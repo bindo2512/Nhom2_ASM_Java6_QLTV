@@ -30,7 +30,10 @@ public class loginController {
 	public String loginCtrl() {
 		return "forgot_and_login/login";
 	}
-	
+	@RequestMapping("/qltv/register")
+	public String showRegisterPage() {
+		return "forgot_and_login/register";
+	}
 	@PostMapping("/qltv/login")
 	public String loginFunc() {
 		String username = param.getString("username", "");
