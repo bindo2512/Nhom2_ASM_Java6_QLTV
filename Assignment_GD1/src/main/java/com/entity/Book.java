@@ -20,6 +20,9 @@ public class Book {
 	@Id
 	String bookname;
 	String author;
+	@ManyToOne
+	@JoinColumn(name = "publishername")
+	Publisher publisher;
 	Double price;
 	Date releasedate;
 	Boolean available;
@@ -29,9 +32,6 @@ public class Book {
 	@OneToMany(mappedBy = "book")
 	List<Retail> retail;
 	
-	@ManyToOne
-	@JoinColumn(name = "publishername")
-	Publisher publisher;
 	
 	@Override
 	public String toString() {
