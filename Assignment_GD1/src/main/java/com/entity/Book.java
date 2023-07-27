@@ -32,4 +32,17 @@ public class Book {
 	@ManyToOne
 	@JoinColumn(name = "publishername")
 	Publisher publisher;
+	
+	@Override
+	public String toString() {
+		return "Book{" +
+				"Book name=" + bookname +
+				", author='" + author + '\'' +
+				", price=" + price +
+				", release date=" + releasedate +
+				", available=" + available +
+				", image=" + image +
+				", pdf='" + pdf + '\'' +
+				'}';
+	}
 }
