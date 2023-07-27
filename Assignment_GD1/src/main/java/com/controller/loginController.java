@@ -34,6 +34,10 @@ public class loginController {
 	public String showRegisterPage() {
 		return "forgot_and_login/register";
 	}
+	@RequestMapping("/qltv/forgot")
+	public String showForgotPWPage() {
+		return "forgot_and_login/forgot";
+	}
 	@PostMapping("/qltv/login")
 	public String loginFunc() {
 		String username = param.getString("username", "");
