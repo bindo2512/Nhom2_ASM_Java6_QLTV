@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard Library</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom styles here */
+        body {
+            padding-top: 20px;
+        }
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #f8f9fa;
+            padding-top: 20px;
+        }
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body ng-app="adminApp">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 sidebar">
+                <h3>Admin</h3>
+                <ul class="list-group">
+                    <li class="list-group-item"> <a href="#/index">Trang chủ</a> </li>
+                    <li class="list-group-item"> <a href=" 	/books" ng-click="showBookList()">Danh sách sách</a> </li>
+                    <li class="list-group-item"> <a href="#/accounts" ng-click="showAccountList()">Danh sách tài khoản</a> </li>
+                </ul>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9 content">
+            	<ng-view></ng-view>
+                <h1>{{ pageTitle }}</h1>
+                <div ng-show="isBookListShown">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tên sách</th>
+                                <th>Giá</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="book in books">
+                                <td>{{ book.isbn13 }}</td>
+                                <td>{{ book.title }}</td>
+                                <td>{{ book.price }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div ng-show="isAccountListShown">
+                    <!-- Add account list content here -->
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tên tài khoản</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="account in accounts">
+                                <td>{{ account.id }}</td>
+                                <td>{{ account.username }}</td>
+                                <td>{{ account.email }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+		
+    <!-- JavaScript Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+
+    <!-- AngularJS App and Routing -->
+    <script>
+        var app = angular.module('adminApp', ['ngRoute']);
+
+        app.config(function ($routeProvider) {
+            $routeProvider
+                .when('/', {
+                    template: '<h1>Trang quản trị hệ thống thư viện trực tuyến</h1>'
+                })
+                .when('/books', {
+                    template: '',
+                    controller: 'BookController'
+                })
+                .when('/accounts', {
+                    template: '',
+                    controller: 'AccountController'
+                })
+                .otherwise({
+                    redirectTo: '/'
+                });
+        });
+
+        app.controller('BookController', function ($scope, $http) {
+            $scope.pageTitle = 'Danh sách các loại sách';
+            $scope.books = [];
+            $scope.isBookListShown = false;
+
+            $scope.showBookList = function () {
+                $http.get('https://api.itbook.store/1.0/search/mongodb')
+                    .then(function (response) {
+                        $scope.books = response.data.books;
+                        $scope.isBookListShown = true;
+                        $scope.isAccountListShown = false;
+                        $scope.pageTitle = 'Danh sách sách';
+                    })
+                    .catch(function (error) {
+                        console.log('Error fetching books:', error);
+                    });
+            };
+        });
+
+        app.controller('AccountController', function ($scope, $http) {
+            $scope.pageTitle = 'Danh sách tài khoản';
+            $scope.accounts = [];
+            $scope.isAccountListShown = false;
+
+            $scope.showAccountList = function () {
+ 
+                $http.get('https://api.example.com/accounts')
+                    .then(function (response) {
+                        $scope.accounts = response.data;
+                        $scope.isAccountListShown = true;
+                        $scope.isBookListShown = false;
+                        $scope.pageTitle = 'Danh sách tài khoản';
+                    })
+                    .catch(function (error) {
+                        console.log('Error fetching accounts:', error);
+                    });
+            };
+        });
+    </script>
+
+</body>
+</html>

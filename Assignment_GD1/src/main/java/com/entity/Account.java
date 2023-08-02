@@ -18,7 +18,7 @@ public class Account {
 	String username;
 	String password;
 	Boolean active;
-	Boolean admin;
+	String admin;
 	@OneToMany(mappedBy = "account")
 	List<Retail> retail;
 	@OneToMany(mappedBy = "account")
