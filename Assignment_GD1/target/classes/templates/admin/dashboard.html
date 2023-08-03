@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" xmlns:th="https://www.thymeleaf.org">
     <title>Admin Dashboard Library</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
@@ -27,16 +27,15 @@
 <body ng-app="adminApp">
     <div class="container-fluid">
         <div class="row">
-            <!-- Sidebar -->
+         <!-- Sidebar -->
             <div class="col-md-3 sidebar">
                 <h3>Admin</h3>
                 <ul class="list-group">
                     <li class="list-group-item"> <a href="#/index">Trang chủ</a> </li>
-                    <li class="list-group-item"> <a href=" 	/books" ng-click="showBookList()">Danh sách sách</a> </li>
+                    <li class="list-group-item"> <a href="/admin/books" ng-click="showBookList()">Danh sách sách</a> </li>
                     <li class="list-group-item"> <a href="#/accounts" ng-click="showAccountList()">Danh sách tài khoản</a> </li>
                 </ul>
             </div>
-
             <!-- Main Content -->
             <div class="col-md-9 content">
             	<ng-view></ng-view>

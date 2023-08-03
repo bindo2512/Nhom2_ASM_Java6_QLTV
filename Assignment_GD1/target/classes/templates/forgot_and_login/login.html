@@ -33,7 +33,7 @@
                     <img src="Image/hinh_anh.png" class="img-character hover-zoom" alt="Character image">
                 </div> -->
                 <div class="col col-md-8 col-lg-5 col-xl-4">
-                    <form class="card shadow-2-strong" style="border-radius: 1rem;">
+                    <form class="card shadow-2-strong" style="border-radius: 1rem;" action="/qltv/login" method="post">
                         <div class="card-body pb-0">
                             <div class="text-center">
                                 <img src="../assest/image/home/library-logo-design-template-45579f2f9eaf725821b915b523f191eb_screen.jpg" alt="">
@@ -70,6 +70,7 @@
                             </div>
                             <!-- Checkbox -->
                             <hr class="my-4">
+                            <i th:text="${message}"></i>
                             <div class="text-center">
                                 <button class="btn btn-info text-bold btn-lg btn-block" style="width: 50%; font-size: 1rem;" type="submit">ĐĂNG NHẬP</button>
                                 <!-- <button class="btn btn-login text-bold btn-lg btn-block" style="width: 50%; font-size: 1rem;" type="submit">ĐĂNG NHẬP</button> -->

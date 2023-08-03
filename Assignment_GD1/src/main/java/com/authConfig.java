@@ -6,15 +6,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.service.userService;
 
 @Configuration
 @EnableWebSecurity
-public class authConfig extends WebSecurityConfiguration{
+public class authConfig extends WebSecurityConfigurerAdapter{
 @Autowired
 BCryptPasswordEncoder be;
 @Autowired
@@ -25,16 +24,18 @@ public BCryptPasswordEncoder getPasswordEncoder() {
 	return new BCryptPasswordEncoder();
 }
 
+@Override
 protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 	auth.userDetailsService(userService);
 }
 
+@Override
 protected void configure(HttpSecurity http) throws Exception {
 	http.csrf().disable().cors().disable();
 	http.authorizeRequests()
 		.antMatchers("/home/**", "/qltv/**").permitAll()
 		.antMatchers("/admin/**").hasAnyRole("ADMIN")
-		.antMatchers("/user/**").hasAnyRole("USER")
+		.antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
 		.antMatchers("/checkout").authenticated();
 	
 	http.exceptionHandling()
