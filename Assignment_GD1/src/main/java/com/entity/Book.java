@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,11 +23,13 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Book {
 	@Id
-	String bookname;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	Integer bookid;
+	String name;
 	String author;
-	String publisher;
+	String pname;
 	Double price;
-	Date releasedate;
+	Integer yearpub;
 	Boolean available;
 	String image;
 	String pdf;

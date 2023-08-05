@@ -1,10 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Book Detail</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap) -->
+    <link href="../assest/css/styles.css" rel="stylesheet" />
 </head>
 <body>
-
+    <main th:object="${item}">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="../assest/image/products/${item.image}" alt="Book Cover" class="img-fluid">
+                </div>
+                <div class="col-md-6">
+                    <h2>[[${item.name}]]</h2>
+                    <p>[[${item.pname}]]</p>
+                    <p>[[${item.author}]]</p>
+                    <p>[[${item.author}]]</p>
+                    <a href="#" class="btn btn-dark">
+                        <i class="bi-cart-fill me-1"></i>
+                        Thêm vào giỏ
+                    </a>
+                    <a href="#" class="btn btn-primary">
+                        <i class="bi-book me-1"></i>
+                        Đọc sách Online
+                    </a>
+                    <a href="#" class="btn btn-secondary">
+                        <i class="bi-download me-1"></i>
+                        Tải PDF
+                    </a>
+                    <a href="#" class="btn btn-success">
+                        <i class="bi-bookmark-plus me-1"></i>
+                        Mượn sách (bản cứng)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS -->
+    <script src="../assest/js/scripts.js"></script>
 </body>
 </html>

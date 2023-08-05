@@ -1,13 +1,52 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
-<head>	
+<html xmlns:th="https://www.thymeleaf.org"
+th:replace="~{/layout/index :: dynamic(~{::main})}"    >
+	<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+	rel="stylesheet" />
+	<link href='https://fonts.googleapis.com/css?family=Josefin Sans'
+	rel='stylesheet'>
+
+
+<head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
 	<main class="row">
-		<div th:each="p: ${items}">
-			
+		<header class="bg-image py-5" style="
+        background-image: url('https://static01.nyt.com/images/2015/10/24/opinion/24manguel/24manguel-superJumbo.jpg');
+        height: 50vh;
+">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Thư viện trực tuyến</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Bạn có thể đọc qua trang web hoặc mượn sách bản cứng</p>
+                </div>
+            </div>
+        </header>
+		<div th:each="p:${items}" class="container px-4 px-lg-5 mt-5 col-sm-4">
+			<div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Product image-->
+                    <img class="card-img-top" src="../assest/image/products/${p.image}"/>
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder" th:text="${p.name}"></h5>
+							<div th:text="${p.pname}"></div>
+							<div th:text="${p.author}"></div>
+                            <!-- Product price-->
+                            <div th:text="${p.price}"></div>
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" th:href="@{|/qltv/products/detail/${p.bookid}|}" >View options</a></div>
+                    </div>
+                </div>
+            </div>
 		</div>
 	</main>
 </body>
