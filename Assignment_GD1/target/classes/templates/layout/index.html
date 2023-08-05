@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" th:fragment="dynamic(main)">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<nav>
+		<div th:replace="/layout/_navbar.html"></div>
+	</nav>
+	<div>
+		<div th:replace="${main}"></div>
+	</div>
+</body>
+</html>
