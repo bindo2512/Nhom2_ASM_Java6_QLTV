@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+th:replace="~{/layout/index :: dynamic(~{::main})}" >
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,6 +34,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 </head>
 <body>
+	<main>
 	<section
 		class="img d-flex justify-content-center align-items-center vh-100"
 		style="background-image: url(../assets/images/Login/background.png);">
@@ -130,5 +132,6 @@
 	<script src="../assets/js/script.js"></script>
 	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 	<script>AOS.init();</script>
+</main>
 </body>
 </html>

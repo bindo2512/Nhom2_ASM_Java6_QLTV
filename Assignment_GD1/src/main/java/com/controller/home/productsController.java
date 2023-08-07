@@ -7,18 +7,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.dao.bookDAO;
 import com.entity.Book;
 import com.service.bookService;
+import com.service.rentalService;
 
 @Controller
 public class productsController {
+	
 	@Autowired
 	bookService service;
 	
+	@Autowired
+	rentalService rentalService;
+
 	@RequestMapping("/qltv/products")
-	public String productsController(Model model) {
+	public String productsCtrl(Model model) {
 		List<Book> list = service.findAll();
 		model.addAttribute("items", list);
 		return "cart/main";
@@ -29,5 +32,16 @@ public class productsController {
 		Book item = service.findById(id);
 		model.addAttribute("item", item);
 		return "cart/detail";
+	}
+
+	@RequestMapping("/user/cart")
+	public String cartCtrl() {
+		return "cart/cart";
+	}
+
+	@RequestMapping("/user/rental")
+	public String rentalCtrl(@PathVariable("retailid") Integer id, Model model) {
+		model.addAttribute("rental", rentalService.findById(id));
+		return "cart/checkout";
 	}
 }

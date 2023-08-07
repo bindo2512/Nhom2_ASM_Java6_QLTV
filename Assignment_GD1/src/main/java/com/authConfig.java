@@ -39,7 +39,7 @@ protected void configure(HttpSecurity http) throws Exception {
 		.antMatchers("/checkout").authenticated();
 	
 	http.exceptionHandling()
-		.accessDeniedPage("/auth/access_denied");
+		.accessDeniedPage("/qltv/login/access_denied");
 	
 	http.formLogin()
 		.loginPage("/qltv/login/form")
@@ -49,7 +49,8 @@ protected void configure(HttpSecurity http) throws Exception {
 		.usernameParameter("username")
 		.passwordParameter("password");
 	http.rememberMe()
-		.rememberMeParameter("remember");
+		.rememberMeParameter("remember")
+		.tokenValiditySeconds(86400);
 	http.logout()
 		.logoutUrl("/qltv/logout")
 		.logoutSuccessUrl("/qltv/logout/successful");

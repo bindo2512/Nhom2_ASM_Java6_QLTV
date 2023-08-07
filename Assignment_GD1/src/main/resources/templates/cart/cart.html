@@ -1,10 +1,123 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="https://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}"    >
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
+    <main>
+        <div class="container py-5">
+            <h2 class="mb-4">Giỏ hàng</h2>
+            <h6 ng-if="cart.items.length == 0">Bạn chưa có sản phẩm nào trong giỏ hàng</h6>
+            <h6 ng-if="cart.items.length > 0">Bạn có {{cart.items.length}} sản phẩm trong giỏ hàng</h6>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Hình</th>
+                                <th scope="col">Tên sách</th>
+                                <th scope="col">Tác giả</th>
+                                <th scope="col">Nhà xuất bản</th>
+                                <th scope="col">Xóa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Cart item 1 -->
+                            <tr ng-repeat="item in cart.items">
+                                <td>
+                                    <img src="/assest/image/products/{{item.image}}" alt="Hình ảnh" width="100">
+                                </td>
+                                <td>{{item.name}}</td>
+                                <td>{{item.author}}</td>
+                                <td>{{item.pname}}</td>
+                                <td><button class="btn btn-danger btn-sm" ng-click="cart.remove(item.bookid)">Xóa</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <style>
+                        .clear-cart-button {
+                          background-color: #f44336;
+                          color: white;
+                          border: none;
+                          padding: 10px 20px;
+                          border-radius: 4px;
+                          cursor: pointer;
+                        }
+                    
+                        .clear-cart-button:hover {
+                          background-color: #d32f2f;
+                        }
+                        .form-group {
+            margin-bottom: 20px;
+        }
 
+        .form-control {
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+        }
+
+        /* Hover and Active Effects */
+        .form-control:hover {
+            border-color: #707070;
+        }
+
+        .form-control:focus {
+            border-color: #4c9d7c;
+            box-shadow: 0 0 0 0.2rem rgba(76, 157, 124, 0.25);
+        }
+
+        .btn-primary {
+            background-color: #4c9d7c;
+            border-color: #4c9d7c;
+        }
+
+        .btn-primary:hover {
+            background-color: #3c7d63;
+            border-color: #3c7d63;
+        }
+
+        .btn-primary:active {
+            background-color: #2c5d4a;
+            border-color: #2c5d4a;
+        }
+                      </style>
+                    <button class="clear-cart-button" ng-click="cart.clear()">Xóa hết giỏ hàng</button>
+                </div>
+            </div>
+            <hr>
+                <form>
+                    <div class="form-group">
+                        <label for="username">Người mượn:</label>
+                        <div class="form-control" id="username" >[[${#request.remoteUser}]]</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="diaChi">Địa chỉ:</label>
+                        <input type="text" class="form-control" id="diaChi" placeholder="Nhập địa chỉ" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" placeholder="Nhập địa chỉ email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ngayMuon">Ngày mượn:</label>
+                        <div class="form-control">{{retail.retailDate| date: 'dd-MM-yyyy'}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ngayTra">Ngày trả:</label>
+                        <input type="date" class="form-control" id="ngayTra" required ng-model="retail.returnDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="diaChiShip">Địa chỉ của bạn:</label>
+                        <textarea class="form-control" id="diaChiShip" placeholder="Nhập địa chỉ của bạn" required></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary"><a th:href="@{/rest/rental}">Đặt mượn</a></button>
+                    </div>
+                </form>
+        </div>
+    </main>
 </body>
 </html>

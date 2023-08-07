@@ -21,7 +21,7 @@ public class loginController {
 	@RequestMapping("/qltv/login/success")
 	public String loginCtrlSuccess(Model model) {
 		model.addAttribute("message", "Đăng nhập thành công");
-		return "forgot_and_login/login";
+		return "redirect:/qltv/products";
 	}
 	
 	@RequestMapping("/qltv/login/error") 
@@ -29,5 +29,18 @@ public class loginController {
 		model.addAttribute("message", "Đăng nhập thất bại");
 		return "forgot_and_login/login";
 	}
+
+	@RequestMapping("/qltv/login/access_denied")
+	public String accessDeniedCtrl(Model model) {
+		model.addAttribute("message", "Truy cập bị từ chối");
+		return "forgot_and_login/login";
+	}
+
+	@RequestMapping("/qltv/logout/successful")
+	public String logoutSucess(Model model) {
+		model.addAttribute("message", "Đăng xuất thành công");
+		return "forgot_and_login/login";
+	}
+
 
 }

@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org"
 th:replace="~{/layout/index :: dynamic(~{::main})}"    >
-	<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
-	rel="stylesheet" />
-	<link href='https://fonts.googleapis.com/css?family=Josefin Sans'
-	rel='stylesheet'>
+
 
 
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<style href="/assest/css/products/product.css"></style>
 </head>
 <body>
 	<main class="row">
@@ -29,21 +26,24 @@ th:replace="~{/layout/index :: dynamic(~{::main})}"    >
 			<div class="col mb-5">
                 <div class="card h-100">
                     <!-- Product image-->
-                    <img class="card-img-top" src="../assest/image/products/${p.image}"/>
+                    <img class="card-img-top" th:src="@{|/assest/image/products/${p.image}|}"/>
                     <!-- Product details-->
                     <div class="card-body p-4">
                         <div class="text-center">
                             <!-- Product name-->
-                            <h5 class="fw-bolder" th:text="${p.name}"></h5>
-							<div th:text="${p.pname}"></div>
-							<div th:text="${p.author}"></div>
+                            <h3 class="fw-bolder" th:text="${p.name}"></h3>
+							<h6 th:text="${p.pname}"></h6>
+							<h5 th:text="${p.author}"></h5>
                             <!-- Product price-->
-                            <div th:text="${p.price}"></div>
+                            <div th:text="${p.yearpub}"></div>
                         </div>
                     </div>
                     <!-- Product actions-->
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" th:href="@{|/qltv/products/detail/${p.bookid}|}" >View options</a></div>
+                        <div class="text-center mrgBtm" style="margin-bottom: 15px;"><a class="btn btn-outline-dark mt-auto" th:href="@{|/qltv/products/detail/${p.bookid}|}" >Chi tiết</a></div>
+                        <th:block th:if="${#request.remoteUser}">
+                            <div class="text-center mrgBtm"><button class="btn btn-outline-dark mt-auto" th:attr="ng-click=@{|cart.add(${p.bookid})|}" >Mượn</button></div>
+                        </th:block>
                     </div>
                 </div>
             </div>
