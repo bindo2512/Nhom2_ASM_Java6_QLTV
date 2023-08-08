@@ -22,4 +22,5 @@ public class rentalrestController {
     public Retail create(@RequestBody JsonNode orderData) {
         return service.create(orderData);
     }
+
 }

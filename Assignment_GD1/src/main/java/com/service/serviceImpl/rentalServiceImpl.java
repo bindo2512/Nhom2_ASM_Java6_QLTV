@@ -9,6 +9,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.service.rentalService;
 
+import antlr.collections.List;
+
 @Service
 public class rentalServiceImpl implements rentalService {
     @Autowired
@@ -18,11 +20,12 @@ public class rentalServiceImpl implements rentalService {
     public Retail create(JsonNode orderData) {
         ObjectMapper mapper = new ObjectMapper();
         Retail retail = mapper.convertValue(orderData, Retail.class);
+        dao.save(retail);
         return retail;
     }
 
     @Override
     public Object findById(Integer id) {
-        return dao.findById(id);
+        return dao.findById(id).get();
     }
 }

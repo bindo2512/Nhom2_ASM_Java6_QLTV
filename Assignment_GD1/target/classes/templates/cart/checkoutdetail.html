@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+th:replace="~{/layout/index :: dynamic(~{::main})}"    >
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <main th:object="${rental}">
+        <section class="ftco-section">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-6 text-center mb-5">
+                        <h2 class="heading-section">Chi tiết mượn sách</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-wrap">
+                            <table class="table table-striped">
+                              <thead>
+                                <tr>
+                                  <th>No.</th>
+                                  <th>Tên sách</th>
+                                  <th>Tên tác giả</th>
+                                  <th>Ngày mượn</th>
+                                  <th>Ngày trả</th>
+                                  <th>Tình trạng</th>
+                                  <th>Xem chi tiết</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <th scope="row">01</th>
+                                  <td>Minh Trí</td>
+                                  <td>Nguyễn Ngọc Minh Trí</td>
+                                  <td>06/07/2023</td>
+                                  <td>08/07/2023</td>
+                                  <td><a href="#" class="btn btn-success">Đã trả</a></td>
+                                  <td><button class="btn btn-outline-secondary align-middle"><i class="bi bi-search"></i></button></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

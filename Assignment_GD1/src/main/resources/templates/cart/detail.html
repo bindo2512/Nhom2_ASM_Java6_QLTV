@@ -25,11 +25,11 @@
                     <p>Nhà xuất bản: [[${item.pname}]]</p>
                     <p>Tác giả: [[${item.author}]]</p>
                     <p>Năm xuất bản: [[${item.yearpub}]]</p>
-                    <a href="#" class="btn btn-primary">
+                    <a th:href="@{|/assest/pdf/${item.pdf}|}"  class="btn btn-primary">
                         <i class="bi-book me-1"></i>
                         Đọc sách Online
                     </a>
-                    <a href="#" class="btn btn-secondary">
+                    <a th:href="@{|/assest/pdf/${item.pdf}|}" class="btn btn-secondary" th:attr="download=${item.pdf}"> 
                         <i class="bi-download me-1"></i>
                         Tải PDF
                     </a>
