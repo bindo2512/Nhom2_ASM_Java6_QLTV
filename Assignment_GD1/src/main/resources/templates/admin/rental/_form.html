@@ -1,0 +1,64 @@
+
+    <div class="container mt-4">
+        <form>
+            <div class="row">
+                <div>
+                    <div ng-if="form.account.admin === 'USER'">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Tên tài khoản mượn sách</label>
+                            <div ng-if="form.account.admin === 'USER'">
+                                <input type="text" ng-model="form.account.username" class="form-control" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="form.account.admin === 'ADMIN'">
+                        <div class="mb-3">
+                            <h6 style="color:red;">SÁCH MƯỢN TRỰC TIẾP</h6>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="author" class="form-label">Tên người mượn sách</label>
+                        <input type="text" class="form-control" id="author" placeholder="Tên người mượn sách" ng-model="form.name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Địa chỉ người mượn sách</label>
+                        <input type="text" class="form-control" id="address" placeholder="Địa chỉ người mượn sách" ng-model="form.address">
+                    </div>
+                    <div class="mb-3">
+                        <label for="retaildate" class="form-label">Ngày mượn sách</label>
+                        <input type="text" class="form-control" id="retaildate" placeholder="Ngày mượn sách" ng-model="form.retaildate" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="returndate" class="form-label">Ngày trả sách</label>
+                        <input type="text" class="form-control" id="returndate" placeholder="Ngày trả sách" ng-model="form.returndate" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Email" ng-model="form.email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="sdt" class="form-label">Số điện thoại</label>
+                        <input type="text" class="form-control" id="sdt" placeholder="Số điện thoại" ng-model="form.phonenumber" format="[0-9]+">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Tình trạng mượn sách</label>
+                        <br>
+                        <label class="radio-label">
+                            <input type="radio" name="availability" value="yes" ng-model="form.active" ng-value="true"> Đang mượn
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="availability" value="no" ng-model="form.active" ng-value="false"> Đã trả
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="text-center">
+    <div class="btn-container">
+        <button class="btn btn-primary" type="button" ng-click="create()">Create</button>
+        <button class="btn btn-warning" type="button" ng-click="update()">Update</button>
+        <button class="btn btn-danger" type="button" ng-click="delete()">Delete</button>
+        <button class="btn btn-secondary" type="button" ng-click="reset()">Reset form</button>
+    </div>
+</div>

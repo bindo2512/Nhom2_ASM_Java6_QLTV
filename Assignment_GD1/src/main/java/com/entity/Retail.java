@@ -33,6 +33,7 @@ public class Retail {
 	String name;
 	String email;
 	String phonenumber;
+	Boolean active;
 	@ManyToOne
 	@JoinColumn(name = "username")
 	Account account;

@@ -81,12 +81,13 @@ app.controller("library-ctrl", function($scope, $http){
 		},
     }
 	$scope.retail = {
-		retaildate: new Date(),
+		retaildate: "",
 		returndate: new Date(),
 		name:"",
 		address:"",
 		phonenumber:"",
 		email: "",
+		active: false,
 		updateReturnDate: function() {
     	if ($scope.retail.returndate) {
 			$scope.retail.returndate = new Date($scope.retail.retaildate);
@@ -99,7 +100,6 @@ app.controller("library-ctrl", function($scope, $http){
 			return $scope.cart.items.map(item => {
 				return {
 					book: {bookid: item.bookid},
-					active: true
 				}
 			})
 		},
@@ -119,5 +119,6 @@ app.controller("library-ctrl", function($scope, $http){
 })
 	</script>
 	<script th:src="@{|/assest/js/adminBook/script.js|}"></script>
+	<script th:src="@{|/assest/js/adminRental/script.js|}"></script>
 </body>
 </html>

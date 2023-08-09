@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org"
-th:replace="~{/layout/index :: dynamic(~{::main})}"    >
+th:replace="~{/layout/index :: dynamic(~{::main})}">
 
 
 
@@ -26,7 +26,7 @@ th:replace="~{/layout/index :: dynamic(~{::main})}"    >
 			<div class="col mb-5">
                 <div class="card h-100">
                     <!-- Product image-->
-                    <img class="card-img-top justify-content-center" th:src="@{|/assest/image/products/${p.image}|}" style="width:50%;"/>
+                    <img class="card-img-top justify-content-center" th:src="@{|/assest/image/products/${p.image}|}" style="height: 175px; width: 175px; margin: auto;"/>
                     <!-- Product details-->
                     <div class="card-body p-4">
                         <div class="text-center">

@@ -50,4 +50,9 @@ public class rentalServiceImpl implements rentalService {
     public List<Retail> findAll() {
         return dao.findAll();
     }
+
+    @Override
+    public Retail update(Retail retail) {
+        return dao.save(retail);
+    }
 }

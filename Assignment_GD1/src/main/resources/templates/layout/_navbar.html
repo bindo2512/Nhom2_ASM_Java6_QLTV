@@ -55,13 +55,16 @@
 										<li><a class="dropdown-item" th:href="@{/admin/books}">
 											Quản lý sách
 										</a></li>
+										<li><a class="dropdown-item" th:href="@{/admin/rental}">
+											Quản lý cho mượn
+										</a></li>
 									</ul>
 								</div>
 							</th:block>
 					   </th:block>
 					   <th:block th:if="${#request.remoteUser}">
 					   		<button class="btn btn-outline-dark margRg">
-								<a href="">Thông tin cá nhân</a>
+								<a href="">Thông tin mượn sách</a>
 							</button>
 							<button class="btn btn-outline-dark margRg">
 								<a th:href="@{|/qltv/logout|}">Đăng xuất</a>

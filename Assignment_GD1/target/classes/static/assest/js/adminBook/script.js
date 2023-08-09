@@ -13,7 +13,6 @@ app.controller("admin-book-ctrl", function($scope, $http){
             $scope.categories = resp.data;
         })
     },
-    $scope.init();
 
     $scope.reset = function() {
         $scope.form = {
@@ -23,7 +22,6 @@ app.controller("admin-book-ctrl", function($scope, $http){
     },
     $scope.edit = function(item) {
         $scope.form = angular.copy(item);
-
     },
     $scope.create = function() {
         var item = angular.copy($scope.form);
@@ -63,4 +61,6 @@ app.controller("admin-book-ctrl", function($scope, $http){
             console.log(error);
         })
     }
+    $scope.init();
+
 })

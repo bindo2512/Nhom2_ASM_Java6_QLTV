@@ -12,5 +12,7 @@ public interface rentalService {
     Object findById(Integer string);
 
     List<Retail> findAll();
+
+    Retail update(Retail retail);
     
 }

@@ -33,6 +33,4 @@ public class Detail {
     @ManyToOne
     @JoinColumn(name = "bookid")
     Book book;
-
-    Boolean active;
 }

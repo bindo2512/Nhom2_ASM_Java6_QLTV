@@ -4,80 +4,42 @@
 <meta charset="UTF-8" xmlns:th="https://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}" >  
 <title>Admin Dashboard Library</title>
 <style>
-/* Custom styles here */
-body {
-	padding-top: 20px;
-}
-
-.sidebar {
-	height: 100%;
-	width: 250px;
-	position: fixed;
-	top: 0;
-	left: 0;
-	background-color: #f8f9fa;
-	padding-top: 20px;
-}
-
-.content {
-	margin-left: 250px;
-	padding: 20px;
-}
 </style>
 </head>
 <body>
-	<main class="container-fluid">
-		<div>
-			<div class="row">
-				<!-- Main Content -->
-				<div class="col-md-9 content">
-					<ng-view></ng-view>
-					<h1>{{ pageTitle }}</h1>
-					<div ng-show="isBookListShown">
-						<table class="table table-bordered">
-							<thead>
-								<tr>
-									<th>ID</th>
-									<th>Tên sách</th>
-									<th>Giá</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr ng-repeat="book in books">
-									<td>{{ book.isbn13 }}</td>
-									<td>{{ book.title }}</td>
-									<td>{{ book.price }}</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<div ng-show="isAccountListShown">
-						<!-- Add account list content here -->
-						<table class="table table-bordered">
-							<thead>
-								<tr>
-									<th>ID</th>
-									<th>Tên tài khoản</th>
-									<th>Email</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr ng-repeat="account in accounts">
-									<td>{{ account.id }}</td>
-									<td>{{ account.username }}</td>
-									<td>{{ account.email }}</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+	<main>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="table-wrap">
+					<table class="table table-striped">
+					  <thead>
+						<tr>
+						  <th>Hình ảnh</th>
+						  <th>Tên sách</th>
+						  <th>Tên tác giả</th>
+						  <th>Tên nhà xuất bản</th>
+						  <th>Năm phát hành</th>
+						  <th>Thể loại</th>
+						  <th>Tình trạng</th>
+						  <th>Mua</th>
+						</tr>
+					  </thead>
+					  <tbody>
+						<tr th:each="p:${items}">
+						  <th> <img class="card-img-top justify-content-center" th:src="@{|/assest/image/products/${p.image}|}" style="height: 175px; width: 175px; margin: auto;"/></th>
+						  <td th:text="${p.name}"></td>
+						  <td th:text="${p.author}"></td>
+						  <td th:text="${p.pname}"></td>
+						  <td th:text="${p.yearpub}"></td>
+						  <td th:text="${p.categories.categoryname}"></td>
+						  <td th:text="${p.available}? 'Còn sách':'Hết sách'"></td>
+						  <td><button class="btn btn-outline-secondary align-middle" th:attr="ng-click=@{|cart.add(${p.bookid})|}"><i class="bi bi-bag"></i></button></td>
+						</tr>
+					  </tbody>
+					</table>
 				</div>
 			</div>
 		</div>
-	
-		<!-- JavaScript Libraries -->
-		<script
-			src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script
-	
 	</main>
 </body>
 </html>

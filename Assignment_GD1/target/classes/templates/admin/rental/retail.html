@@ -7,6 +7,12 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <main ng-controller="admin-rental-ctrl">
+        <h3  style="justify-content: center; text-align: center;">Danh sách mượn sách</h3>
+        <br>
+        <div th:replace="/admin/rental/_form.html"></div>
+        <hr>
+        <div th:replace="/admin/rental/_table.html"></div>
+    </main>
 </body>
 </html>
