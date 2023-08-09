@@ -1,0 +1,42 @@
+
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<h2 class="heading-section">Chi tiết mượn sách</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="table-wrap">
+						<table class="table table-striped">
+						  <thead>
+						    <tr>
+						      <th>Hình ảnh</th>
+						      <th>Tên sách</th>
+						      <th>Tên tác giả</th>
+						      <th>Tên nhà xuất bản</th>
+						      <th>Năm phát hành</th>
+                              <th>Thể loại</th>
+						      <th>Tình trạng</th>
+                              <th>Chỉnh sửa</th>
+                              <th>Xóa</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr ng-repeat="b in books">
+						      <th><img th:src="@{|/assest/image/products/{{b.image}}|}" style="width:150px; height: 150px;"></th>
+						      <td>{{b.name}}</td>
+						      <td>{{b.author}}</td>
+						      <td>{{b.pname}}</td>
+						      <td>{{b.yearpub}}</td>
+                              <td>{{b.categories.categoryname}}</td>
+                              <td>{{b.available? 'Còn sách':'Hết sách'}}</td>
+                              <td><button class="btn btn-outline-secondary align-middle" ng-click="edit(b)"><i class="bi bi-pencil"></i></button></td>
+                              <td><button class="btn btn-outline-secondary align-middle"><i class="bi bi-trash"></i></td>
+						    </tr>
+						  </tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>

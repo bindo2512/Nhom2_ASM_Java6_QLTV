@@ -48,6 +48,6 @@ public class productsController {
 	@RequestMapping("/user/rental/detail/{retailid}")
 	public String rentalDetailCtrl(@PathVariable("retailid") Integer id, Model model) {
 		model.addAttribute("rental", rentalService.findById(id));
-		return "cart/checkout";
+		return "cart/checkoutdetail";
 	}
 }

@@ -23,7 +23,10 @@
 <link href='https://fonts.googleapis.com/css?family=Josefin Sans'
 rel='stylesheet'>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script
+src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
 
 </head>
 <body ng-app="library-app" ng-controller="library-ctrl">
@@ -33,6 +36,9 @@ rel='stylesheet'>
 	<div>
 		<div th:replace="${main}"></div>
 	</div>
+	<footer>
+		<div th:replace="/layout/_footer.html"></div>
+	</footer>
 	<script type="text/javascript">
 		const app = angular.module("library-app", []);
 
@@ -77,15 +83,32 @@ app.controller("library-ctrl", function($scope, $http){
 	$scope.retail = {
 		retaildate: new Date(),
 		returndate: new Date(),
+		name:"",
+		address:"",
+		phonenumber:"",
+		email: "",
+		updateReturnDate: function() {
+    	if ($scope.retail.returndate) {
+			$scope.retail.returndate = new Date($scope.retail.retaildate);
+			$scope.retail.returndate.setMonth($scope.retail.retaildate.getMonth() + 1);
+    	}
+		return $scope.retail.returndate
+	},
 		account: {username: $("#username").text()},
-		get book(){
-			bookid: $scope.cart.items.map(item => item.bookid)},
+		get rdetail(){
+			return $scope.cart.items.map(item => {
+				return {
+					book: {bookid: item.bookid},
+					active: true
+				}
+			})
+		},
 		rental() {
 			var rental = angular.copy(this);
 			$http.post("/rest/rental", rental).then(resp => {
 				alert("Đặt mượn thành công, hãy đến thư viện để trực tiếp nhận sách");
 				$scope.cart.clear();
-				localtion.href = "/user/rental/detail" + resp.data.retailid;
+				location.href = "/user/rental/detail/" + resp.data.retailid;
 			}).catch(error => {
 				alert("Đặt sách lỗi");
 				console.log(error)
@@ -95,5 +118,6 @@ app.controller("library-ctrl", function($scope, $http){
 	$scope.cart.loadStorage();
 })
 	</script>
+	<script th:src="@{|/assest/js/adminBook/script.js|}"></script>
 </body>
 </html>

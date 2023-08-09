@@ -8,46 +8,68 @@ th:replace="~{/layout/index :: dynamic(~{::main})}"    >
     <title>Document</title>
 </head>
 <body>
-    <main th:object="${rental}">
-        <section class="ftco-section">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-md-6 text-center mb-5">
-                        <h2 class="heading-section">Chi tiết mượn sách</h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="table-wrap">
-                            <table class="table table-striped">
-                              <thead>
-                                <tr>
-                                  <th>No.</th>
-                                  <th>Tên sách</th>
-                                  <th>Tên tác giả</th>
-                                  <th>Ngày mượn</th>
-                                  <th>Ngày trả</th>
-                                  <th>Tình trạng</th>
-                                  <th>Xem chi tiết</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <th scope="row">01</th>
-                                  <td>Minh Trí</td>
-                                  <td>Nguyễn Ngọc Minh Trí</td>
-                                  <td>06/07/2023</td>
-                                  <td>08/07/2023</td>
-                                  <td><a href="#" class="btn btn-success">Đã trả</a></td>
-                                  <td><button class="btn btn-outline-secondary align-middle"><i class="bi bi-search"></i></button></td>
-                                </tr>
-                              </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+    <main th:object="${rental}" class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6 text-center mb-5">
+          <h2 class="heading-section">Chi tiết mượn sách</h2>
+        </div>
+      </div>
+      <div>
+        <div class="form-group">
+            <label for="username">Tài khoản mượn:</label>
+            <input class="form-control" id="username" th:field="*{account.username}" disabled></div>
+        </div>
+        <div class="form-group">
+            <label for="fullname">Họ tên người mượn:</label>
+            <input class="form-control" id="fullname" th:field="*{name}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="diaChi">Địa chỉ:</label>
+            <input type="text" class="form-control" id="diaChi" th:field="*{address}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" th:field="*{email}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="sdt">Địa chỉ:</label>
+            <input type="text" class="form-control" id="sdt" th:field="*{phonenumber}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="ngayMuon">Ngày mượn:</label>
+            <input type="date" class="form-control" id="ngayMuon" th:field="*{retaildate}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="ngayTra">Ngày trả:</label>
+            <input type="date" class="form-control" id="ngayTra" th:field="*{returndate}" disabled></input>
+        </div>
+      </div>
+        <hr>
+        <div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="table-wrap">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Hình</th>
+                      <th>Tên sách</th>
+                      <th>Tên tác giả</th>
+                      <th>Tên nhà xuất bản</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:each="detail: *{rdetail}" th:object="${detail}">
+                      <td><img th:src="@{|/assest/image/products/*{book.image}|}" alt="Book Cover" class="img-fluid" style="height: 100%; width: 50px;;"></td>
+                      <td>[[*{book.name}]]</td>
+                      <td>[[*{book.author}]]</td>
+                      <td>[[*{book.pname}]]</td>
+                  </tbody>
+                </table>
+              </div>
             </div>
-        </section>
+          </div>
+        </div>
     </main>
 </body>
 </html>

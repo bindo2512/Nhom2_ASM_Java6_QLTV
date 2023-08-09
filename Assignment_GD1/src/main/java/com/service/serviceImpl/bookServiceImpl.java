@@ -23,4 +23,9 @@ public class bookServiceImpl implements bookService {
     public Book findById(Integer id) {
         return dao.findById(id).get();
     }
+
+    @Override
+    public Book create(Book book) {
+        return dao.save(book);
+    }
 }

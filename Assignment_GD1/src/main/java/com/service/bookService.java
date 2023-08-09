@@ -11,4 +11,6 @@ public interface bookService {
     List<Book> findAll();
 
     Book findById(Integer id);
+
+    Book create(Book book);
 }

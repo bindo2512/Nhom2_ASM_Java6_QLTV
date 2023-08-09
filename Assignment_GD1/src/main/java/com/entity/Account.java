@@ -21,6 +21,4 @@ public class Account {
 	String admin;
 	@OneToMany(mappedBy = "account")
 	List<Retail> retail;
-	@OneToMany(mappedBy = "account")
-	List<Account_Details> details;
 }

@@ -28,14 +28,17 @@ public class Book {
 	String name;
 	String author;
 	String pname;
-	Double price;
+	String description;
 	Integer yearpub;
 	Boolean available;
 	String image;
 	String pdf;
 	@JsonIgnore
 	@OneToMany(mappedBy = "book")
-	List<Retail> retail;
+	List<Detail> retaildetail;
 	
+	@ManyToOne
+	@JoinColumn(name = "categoryid")
+	Categories categories;
 	
 }

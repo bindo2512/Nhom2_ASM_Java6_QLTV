@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class bookController {
 	@RequestMapping("/admin/books")
 	public String bookCtrl() {
-		return "admin/books";
+		return "admin/book/books";
 	}
 }
