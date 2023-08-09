@@ -45,4 +45,9 @@ public class rentalServiceImpl implements rentalService {
     public Object findById(Integer id) {
         return dao.findById(id).get();
     }
+
+    @Override
+    public List<Retail> findAll() {
+        return dao.findAll();
+    }
 }

@@ -1,4 +1,4 @@
-app.controller("library-ctrl", function($scope, $http){
+app.controller("admin-book-ctrl", function($scope, $http){
     $scope.books = [];
     $scope.categories = [];
     $scope.form = {
