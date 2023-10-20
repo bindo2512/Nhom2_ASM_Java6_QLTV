@@ -2,17 +2,20 @@ package com.service;
 
 import java.util.List;
 
-import com.entity.Retail;
+import com.entity.details;
+import com.entity.retails;
 import com.fasterxml.jackson.databind.JsonNode;
 
 public interface rentalService {
 
-    Retail create(JsonNode orderData);
+    retails create(JsonNode orderData);
 
-    Object findById(Integer string);
+    List<details> findById(Integer string);
 
-    List<Retail> findAll();
+    List<retails> findAll();
 
-    Retail update(Retail retail);
+    retails update(retails retail);
+
+    List<retails> findByAccountUsername(String username);
     
 }

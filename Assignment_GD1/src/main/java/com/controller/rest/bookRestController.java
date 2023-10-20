@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.entity.Book;
+import com.entity.books;
 import com.service.bookService;
 
 @CrossOrigin("*")
@@ -22,17 +22,17 @@ public class bookRestController {
     bookService service;
 
     @GetMapping("/{bookid}")
-    public Book getOne(@PathVariable("bookid") Integer id) {
+    public books getOne(@PathVariable("bookid") Integer id) {
         return service.findById(id);
     }
     
     @GetMapping()
-    public List<Book> getAll() {
+    public List<books> getAll() {
         return service.findAll();
     }
 
     @PostMapping()
-    public Book create(@RequestBody Book book) {
+    public books create(@RequestBody books book) {
         return service.create(book);
     }
 

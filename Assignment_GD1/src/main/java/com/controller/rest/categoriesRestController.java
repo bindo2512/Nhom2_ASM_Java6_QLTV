@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.entity.Categories;
+import com.entity.categories;
 import com.service.categoriesService;
 
 @CrossOrigin("*")
@@ -19,7 +19,7 @@ public class categoriesRestController {
     categoriesService cservice;
 
     @GetMapping()
-    public List<Categories> getAll() {
+    public List<categories> getAll() {
         return cservice.findAll();
     }
 }

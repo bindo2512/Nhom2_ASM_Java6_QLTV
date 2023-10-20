@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dao.bookDAO;
-import com.entity.Book;
+import com.entity.books;
 import com.service.bookService;
 
 @Service
@@ -15,17 +15,17 @@ public class bookServiceImpl implements bookService {
     bookDAO dao;
 
     @Override
-    public List<Book> findAll(){
+    public List<books> findAll(){
         return dao.findAll();
     }
 
     @Override
-    public Book findById(Integer id) {
+    public books findById(Integer id) {
         return dao.findById(id).get();
     }
 
     @Override
-    public Book create(Book book) {
+    public books create(books book) {
         return dao.save(book);
     }
 }

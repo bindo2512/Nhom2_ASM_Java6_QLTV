@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-wrap">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Id mượn sách</th>
+                      <th>Tên tài khoản mượn</th>
+                      <th>Ngày mượn</th>
+                      <th>Ngày trả</th>
+                      <th>Họ tên người mượn</th>
+                      <th>Email</th>
+                      <th>Địa chỉ</th>
+                      <th>Số điện thoại</th>
+                      <th>Tình trạng</th>
+                      <th>Xem chi tiết</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="r in rentals">
+                      <th>{{r.retailid}}</th>
+                      <td>{{r.account.username}}</td>
+                      <td>{{r.retaildate}}</td>
+                      <td>{{r.returndate}}</td>
+                      <td>{{r.name}}</td>
+                      <td>{{r.email}}</td>
+                      <td>{{r.address}}</td>
+                      <td>{{r.phonenumber}}</td>
+                      <td>{{r.active? (r.returndate < currentDate? 'Sách mượn quá hạn':'Sách đang mượn'):'Chưa mượn sách'}}</td>
+                      <td><button class="btn btn-outline-secondary align-middle" ng-click="watch(r)"><i class="bi bi-search"></i></button></td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

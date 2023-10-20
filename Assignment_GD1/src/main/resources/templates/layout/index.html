@@ -2,7 +2,8 @@
 <html xmlns:th="https://www.thymeleaf.org" th:fragment="dynamic(main)">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Library of Alexandria</title>
+<link rel="icon" type="image/x-icon" href="https://st2.depositphotos.com/1353632/9797/v/450/depositphotos_97976010-stock-illustration-architecture-symbol-circle.jpg">
 <!-- Link to FontAwesome CSS -->
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
@@ -35,6 +36,7 @@ src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"
 	</nav>
 	<div>
 		<div th:replace="${main}"></div>
+		<h1 >{{qoutes.qoute}}</h1>
 	</div>
 	<footer>
 		<div th:replace="/layout/_footer.html"></div>
@@ -42,7 +44,9 @@ src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"
 	<script type="text/javascript">
 		const app = angular.module("library-app", []);
 
-app.controller("library-ctrl", function($scope, $http){
+app.controller("library-ctrl", function($scope, $http, $document){
+	$scope.qoutes = {};
+	$scope.qouteHidden = 'none';
     $scope.cart = {
         items: [],
 		number: 0,
@@ -115,10 +119,29 @@ app.controller("library-ctrl", function($scope, $http){
 			})
 		}
 	}
+	if ($scope.qouteHidden == 'none') {
+		setTimeout(function() {
+			$scope.qouteHidden = 'block';
+			alert($scope.qouteHidden);
+			$http({method: 'get', url: 'https://api.api-ninjas.com/v1/quotes', headers: {'X-Api-Key':'x9nN+gyGD6YENIbe0uTBWA==fghWSfyv6nAKYTy2'}, contentType: 'application/json'}).then(resp => {
+				console.log(resp.data)
+				$scope.qoutes = resp.data;
+				console.log($scope.qoutes)
+			}).catch(error => {
+				console.log(error)
+			})
+			setTimeout(function() {
+				$scope.qouteHidden = 'none';
+			}, 15000)
+		}, 30000)
+	}
+	console.log($scope.isLogin)
 	$scope.cart.loadStorage();
 })
 	</script>
 	<script th:src="@{|/assest/js/adminBook/script.js|}"></script>
 	<script th:src="@{|/assest/js/adminRental/script.js|}"></script>
+	<script th:src="@{|/assest/js/rentalHistory/script.js|}"></script>
+	<script th:src="@{|/assest/js/adminAccount/script.js|}"></script>
 </body>
 </html>

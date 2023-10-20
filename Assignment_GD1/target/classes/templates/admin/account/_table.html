@@ -1,0 +1,28 @@
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="table-wrap">
+						<table class="table table-striped">
+						  <thead>
+						    <tr>
+						      <th>Tên tài khoản</th>
+						      <th>Mật khẩu</th>
+						      <th>Trạng thái admin</th>
+						      <th>Trạng thái tài khoản</th>
+                              <th>Chỉnh sửa</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr ng-repeat="a in account">
+						      <td>{{a.username}}</td>
+						      <td>{{a.password}}</td>
+						      <td>{{a.admin}}</td>
+						      <td>{{a.active}}</td>
+                              <td><button class="btn btn-outline-secondary align-middle" ng-click="edit(a)"><i class="bi bi-pencil"></i></button></td>
+						    </tr>
+						  </tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>

@@ -9,7 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.dao.accountDAO;
-import com.entity.Account;
+import com.entity.accounts;
 
 @Service
 public class userService implements UserDetailsService {
@@ -19,7 +19,7 @@ public class userService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		try {
-			Account account = accountDAO.findById(username).get();
+			accounts account = accountDAO.findById(username).get();
 			String password = account.getPassword();
 			String role = account.getAdmin();
 			return User.withUsername(username).password(pe.encode(password)).roles(role).build();			

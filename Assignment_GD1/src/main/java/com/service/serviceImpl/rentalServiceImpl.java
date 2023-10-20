@@ -5,12 +5,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
+import com.dao.accountDAO;
 import com.dao.retailDAO;
 import com.dao.retaildetailDAO;
-import com.entity.Retail;
-import com.entity.Detail;
+import com.entity.retails;
+import com.entity.details;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,16 +27,19 @@ public class rentalServiceImpl implements rentalService {
     @Autowired
     retaildetailDAO ddao;
 
+    @Autowired
+    accountDAO adao;
+
     @Override
-    public Retail create(JsonNode orderData) {
+    public retails create(JsonNode orderData) {
         ObjectMapper mapper = new ObjectMapper();
-        Retail retail = mapper.convertValue(orderData, Retail.class);
+        retails retail = mapper.convertValue(orderData, retails.class);
         dao.save(retail);
 
-        TypeReference<List<Detail>> type = new TypeReference<List<Detail>>() {};
-        List<Detail> details = mapper.convertValue(orderData.get("rdetail"), type)
+        TypeReference<List<details>> type = new TypeReference<List<details>>() {};
+        List<details> details = mapper.convertValue(orderData.get("rdetail"), type)
         .stream()
-        .peek(r -> r.setRetail(retail))
+        .peek(r -> r.setRetails(retail))
         .collect(Collectors.toList());
         ddao.saveAll(details);
 
@@ -42,17 +47,23 @@ public class rentalServiceImpl implements rentalService {
     }
 
     @Override
-    public Object findById(Integer id) {
-        return dao.findById(id).get();
+    public List<details> findById(Integer id) {
+        return dao.findById(id).get().getDetails();
     }
 
     @Override
-    public List<Retail> findAll() {
+    public List<retails> findAll() {
         return dao.findAll();
     }
 
     @Override
-    public Retail update(Retail retail) {
+    public retails update(retails retail) {
         return dao.save(retail);
     }
+
+    @Override
+    public List<retails> findByAccountUsername(String username) {
+        return adao.findById(username).get().getRetail();
+    }
+
 }

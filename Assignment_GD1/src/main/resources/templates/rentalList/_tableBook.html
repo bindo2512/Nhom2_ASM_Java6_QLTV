@@ -1,0 +1,31 @@
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="table-wrap">
+						<table class="table table-striped">
+						  <thead>
+						    <tr>
+						      <th>Hình ảnh</th>
+						      <th>Tên sách</th>
+						      <th>Tên tác giả</th>
+						      <th>Tên nhà xuất bản</th>
+						      <th>Năm phát hành</th>
+                              <th>Thể loại</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr ng-repeat="b in retaildetail">
+						      <th><img th:src="@{|/assest/image/products/{{b.book.image}}|}" style="width:150px; height: 150px;"></th>
+						      <td>{{b.book.name}}</td>
+						      <td>{{b.book.author}}</td>
+						      <td>{{b.book.pname}}</td>
+						      <td>{{b.book.yearpub}}</td>
+                              <td>{{b.book.categories.categoryname}}</td>
+						    </tr>
+						  </tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>

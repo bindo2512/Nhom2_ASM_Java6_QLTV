@@ -42,7 +42,12 @@ th:replace="~{/layout/index :: dynamic(~{::main})}">
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                         <div class="text-center mrgBtm" style="margin-bottom: 15px;"><a class="btn btn-outline-dark mt-auto" th:href="@{|/qltv/products/detail/${p.bookid}|}" >Chi tiết</a></div>
                         <th:block th:if="${#request.remoteUser}">
-                            <div class="text-center mrgBtm"><button class="btn btn-outline-dark mt-auto" th:attr="ng-click=@{|cart.add(${p.bookid})|}" >Mượn</button></div>
+                            <th th:if="${p.available}">
+                                <div class="text-center mrgBtm"><button class="btn btn-outline-dark mt-auto" th:attr="ng-click=@{|cart.add(${p.bookid})|}">Mượn</button></div>
+                            </th>
+                            <th th:if="!${p.available}">
+                                <h4 style="text-align: center;"><span class="badge bg-danger">Sách này hiện tại không thể mượn</span></h4>
+                            </th>
                         </th:block>
                     </div>
                 </div>

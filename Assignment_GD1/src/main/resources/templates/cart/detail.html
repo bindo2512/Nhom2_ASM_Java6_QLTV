@@ -21,11 +21,11 @@
                     <img th:src="@{|/assest/image/products/${item.image}|}" alt="Book Cover" class="img-fluid">
                 </div>
                 <div class="col-md-6">
-                    <h2>[[${item.name}]]</h2>
-                    <p>Nhà xuất bản: [[${item.pname}]]</p>
-                    <p>Tác giả: [[${item.author}]]</p>
-                    <p>Năm xuất bản: [[${item.yearpub}]]</p>
-                    <h4>Nội dung: [[${item.description}]]</h4>
+                    <h1>[[${item.name}]]</h1>
+                    <p> <h4>Nhà xuất bản</h4> [[${item.pname}]]</p>
+                    <p> <h4>Tác giả</h4> [[${item.author}]]</p>
+                    <p> <h4>Năm xuất bản</h4> [[${item.yearpub}]]</p>
+                    <p> <h4>Nội dung:</h4> [[${item.description}]]</p>
                     <hr>
                     <a th:href="@{|/assest/pdf/${item.pdf}|}"  class="btn btn-primary">
                         <i class="bi-book me-1"></i>
@@ -36,10 +36,15 @@
                         Tải PDF
                     </a>
                     <th:block th:if="${#request.remoteUser}">
-                        <button th:attr="ng-click=@{|cart.add(${item.bookid})|}" class="btn btn-success">
-                            <i class="bi-bookmark-plus me-1"></i>
-                            Mượn sách (bản cứng)
-                        </button>
+                        <th th:if="${item.available}">
+                            <button th:attr="ng-click=@{|cart.add(${item.bookid})|}" class="btn btn-success">
+                                <i class="bi-bookmark-plus me-1"></i>
+                                Mượn sách (bản cứng)
+                            </button>
+                        </th>&nbsp
+                        <th th:if="!${item.available}">
+                            <h1><span class="badge bg-danger">Sản phẩm đã hết hàng</span></h1>
+                        </th>
                     </th:block>
                 </div>
             </div>

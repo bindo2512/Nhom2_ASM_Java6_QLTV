@@ -1,9 +1,9 @@
 package com.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
-import com.entity.Account;
+import com.entity.accounts;
 
-public interface accountDAO extends JpaRepository<Account, String> {
-
+public interface accountDAO extends JpaRepository<accounts, String> {
 }

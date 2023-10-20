@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}" >
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <main ng-controller="rental-history-ctrl">
+        <h1 style="text-align:center;">Lịch sử mượn sách của bạn</h1>
+        <br>
+        <div hidden id="username">[[${#request.remoteUser}]]</div>
+        <div th:replace="/rentalList/_tableBook.html"></div>
+        <br>
+        <div th:replace="/rentalList/_table.html"></div>
+    </main>
+</body>
+</html>

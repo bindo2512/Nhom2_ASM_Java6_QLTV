@@ -2,7 +2,10 @@ package com.entity;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -16,13 +19,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Account {
+public class accounts {
 	@Id
 	String username;
 	String password;
 	Boolean active;
 	String admin;
 	@JsonIgnore
-	@OneToMany(mappedBy = "account")
-	List<Retail> retail;
+	@OneToMany(mappedBy = "accounts")
+	List<accountdetails> accountdetail;
+	@JsonIgnore
+	@OneToMany(mappedBy = "accounts")
+	List<retails> retail;
+	@JsonIgnore
+	@OneToMany(mappedBy = "accounts")
+	List<comments> comments;
 }

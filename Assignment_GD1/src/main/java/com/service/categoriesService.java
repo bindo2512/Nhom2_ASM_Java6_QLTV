@@ -2,8 +2,8 @@ package com.service;
 
 import java.util.List;
 
-import com.entity.Categories;
+import com.entity.categories;
 
 public interface categoriesService {
-    List<Categories> findAll();
+    List<categories> findAll();
 }

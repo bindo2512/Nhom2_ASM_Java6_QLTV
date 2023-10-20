@@ -4,13 +4,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.entity.Book;
+import com.entity.books;
 
 
 public interface bookService {
-    List<Book> findAll();
+    List<books> findAll();
 
-    Book findById(Integer id);
+    books findById(Integer id);
 
-    Book create(Book book);
+    books create(books book);
 }

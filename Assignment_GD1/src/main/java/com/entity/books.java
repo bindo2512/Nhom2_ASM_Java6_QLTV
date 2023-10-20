@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -23,21 +21,32 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Retail {
+public class books {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Integer retailid;
-	Date retaildate;
-	Date returndate;
-	String address;
-	String name;
-	String email;
-	String phonenumber;
-	Boolean active;
+	Integer bookid;
 	@ManyToOne
-	@JoinColumn(name = "username")
-	Account account;
+	@JoinColumn(name = "booknameid")
+	bname bname;
+	@ManyToOne
+	@JoinColumn(name = "authorid")
+	authors authors;
+	@ManyToOne
+	@JoinColumn(name = "publisherid")
+	publishers publishers;
+	String description;
+	Integer yearpub;
+	Boolean available;
+	String image;
+	String pdf;
 	@JsonIgnore
-	@OneToMany(mappedBy = "retail")
-	List<Detail> rdetail;
+	@OneToMany(mappedBy = "books")
+	List<details> retaildetail;
+	@JsonIgnore
+	@OneToMany(mappedBy = "books")
+	List<comments> comments;
+	@ManyToOne
+	@JoinColumn(name = "categoryid")
+	categories categories;
+	
 }

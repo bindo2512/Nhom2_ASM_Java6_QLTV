@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dao.categoriesDAO;
-import com.entity.Categories;
+import com.entity.categories;
 import com.service.categoriesService;
 
 @Service
@@ -16,7 +16,7 @@ public class categoriesImpl implements categoriesService{
     categoriesDAO dao;
 
     @Override
-    public List<Categories> findAll() {
+    public List<categories> findAll() {
         return dao.findAll();
     }
     

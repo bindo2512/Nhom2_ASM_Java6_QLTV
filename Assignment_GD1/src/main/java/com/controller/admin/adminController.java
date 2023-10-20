@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.entity.Book;
+import com.entity.books;
 import com.service.bookService;
 
 @Controller
@@ -18,7 +18,7 @@ public class adminController {
 
 	@RequestMapping("dashboard")
 	public String index(Model model) {
-		List<Book> list = service.findAll();
+		List<books> list = service.findAll();
 		model.addAttribute("items", list);
 		return "admin/dashboard";
 	}
@@ -26,5 +26,10 @@ public class adminController {
 	@RequestMapping("rental")
 	public String rentalCtrl() {
 		return "admin/rental/retail";
+	}
+
+	@RequestMapping("account")
+	public String accountCtrl() {
+		return "admin/account/accounts";
 	}
 }

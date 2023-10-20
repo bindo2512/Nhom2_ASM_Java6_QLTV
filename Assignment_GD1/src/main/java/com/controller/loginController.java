@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.dao.accountDAO;
-import com.entity.Account;
+import com.entity.accounts;
 
 
 @Controller

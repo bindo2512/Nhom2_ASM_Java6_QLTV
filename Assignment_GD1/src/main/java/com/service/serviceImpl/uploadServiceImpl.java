@@ -42,10 +42,10 @@ public class uploadServiceImpl implements uploadService{
         if (!dir.exists()) {
             dir.mkdir();
         }
-        String fileName = System.currentTimeMillis() + file.getOriginalFilename();
-        String name = Integer.toHexString(fileName.hashCode()) + fileName.substring(fileName.lastIndexOf("."));
+        String fileName = file.getOriginalFilename();
         try {
-            File saveFile = new File(dir, name);
+            File saveFile = new File(dir, fileName);
+            System.out.println(app.getRealPath("/assest/image"));
             file.transferTo(saveFile);
             System.out.println(saveFile.getAbsolutePath());
             return saveFile;

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.entity.Book;
+import com.entity.books;
 import com.service.bookService;
 import com.service.rentalService;
 
@@ -22,14 +22,14 @@ public class productsController {
 
 	@RequestMapping("/qltv/products")
 	public String productsCtrl(Model model) {
-		List<Book> list = service.findAll();
+		List<books> list = service.findAll();
 		model.addAttribute("items", list);
 		return "cart/main";
 	}
 
 	@RequestMapping("/qltv/products/detail/{bookid}")
 	public String productDetailController(Model model, @PathVariable("bookid") Integer id) {
-		Book item = service.findById(id);
+		books item = service.findById(id);
 		model.addAttribute("item", item);
 		return "cart/detail";
 	}
@@ -49,5 +49,10 @@ public class productsController {
 	public String rentalDetailCtrl(@PathVariable("retailid") Integer id, Model model) {
 		model.addAttribute("rental", rentalService.findById(id));
 		return "cart/checkoutdetail";
+	}
+
+	@RequestMapping("/user/rental/history")
+	public String rentalHistoryCtrl() {
+		return "rentalList/rental";
 	}
 }

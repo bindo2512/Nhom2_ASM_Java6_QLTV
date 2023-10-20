@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.entity.Retail;
+import com.entity.details;
+import com.entity.retails;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.service.rentalService;
 
@@ -24,17 +25,27 @@ public class rentalrestController {
     rentalService service;
 
     @PostMapping
-    public Retail create(@RequestBody JsonNode orderData) {
+    public retails create(@RequestBody JsonNode orderData) {
         return service.create(orderData);
     }
 
     @GetMapping()
-    public List<Retail> getAll() {
+    public List<retails> getAll() {
         return service.findAll();
     }
 
     @PutMapping("/{id}")
-    public Retail update(@PathVariable("id") String id, @RequestBody Retail retail) {
+    public retails update(@PathVariable("id") String id, @RequestBody retails retail) {
         return service.update(retail);
+    }
+
+    @GetMapping("/username/{username}")
+    public List<retails> getByUsername(@PathVariable("username") String username) {
+        return service.findByAccountUsername(username);
+    }
+
+    @GetMapping("/id/{id}")
+    public List<details> getByRetailId(@PathVariable("id") Integer id) {
+        return service.findById(id);
     }
 }
