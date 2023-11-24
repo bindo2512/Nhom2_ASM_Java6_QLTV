@@ -16,12 +16,12 @@
 						  </thead>
 						  <tbody>
 						    <tr ng-repeat="b in retaildetail">
-						      <th><img th:src="@{|/assest/image/products/{{b.book.image}}|}" style="width:150px; height: 150px;"></th>
-						      <td>{{b.book.name}}</td>
-						      <td>{{b.book.author}}</td>
-						      <td>{{b.book.pname}}</td>
-						      <td>{{b.book.yearpub}}</td>
-                              <td>{{b.book.categories.categoryname}}</td>
+						      <th><img th:src="@{|/assest/image/products/{{b.books.image}}|}" style="max-width:50px; max-height: 175px;"></th>
+						      <td>{{b.books.bname.bookname}}</td>
+						      <td>{{b.books.authors.authorname}}</td>
+						      <td>{{b.books.publishers.publishername}}</td>
+						      <td>{{b.books.yearpub}}</td>
+                              <td>{{b.books.categories.categoryname}}</td>
 						    </tr>
 						  </tbody>
 						</table>

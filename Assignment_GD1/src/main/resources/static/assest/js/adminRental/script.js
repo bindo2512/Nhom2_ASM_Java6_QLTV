@@ -1,6 +1,7 @@
 app.controller("admin-rental-ctrl", function($scope,$http) {
     $scope.rentals = [];
     $scope.rentalsdetail = [];
+    $scope.orderstate = [];
     $scope.currentDate = new Date();
     $scope.form = {};
     $scope.init = function() {
@@ -8,6 +9,9 @@ app.controller("admin-rental-ctrl", function($scope,$http) {
             $scope.rentals = resp.data;
         }).catch(error => {
             console.log(error)
+        });
+        $http.get("/rest/orderstate").then(resp => {
+            $scope.orderstate = resp.data;
         })
     }
 

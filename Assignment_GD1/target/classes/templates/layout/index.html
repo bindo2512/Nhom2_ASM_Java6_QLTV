@@ -35,8 +35,7 @@ src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"
 		<div th:replace="/layout/_navbar.html"></div>
 	</nav>
 	<div>
-		<div th:replace="${main}"></div>
-		<h1 >{{qoutes.qoute}}</h1>
+		<main th:replace="${main}" ></main>
 	</div>
 	<footer>
 		<div th:replace="/layout/_footer.html"></div>
@@ -45,12 +44,16 @@ src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"
 		const app = angular.module("library-app", []);
 
 app.controller("library-ctrl", function($scope, $http, $document){
-	$scope.qoutes = {};
-	$scope.qouteHidden = 'none';
     $scope.cart = {
         items: [],
 		number: 0,
+		init() {
+			$http.get("/rest/categories").then(resp => {
+            $scope.categories = resp.data;
+        })
+		},
         add(bookid) {
+
             var item = this.items.find(item => item.bookid == bookid);
 			if (item) {
 				alert("Bạn chỉ được mượn 1 quyển sách cùng loại vào 1 thời điểm")
@@ -87,11 +90,11 @@ app.controller("library-ctrl", function($scope, $http, $document){
 	$scope.retail = {
 		retaildate: "",
 		returndate: new Date(),
-		name:"",
+		fullname:"",
 		address:"",
 		phonenumber:"",
 		email: "",
-		active: false,
+		orderstate: {orderstateid: '1'},
 		updateReturnDate: function() {
     	if ($scope.retail.returndate) {
 			$scope.retail.returndate = new Date($scope.retail.retaildate);
@@ -99,11 +102,11 @@ app.controller("library-ctrl", function($scope, $http, $document){
     	}
 		return $scope.retail.returndate
 	},
-		account: {username: $("#username").text()},
-		get rdetail(){
+		accounts: {username: $("#username").text()},
+		get details(){
 			return $scope.cart.items.map(item => {
 				return {
-					book: {bookid: item.bookid},
+					books: {bookid: item.bookid},
 				}
 			})
 		},
@@ -119,29 +122,27 @@ app.controller("library-ctrl", function($scope, $http, $document){
 			})
 		}
 	}
-	if ($scope.qouteHidden == 'none') {
-		setTimeout(function() {
-			$scope.qouteHidden = 'block';
-			alert($scope.qouteHidden);
-			$http({method: 'get', url: 'https://api.api-ninjas.com/v1/quotes', headers: {'X-Api-Key':'x9nN+gyGD6YENIbe0uTBWA==fghWSfyv6nAKYTy2'}, contentType: 'application/json'}).then(resp => {
-				console.log(resp.data)
-				$scope.qoutes = resp.data;
-				console.log($scope.qoutes)
-			}).catch(error => {
-				console.log(error)
-			})
-			setTimeout(function() {
-				$scope.qouteHidden = 'none';
-			}, 15000)
-		}, 30000)
+	$scope.expandText = {'overflow': 'hidden', 'text-overflow': 'ellipsis', 'display': '-webkit-box', '-webkit-line-clamp': '3', '-webkit-box-orient': 'vertical'};
+  	$scope.buttonText = 'More';
+	  $scope.buttonText = 'More';
+
+	$scope.toggleText = function() {
+	if ($scope.expandText['overflow'] === 'hidden') {
+		$scope.expandText = {'overflow': 'visible'};
+      	$scope.buttonText = 'Less';
+	} else {
+		$scope.expandText = {'overflow': 'hidden', 'text-overflow': 'ellipsis', 'display': '-webkit-box', '-webkit-line-clamp': '3', '-webkit-box-orient': 'vertical'};
+      $scope.buttonText = 'More';
 	}
+	};
 	console.log($scope.isLogin)
+	$scope.cart.init();
 	$scope.cart.loadStorage();
 })
 	</script>
 	<script th:src="@{|/assest/js/adminBook/script.js|}"></script>
 	<script th:src="@{|/assest/js/adminRental/script.js|}"></script>
-	<script th:src="@{|/assest/js/rentalHistory/script.js|}"></script>
+	<script th:src="@{|/assest/js/rentalHistory/script.js|}" type="text/javascript"></script>
 	<script th:src="@{|/assest/js/adminAccount/script.js|}"></script>
 </body>
 </html>

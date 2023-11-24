@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org"
-th:replace="~{/layout/index :: dynamic(~{::main})}">
+th:replace="~{/layout/index :: dynamic(~{::main})}" style="width: 100px;">
 
 
 
@@ -10,7 +10,7 @@ th:replace="~{/layout/index :: dynamic(~{::main})}">
 <style href="/assest/css/products/product.css"></style>
 </head>
 <body>
-	<main class="row">
+	<main class="row" style="width: 100%;">
 		<header class="bg-image py-5" style="
         background-image: url('https://static01.nyt.com/images/2015/10/24/opinion/24manguel/24manguel-superJumbo.jpg');
         height: 50vh;
@@ -22,20 +22,62 @@ th:replace="~{/layout/index :: dynamic(~{::main})}">
                 </div>
             </div>
         </header>
+        <h1 class="" th:text="*{message}"></h1>
+        <div style="margin-left:150px; transition: float 5s; transition-delay: 2.5s; width: 80%;">
+					<button class="btn btn-outline-dark" type="button" data-bs-toggle="collapse" data-bs-target="#searchBox" aria-expanded="false" aria-controls="searchBox">
+						Tìm kiếm
+					</button>
+				</div>
+        <div class="collapse" id="searchBox">
+					<div class="card card-body" style="border:none;">
+						<form th:action="@{/qltv/products/search}" th:object="${criteria}" method="post">
+							<div class="input-group search-box" style="justify-content:center;">
+								<div class="form-outline margRg">
+								  <input id="search-input" type="search" class="form-control" th:field="*{booknamekeyword}" />
+								</div>
+								<div class="margRg">
+									<button class="btn btn-outline-dark" type="button" data-bs-toggle="collapse" data-bs-target="#advanceSearchBox" aria-expanded="false" aria-controls="advanceSearchBox" style="width: 225.6px;">
+										Tìm kiếm nâng cao
+									  </button>
+									<div class="collapse" id="advanceSearchBox" style="margin-top: 15px;">
+											<div class="form-outline margRg">
+												<select name="" id="category" class="form-control margTop" th:field="*{categoriesid}">
+													<option value="">Tất cả</option>
+													<option th:each="category: ${categories}" th:value="${category.categoryid}" th:text="${category.categoryname}" th:selected="${category.categoryid == categoriesid}"></option>
+												</select>
+												<select name="" id="authors" class="form-control margTop" th:field="*{authorid}">
+													<option value="">Tất cả</option>
+													<option th:each="author: ${authors}" th:value="${author.authorid}" th:text="${author.authorname}" th:selected="${author.authorid == authorid}"></option>
+												</select>
+												<select name="" id="publishers" class="form-control margTop" th:field="*{publishersid}">
+													<option value="">Tất cả</option>
+													<option th:each="publisher: ${publishers}" th:value="${publisher.publisherid}" th:text="${publisher.publishername}" th:selected="${publisher.publisherid == publishersid}"></option>
+												</select>
+											</div>										
+									</div>
+								</div>
+								<button id="search-button margRg" type="submit" class="btn btn-primary">
+								  <i class="fas fa-search"></i>
+								</button>
+							</div>	
+						</form>
+					</div>
+				  </div>
 		<div th:each="p:${items}" class="container px-4 px-lg-5 mt-5 col-sm-4">
 			<div class="col mb-5">
                 <div class="card h-100">
                     <!-- Product image-->
-                    <img class="card-img-top justify-content-center" th:src="@{|/assest/image/products/${p.image}|}" style="height: 175px; width: 175px; margin: auto;"/>
+                    <img class="card-img-top justify-content-center" th:src="@{|/assest/image/products/${p.image}|}" style="max-height: 300px; width: 175px; margin: auto; margin-top: 15px;"/>
                     <!-- Product details-->
                     <div class="card-body p-4">
                         <div class="text-center">
-                            <!-- Product name-->
-                            <h3 class="fw-bolder" th:text="${p.name}"></h3>
-							<h6 th:text="${p.pname}"></h6>
-							<h5 th:text="${p.author}"></h5>
-                            <!-- Product price-->
-                            <div th:text="${p.yearpub}"></div>
+                            <h3 class="fw-bolder" th:text="${p.bname.bookname}"></h3>
+							<h6 th:text="${p.publishers.publishername}"></h6>
+							<h5 th:text="${p.authors.authorname}"></h5>
+                            <div style="display:flex; justify-content: center; padding: 5px;">
+                                <h3 th:text="${p.yearpub}"></h3>
+                                <h6 class="ribbon ribbon-top-left"><span th:text="${p.categories.categoryname}" class="badge bg-primary"></span></h6>
+                            </div>
                         </div>
                     </div>
                     <!-- Product actions-->
@@ -53,6 +95,88 @@ th:replace="~{/layout/index :: dynamic(~{::main})}">
                 </div>
             </div>
 		</div>
+    <nav aria-label="Page navigation example" >
+      <ul class="pagination" style="justify-content: center;">
+        <li class="page-item" th:classappend="${items.first} ? 'disabled':''">
+          <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        <li class="page-item" th:each="pageNum: ${#numbers.sequence(0, items.totalPages - 1)}" th:classappend="${pageNum == items.number} ? 'active':''"><a class="page-link" href="#" th:text="${pageNum + 1}" th:href="@{/qltv/products/search(page = ${pageNum})}"></a></li>
+        <li class="page-item" th:classappend="${items.last} ? 'disabled':''">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+        <style>
+            @import url(https://fonts.googleapis.com/css?family=Lato:700);
+.box {
+  position: relative;
+  max-width: 600px;
+  width: 90%;
+  height: 400px;
+  background: #fff;
+  box-shadow: 0 0 15px rgba(0,0,0,.1);
+}
+
+/* common */
+.ribbon {
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  position: absolute;
+}
+.ribbon::before,
+.ribbon::after {
+  position: absolute;
+  z-index: -1;
+  content: '';
+  display: block;
+  border: 5px solid #2980b9;
+}
+.ribbon span {
+  position: absolute;
+  display: block;
+  width: 225px;
+  padding: 15px 0;
+  background-color: #3498db;
+  box-shadow: 0 5px 10px rgba(0,0,0,.1);
+  color: #fff;
+  font: 700 18px/1 'Lato', sans-serif;
+  text-shadow: 0 1px 1px rgba(0,0,0,.2);
+  text-transform: uppercase;
+  text-align: top;
+  font-size: 10px;
+}
+
+/* top left*/
+.ribbon-top-left {
+  top: -10px;
+  left: -10px;
+}
+.ribbon-top-left::before,
+.ribbon-top-left::after {
+  border-top-color: transparent;
+  border-left-color: transparent;
+}
+.ribbon-top-left::before {
+  top: 0;
+  right: 0;
+}
+.ribbon-top-left::after {
+  bottom: 0;
+  left: 0;
+}
+.ribbon-top-left span {
+  right: -25px;
+  top: 30px;
+  transform: rotate(-45deg);
+}
+        </style>
 	</main>
 </body>
 </html>

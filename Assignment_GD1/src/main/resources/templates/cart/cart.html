@@ -29,9 +29,9 @@
                                 <td>
                                     <img src="/assest/image/products/{{item.image}}" alt="Hình ảnh" width="100">
                                 </td>
-                                <td>{{item.name}}</td>
-                                <td>{{item.author}}</td>
-                                <td>{{item.pname}}</td>
+                                <td>{{item.bname.bookname}}</td>
+                                <td>{{item.authors.authorname}}</td>
+                                <td>{{item.publishers.publishername}}</td>
                                 <td><button class="btn btn-danger btn-sm" ng-click="cart.remove(item.bookid)">Xóa</button></td>
                             </tr>
                         </tbody>
@@ -95,7 +95,7 @@
                     </div>
                     <div class="form-group">
                         <label for="fullname">Họ tên người mượn:</label>
-                        <input type="fullname" class="form-control" id="fullname" placeholder="Nhập họ tên người mượn" required ng-model="retail.name">
+                        <input type="fullname" class="form-control" id="fullname" placeholder="Nhập họ tên người mượn" required ng-model="retail.fullname">
                     </div>
                     <div class="form-group">
                         <label for="diaChi">Địa chỉ:</label>
@@ -117,7 +117,7 @@
                         <label for="ngayTra">Ngày trả:</label>
                         <input type="date" class="form-control" id="ngayTra" ng-model="retail.returndate" disabled></input>
                     </div>
-                    <div class="text-center">
+                    <div class="text-center" ng-show="{{cart.count()}}" ng-model-options="{debounce: 500}">
                         <button type="submit" class="btn btn-primary" ng-click="retail.rental()">Đặt mượn</button>
                     </div>
                 </div>

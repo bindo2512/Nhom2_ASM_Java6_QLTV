@@ -25,6 +25,6 @@ public class orderstate {
     Integer orderstateid;
     String orderstatename;
     @JsonIgnore
-    @OneToMany
+    @OneToMany(mappedBy = "orderstate")
     List<retails> retails;
 }

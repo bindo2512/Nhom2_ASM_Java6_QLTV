@@ -37,11 +37,11 @@ public class rentalServiceImpl implements rentalService {
         dao.save(retail);
 
         TypeReference<List<details>> type = new TypeReference<List<details>>() {};
-        List<details> details = mapper.convertValue(orderData.get("rdetail"), type)
+        List<details> rental_detail = mapper.convertValue(orderData.get("details"), type)
         .stream()
         .peek(r -> r.setRetails(retail))
         .collect(Collectors.toList());
-        ddao.saveAll(details);
+        ddao.saveAll(rental_detail);
 
         return retail;
     }
@@ -57,7 +57,7 @@ public class rentalServiceImpl implements rentalService {
     }
 
     @Override
-    public retails update(retails retail) {
+    public retails updateSRetails(retails retail) {
         return dao.save(retail);
     }
 
@@ -66,4 +66,14 @@ public class rentalServiceImpl implements rentalService {
         return adao.findById(username).get().getRetail();
     }
 
+
+    @Override
+    public List<details> findAllRDetails() {
+        return ddao.findAll();
+    }
+
+    @Override
+    public List<retails> findAllRetailById(Integer id) {
+        return dao.findAll();
+    }
 }

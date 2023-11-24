@@ -28,4 +28,5 @@ public class categories {
     @JsonIgnore
     @OneToMany(mappedBy = "categories")
     List<books> book;
+
 }

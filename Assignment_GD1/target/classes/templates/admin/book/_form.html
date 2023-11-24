@@ -9,27 +9,113 @@
                     </div>
                 </div>
                 <div class="col-md-9">
-                    <div class="mb-3">
-                        <label for="bookName" class="form-label">Tên sách</label>
-                        <input type="text" class="form-control" id="bookName" placeholder="Nhập tên sách" ng-model="form.name">
+                    <label for="bname" class="form-label">Tên sách</label>
+                    <div class="input-group">
+                        <select name="" id="bname" class="form-control" ng-model="form.bname.booknameid" style="margin-right: 15px;">
+                            <option ng-repeat="b in bname" ng-value="b.booknameid">{{b.bookname}}</option>
+                        </select>
+                        <span class="input-group-btn"><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bnameAddModal">Thêm đầu sách</button></span>
+                        <div class="modal fade" id="bnameAddModal" tabindex="-1" aria-labelledby="bnameAddModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="bnameAddModalLabel">Modal title</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  ...
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                  <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                     </div>
                     <div class="mb-3">
-                        <label for="author" class="form-label">Tác giả</label>
-                        <input type="text" class="form-control" id="author" placeholder="Nhập giá sách" ng-model="form.author">
+                        <label for="authors" class="form-label">Tác giả</label>
+                        <select name="" id="authors" class="form-control" ng-model="form.authors.authorid">
+                            <option ng-repeat="a in authors" ng-value="a.authorid">{{a.authorname}}</option>
+                        </select>
                     </div>
-                    <div class="mb-3">
-                        <label for="publisher" class="form-label">Nhà xuất bản</label>
-                        <input type="text" class="form-control" id="publisher" placeholder="Nhập nhà xuất bản" ng-model="form.pname">
+                    <label for="publishers" class="form-label">Nhà xuất bản</label>
+                    <div class="input-group">
+                        <select name="" id="publishers" class="form-control" ng-model="form.publishers.publisherid" style="margin-right: 15px;">
+                            <option ng-repeat="p in publishers" ng-value="p.publisherid">{{p.publishername}}</option>
+                        </select>
+                        <span class="input-group-btn"><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#publishersAddModal">Thêm nhà xuất bản</button></span>
+                        <div class="modal fade" id="publishersAddModal" tabindex="-1" aria-labelledby="publishersAddModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="publishersAddModalLabel">Thêm nhà xuất bản</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  ...
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                  <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                    <div style="margin-top: 15px;">
+                      <label for="issuer" class="form-label">Nhà phát hành</label>
+                      <div class="input-group">
+                        <select name="" id="issuer" class="form-control" ng-model="form.issuer.issuerid" style="margin-right: 15px;">
+                            <option ng-repeat="i in issuer" ng-value="i.issuerid">{{i.issuername}}</option>
+                        </select>
+                        <span class="input-group-btn"><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#issuerAddModal">Thêm nhà phát hành</button></span>
+                        <div class="modal fade" id="issuerAddModal" tabindex="-1" aria-labelledby="issuerAddModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="issuerAddModalLabel">Modal title</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  ...
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                  <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
                     </div>
                     <div class="mb-3">
                         <label for="yearpub" class="form-label">Năm xuất bản</label>
                         <input type="text" class="form-control" id="yearpub" placeholder="Năm xuất bản" ng-model="form.yearpub" maxlength="4" pattern="[0-9]+">
                     </div>
-                    <div class="mb-3">
-                        <label for="category" class="form-label">Thể loại</label>
-                        <select name="" id="category" class="form-control" ng-model="form.categories.categoryid">
+                    <label for="category" class="form-label">Thể loại</label>
+                    <div class="input-group">
+                        <select name="" id="category" class="form-control" ng-model="form.categories.categoryid" style="margin-right: 15px;">
                             <option ng-repeat="c in categories" ng-value="c.categoryid">{{c.categoryname}}</option>
                         </select>
+                       <span class="input-group-btn"> <button data-bs-toggle="modal" data-bs-target="#categoryAddModal" class="btn btn-primary">Thêm phân loại mới</button></span>
+                        <div class="modal fade" id="categoryAddModal" tabindex="-1" aria-labelledby="categoryAddModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="categoryAddModalLabel">Modal title</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  ...
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                  <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                     </div>
                     <div class="mb-3">
                         <label for="pdf" class="form-label">PDF</label>
@@ -58,7 +144,7 @@
         </form>
     </div>
     
-    <div class="btn-container">
+    <div class="btn-container justify-content-center" style="text-align:center ;">
         <button class="btn btn-primary" type="button" ng-click="create()">Create</button>
         <button class="btn btn-warning" type="button" ng-click="update()">Update</button>
         <button class="btn btn-secondary" type="button" ng-click="reset()">Reset form</button>

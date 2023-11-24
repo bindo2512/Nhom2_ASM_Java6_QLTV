@@ -22,11 +22,11 @@
 						    </tr>
 						  </thead>
 						  <tbody>
-						    <tr ng-repeat="b in books">
-						      <th><img th:src="@{|/assest/image/products/{{b.image}}|}" style="width:150px; height: 150px;"></th>
-						      <td>{{b.name}}</td>
-						      <td>{{b.author}}</td>
-						      <td>{{b.pname}}</td>
+						    <tr ng-repeat="b in pager.items">
+						      <th><img th:src="@{|/assest/image/products/{{b.image}}|}" style="max-height:175px; max-width: 50px;"></th>
+						      <td>{{b.bname.bookname}}</td>
+						      <td>{{b.authors.authorname}}</td>
+						      <td>{{b.publishers.publishername}}</td>
 						      <td>{{b.yearpub}}</td>
                               <td>{{b.categories.categoryname}}</td>
                               <td>{{b.available? 'Còn sách':'Hết sách'}}</td>
@@ -37,4 +37,18 @@
 					</div>
 				</div>
 			</div>
+			<br>
+			<nav aria-label="Page navigation example">
+				<ul class="pagination justify-content-center">
+				  <li class="page-item">
+					<button class="btn btn-primary page-link"  ng-click="pager.first()">First</button>
+				  </li>
+				  <li class="page-item"><button class="page-link" ng-click="pager.prev()">Previous</button></li>
+				  <li class="page-item"><a class="page-link" href="#">{{pager.page + 1}} of {{pager.count}}</a></li>
+				  <li class="page-item"><button class="page-link" ng-click="pager.next()">Next</button></li>
+				  <li class="page-item">
+					<button class="page-link" ng-click="pager.last()">Last</button>
+				  </li>
+				</ul>
+			  </nav>
 		</div>

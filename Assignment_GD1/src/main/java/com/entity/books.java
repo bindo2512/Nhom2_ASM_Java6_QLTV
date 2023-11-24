@@ -32,11 +32,15 @@ public class books {
 	@JoinColumn(name = "authorid")
 	authors authors;
 	@ManyToOne
+	@JoinColumn(name = "issuerid")
+	issuer issuer;
+	@ManyToOne
 	@JoinColumn(name = "publisherid")
 	publishers publishers;
 	String description;
 	Integer yearpub;
 	Boolean available;
+	Boolean hardcover;
 	String image;
 	String pdf;
 	@JsonIgnore

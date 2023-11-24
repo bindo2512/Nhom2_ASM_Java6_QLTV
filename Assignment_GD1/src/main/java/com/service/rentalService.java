@@ -10,12 +10,15 @@ public interface rentalService {
 
     retails create(JsonNode orderData);
 
-    List<details> findById(Integer string);
+    List<details> findById(Integer id);
 
     List<retails> findAll();
 
-    retails update(retails retail);
+    retails updateSRetails(retails retail);
 
     List<retails> findByAccountUsername(String username);
     
+    List<details> findAllRDetails();
+
+    List<retails> findAllRetailById(Integer id);
 }

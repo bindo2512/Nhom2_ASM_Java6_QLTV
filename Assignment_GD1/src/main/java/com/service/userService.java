@@ -21,7 +21,7 @@ public class userService implements UserDetailsService {
 		try {
 			accounts account = accountDAO.findById(username).get();
 			String password = account.getPassword();
-			String role = account.getAdmin();
+			String role = account.getIsadmin();
 			return User.withUsername(username).password(pe.encode(password)).roles(role).build();			
 		} catch (Exception e) {
 			return null;

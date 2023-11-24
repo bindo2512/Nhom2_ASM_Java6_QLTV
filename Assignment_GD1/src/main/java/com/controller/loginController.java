@@ -8,13 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.dao.accountDAO;
 import com.entity.accounts;
+import com.entity.filterCriteria;
 
 
 @Controller
 public class loginController {
 
 	@RequestMapping("/qltv/login/form")
-	public String loginCtrl() {
+	public String loginCtrl(Model model) {
 		return "forgot_and_login/login";
 	}
 	

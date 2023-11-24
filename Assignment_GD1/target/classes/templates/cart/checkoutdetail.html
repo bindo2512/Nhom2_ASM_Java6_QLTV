@@ -17,11 +17,11 @@ th:replace="~{/layout/index :: dynamic(~{::main})}"    >
       <div>
         <div class="form-group">
             <label for="username">Tài khoản mượn:</label>
-            <input class="form-control" id="username" th:field="*{account.username}" disabled></div>
+            <input class="form-control" id="username" th:field="*{accounts.username}" disabled></div>
         </div>
         <div class="form-group">
             <label for="fullname">Họ tên người mượn:</label>
-            <input class="form-control" id="fullname" th:field="*{name}" disabled>
+            <input class="form-control" id="fullname" th:field="*{fullname}" disabled>
         </div>
         <div class="form-group">
             <label for="diaChi">Địa chỉ:</label>
@@ -61,9 +61,9 @@ th:replace="~{/layout/index :: dynamic(~{::main})}"    >
                   <tbody>
                     <tr th:each="detail: *{rdetail}" th:object="${detail}">
                       <td><img th:src="@{|/assest/image/products/*{book.image}|}" alt="Book Cover" class="img-fluid" style="height: 100%; width: 50px;;"></td>
-                      <td>[[*{book.name}]]</td>
-                      <td>[[*{book.author}]]</td>
-                      <td>[[*{book.pname}]]</td>
+                      <td>[[*{book.bname.bookname}]]</td>
+                      <td>[[*{book.authors.authorname}]]</td>
+                      <td>[[*{book.publishers.publishername}]]</td>
                   </tbody>
                 </table>
               </div>

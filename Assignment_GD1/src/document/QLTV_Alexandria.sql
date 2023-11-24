@@ -67,14 +67,18 @@ create table retails (
 	retailid int primary key identity(1,1),
 	retaildate date,
 	returndate date,
-	username varchar(255) foreign key references accounts(username)
+	username varchar(255) foreign key references accounts(username),
+	email varchar(255),
+	fullname nvarchar(50),
+	phonenumber varchar(50),
+	address nvarchar(255),
+	orderstateid int foreign key references orderstate(orderstateid)
 )
 
 create table details (
 	detailid int primary key identity(1,1),
 	retailid int foreign key references retails(retailid),
 	bookid int foreign key references books(bookid),
-	orderstateid int foreign key references orderstate(orderstateid)
 )
 
 create table comments(

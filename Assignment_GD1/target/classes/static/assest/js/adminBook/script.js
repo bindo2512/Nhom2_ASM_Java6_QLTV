@@ -1,6 +1,10 @@
 app.controller("admin-book-ctrl", function($scope, $http){
     $scope.books = [];
     $scope.categories = [];
+    $scope.bname = [];
+    $scope.authors = [];
+    $scope.publishers = [];
+    $scope.issuer = [];
     $scope.form = {
         image: 'not_available.png'
     };
@@ -11,6 +15,18 @@ app.controller("admin-book-ctrl", function($scope, $http){
 
         $http.get("/rest/categories").then(resp => {
             $scope.categories = resp.data;
+        })
+        $http.get("/rest/bname").then(resp => {
+            $scope.bname = resp.data;
+        })
+        $http.get("/rest/authors").then(resp => {
+            $scope.authors = resp.data;
+        })
+        $http.get("/rest/publishers").then(resp => {
+            $scope.publishers = resp.data;
+        })
+        $http.get("/rest/issuer").then(resp => {
+            $scope.issuer = resp.data;
         })
     },
 
@@ -60,6 +76,29 @@ app.controller("admin-book-ctrl", function($scope, $http){
             alert("Lỗi update file hình ảnh");
             console.log(error);
         })
+    }
+    $scope.pager = {
+        page: 0,
+        size: 10,
+        get items(){
+            var start = this.page * this.size;
+            return $scope.books.slice(start, start + this.size);
+        },
+        get count() {
+            return Math.ceil(1.0 * $scope.books.length / this.size); 
+        },
+        first () {
+            this.page = 0;
+        },
+        prev() {
+            this.page--;
+        },
+        next() {
+            this.page++;
+        },
+        last() {
+            this.page = this.count - 1;
+        }
     }
     $scope.init();
 

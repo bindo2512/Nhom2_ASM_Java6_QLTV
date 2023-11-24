@@ -33,7 +33,7 @@ public class bookRestController {
 
     @PostMapping()
     public books create(@RequestBody books book) {
-        return service.create(book);
+        return service.createNewBook(book);
     }
 
 }

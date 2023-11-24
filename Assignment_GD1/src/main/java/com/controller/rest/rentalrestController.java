@@ -36,7 +36,7 @@ public class rentalrestController {
 
     @PutMapping("/{id}")
     public retails update(@PathVariable("id") String id, @RequestBody retails retail) {
-        return service.update(retail);
+        return service.updateSRetails(retail);
     }
 
     @GetMapping("/username/{username}")
@@ -47,5 +47,10 @@ public class rentalrestController {
     @GetMapping("/id/{id}")
     public List<details> getByRetailId(@PathVariable("id") Integer id) {
         return service.findById(id);
+    }
+
+    @GetMapping("/details/all")
+    public List<details> getAllRDetails() {
+        return service.findAllRDetails();
     }
 }

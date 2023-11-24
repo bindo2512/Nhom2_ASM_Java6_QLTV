@@ -8,10 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,10 +18,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "details")
 public class details {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer retaildetailid;
+    Integer detailid;
     
     @ManyToOne
     @JoinColumn(name = "retailid")
@@ -33,4 +31,6 @@ public class details {
     @ManyToOne
     @JoinColumn(name = "bookid")
     books books;
+
+
 }

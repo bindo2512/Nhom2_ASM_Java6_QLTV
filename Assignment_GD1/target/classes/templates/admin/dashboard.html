@@ -27,9 +27,9 @@
 					  <tbody>
 						<tr th:each="p:${items}">
 						  <th> <img class="card-img-top justify-content-center" th:src="@{|/assest/image/products/${p.image}|}" style="height: 175px; width: 175px; margin: auto;"/></th>
-						  <td th:text="${p.name}"></td>
-						  <td th:text="${p.author}"></td>
-						  <td th:text="${p.pname}"></td>
+						  <td th:text="${p.bname.bookname}"></td>
+						  <td th:text="${p.authors.authorname}"></td>
+						  <td th:text="${p.publishers.publishername}"></td>
 						  <td th:text="${p.yearpub}"></td>
 						  <td th:text="${p.categories.categoryname}"></td>
 						  <td th:text="${p.available}? 'Còn sách':'Hết sách'"></td>

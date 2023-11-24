@@ -30,10 +30,9 @@ public class retails {
 	Date retaildate;
 	Date returndate;
 	String address;
-	String name;
+	String fullname;
 	String email;
 	String phonenumber;
-	Boolean active;
 	@ManyToOne
 	@JoinColumn(name = "username")
 	accounts accounts;
