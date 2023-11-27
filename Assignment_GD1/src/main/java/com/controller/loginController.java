@@ -1,6 +1,7 @@
 package com.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,10 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.dao.accountDAO;
 import com.entity.accounts;
 import com.entity.filterCriteria;
+import com.service.userService;
 
 
 @Controller
 public class loginController {
+
+	@Autowired
+	userService service;
 
 	@RequestMapping("/qltv/login/form")
 	public String loginCtrl(Model model) {
@@ -21,8 +26,13 @@ public class loginController {
 	
 	@RequestMapping("/qltv/login/success")
 	public String loginCtrlSuccess(Model model) {
-		model.addAttribute("message", "Đăng nhập thành công");
 		return "redirect:/qltv/products";
+	}
+
+	@RequestMapping("/oauth2/login/success")
+	public String oauth2Login(OAuth2AuthenticationToken oauth2) {
+		service.loginFormOAuth2(oauth2);
+		return "forward:/qltv/login/success";
 	}
 	
 	@RequestMapping("/qltv/login/error") 

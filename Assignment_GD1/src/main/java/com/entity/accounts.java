@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -22,9 +24,9 @@ public class accounts {
 	String password;
 	Boolean isactive;
 	String isadmin;
-	@JsonIgnore
-	@OneToMany(mappedBy = "accounts")
-	List<accountdetails> accountdetail;
+	@ManyToOne
+    @JoinColumn(name = "accountdetailid")
+    accountdetail accountdetail;
 	@JsonIgnore
 	@OneToMany(mappedBy = "accounts")
 	List<retails> retail;

@@ -37,12 +37,11 @@ public class books {
 	@ManyToOne
 	@JoinColumn(name = "publisherid")
 	publishers publishers;
-	String description;
-	Integer yearpub;
 	Boolean available;
 	Boolean hardcover;
 	String image;
 	String pdf;
+	Date createdate;
 	@JsonIgnore
 	@OneToMany(mappedBy = "books")
 	List<details> retaildetail;

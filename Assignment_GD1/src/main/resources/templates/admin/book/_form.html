@@ -5,7 +5,7 @@
                 <div class="col-md-3">
                     <div class="mb-3">
                         <!-- Book image -->
-                        <img ng-src="/assest/image/products/{{form.image}}" alt="" style="width: 300px; height: 300px;">
+                        <img ng-src="/assest/image/products/{{form.image}}" alt="" style="max-width: 150px; max-height: 300px;">
                     </div>
                 </div>
                 <div class="col-md-9">
@@ -15,29 +15,14 @@
                             <option ng-repeat="b in bname" ng-value="b.booknameid">{{b.bookname}}</option>
                         </select>
                         <span class="input-group-btn"><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bnameAddModal">Thêm đầu sách</button></span>
-                        <div class="modal fade" id="bnameAddModal" tabindex="-1" aria-labelledby="bnameAddModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="bnameAddModalLabel">Modal title</h5>
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                  ...
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                  <button type="button" class="btn btn-primary">Save changes</button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="authors" class="form-label">Tác giả</label>
-                        <select name="" id="authors" class="form-control" ng-model="form.authors.authorid">
+
+                    <label for="authors" class="form-label">Tác giả</label>
+                    <div class="input-group">
+                        <select name="" id="authors" class="form-control" ng-model="form.authors.authorid" style="margin-right: 15px;">
                             <option ng-repeat="a in authors" ng-value="a.authorid">{{a.authorname}}</option>
                         </select>
+                        <span class="input-group-btn"><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#authorsAddModal">Thêm tác giả</button></span>
                     </div>
                     <label for="publishers" class="form-label">Nhà xuất bản</label>
                     <div class="input-group">
@@ -45,23 +30,6 @@
                             <option ng-repeat="p in publishers" ng-value="p.publisherid">{{p.publishername}}</option>
                         </select>
                         <span class="input-group-btn"><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#publishersAddModal">Thêm nhà xuất bản</button></span>
-                        <div class="modal fade" id="publishersAddModal" tabindex="-1" aria-labelledby="publishersAddModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="publishersAddModalLabel">Thêm nhà xuất bản</h5>
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                  ...
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                  <button type="button" class="btn btn-primary">Save changes</button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
                     </div>
                     <div style="margin-top: 15px;">
                       <label for="issuer" class="form-label">Nhà phát hành</label>
@@ -70,28 +38,8 @@
                             <option ng-repeat="i in issuer" ng-value="i.issuerid">{{i.issuername}}</option>
                         </select>
                         <span class="input-group-btn"><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#issuerAddModal">Thêm nhà phát hành</button></span>
-                        <div class="modal fade" id="issuerAddModal" tabindex="-1" aria-labelledby="issuerAddModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="issuerAddModalLabel">Modal title</h5>
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                  ...
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                  <button type="button" class="btn btn-primary">Save changes</button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+
                     </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="yearpub" class="form-label">Năm xuất bản</label>
-                        <input type="text" class="form-control" id="yearpub" placeholder="Năm xuất bản" ng-model="form.yearpub" maxlength="4" pattern="[0-9]+">
                     </div>
                     <label for="category" class="form-label">Thể loại</label>
                     <div class="input-group">
@@ -125,11 +73,8 @@
                         <label for="image" class="form-label">Hình Ảnh</label>
                         <input type="file" class="form-control" id="image" onchange="angular.element(this).scope().imageChange(this.files)">
                     </div>
-                    <div class="mb-3">
-                        <label for="description" class="form-label">Nội dung</label>
-                        <textarea class="form-control" id="description" placeholder="Nội dung" ng-model="form.description"></textarea>
-                    </div>
-                    <div class="mb-3">
+                    <div class="mb-3 row">
+                      <div class="col">
                         <label class="form-label">Còn hàng không?</label>
                         <br>
                         <label class="radio-label">
@@ -138,6 +83,11 @@
                         <label class="radio-label">
                             <input type="radio" name="availability" value="no" ng-model="form.available" ng-value="false"> Không
                         </label>
+                      </div>
+                      <div class="col">
+                        <label for="form-label">Bìa cứng?</label>
+                        <input type="checkbox" ng-model="form.hardcover">
+                      </div>
                     </div>
                 </div>
             </div>
@@ -149,3 +99,354 @@
         <button class="btn btn-warning" type="button" ng-click="update()">Update</button>
         <button class="btn btn-secondary" type="button" ng-click="reset()">Reset form</button>
     </div>
+
+    <style>
+      .modal.fade.show {
+        background-color: rgba(0, 0, 0, 0.4);
+        transition: opacity 0.5s; 
+        -webkit-transition: opacity 0.5s;
+      }
+    </style>
+
+<!-- BnameModal -->
+
+<div class="modal fade" id="bnameAddModal" tabindex="-1" aria-labelledby="bnameAddModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="bnameAddModalLabel">Thêm đầu sách</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div class="container mt-4">
+            <div class="row">
+              <div class="col">
+                <form>
+                  <div class="row">
+                      <div>
+                          <div class="mb-3">
+                              <label for="author" class="form-label">Tên đầu sách</label>
+                              <input type="text" class="form-control" id="author" placeholder="Tên đầu sách" ng-model="bnameform.bookname">
+                          </div>
+                          <div class="mb-3">
+                              <label for="address" class="form-label">Thông tin đầu sách</label>
+                              <textarea rows="4" cols="10" class="form-control" id="address" placeholder="Thông tin đầu sách" ng-model="bnameform.bookdescription"></textarea>
+                          </div>
+                          <div class="mb-3">
+                              <label for="retaildate" class="form-label">Năm ra mắt</label>
+                              <input type="text" class="form-control" id="retaildate" placeholder="Năm ra mắt" ng-model="bnameform.bookreleaseyear">
+                          </div>
+                      </div>
+                  </div>
+              </form>
+              </div>
+              <div class="col">
+                <div class="col-md-12">
+                  <div class="table-wrap">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Tên đầu sách</th>
+                          <th>Năm ra mắt</th>
+                          <th>Chỉnh sửa</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="bname in bnamefunction.pager.items">
+                          <td>{{bname.booknameid}}</td>
+                          <td>{{bname.bookname}}</td>
+                          <td>{{bname.bookreleaseyear}}</td>
+                          <td><button class="btn btn-outline-secondary align-middle" ng-click="bnamefunction.edit(bname)"><i class="bi bi-pencil"></i></button></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                      <li class="page-item">
+                      <button class="btn btn-primary page-link"  ng-click="bnamefunction.pager.first()">First</button>
+                      </li>
+                      <li class="page-item"><button class="page-link" ng-click="bnamefunction.pager.prev()">Previous</button></li>
+                      <li class="page-item"><a class="page-link" href="#">{{bnamefunction.pager.page + 1}} of {{bnamefunction.pager.count}}</a></li>
+                      <li class="page-item"><button class="page-link" ng-click="bnamefunction.pager.next()">Next</button></li>
+                      <li class="page-item">
+                      <button class="page-link" ng-click="bnamefunction.pager.last()">Last</button>
+                      </li>
+                    </ul>
+                    </nav>
+                </div>
+              </div>
+            </div>
+        <div class="text-center">
+          <div class="btn-container">
+              <button class="btn btn-warning" type="button" ng-click="bnamefunction.createBname()">Create</button>
+              <button class="btn btn-warning" type="button" ng-click="bnamefunction.update()">Update</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- BnameModal -->
+
+<!-- AuthorsModal -->
+
+<div class="modal fade" id="authorsAddModal" tabindex="-1" aria-labelledby="authorsAddModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="authorsAddModalLabel">Thêm tác giả</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="container mt-4 row">
+              <div class="col">
+                  <div>
+                    <div class="mb-3">
+                      <img ng-src="/assest/image/authors/{{authorsform.authorimage}}" alt="" style="max-width: 150px; max-height: 150px; border-radius: 50%;" ng-model="authorsform.authorimage">
+                    </div>
+                      <div class="mb-3">
+                          <label for="author" class="form-label">Tên tác giả</label>
+                          <input type="text" class="form-control" id="author" placeholder="Tên đầu sách" ng-model="authorsform.authorname">
+                      </div>
+                      <div class="mb-3">
+                          <label for="address" class="form-label">Thông tin tác giả</label>
+                          <textarea rows="4" cols="10" class="form-control" id="address" placeholder="Thông tin đầu sách" ng-model="authorsform.authordescription"></textarea>
+                      </div>
+                      <div class="mb-3">
+                          <label for="retaildate" class="form-label">Năm sinh</label>
+                          <input type="text" class="form-control" id="retaildate" placeholder="Năm ra mắt" ng-model="authorsform.authorbirth">
+                      </div>
+                      <div class="mb-3">
+                        <label for="image" class="form-label">Hình ảnh tác giả</label>
+                        <input type="file" class="form-control" id="image" onchange="angular.element(this).scope().authorsfunction.imageChangeAuthor(this.files)">
+                    </div>
+                  </div>
+              </div>
+              <div class="col">
+                <div class="col-md-12">
+                  <div class="table-wrap">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>Hình ảnh</th>
+                          <th>Tên tác giả</th>
+                          <th>Năm sinh</th>
+                          <th>Chỉnh sửa</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="author in authorsfunction.pager.items">
+                          <td><img ng-src="/assest/image/authors/{{author.authorimage}}" alt="" style="width: 50px; height: 50px; border-radius: 50%;"></td>
+                          <td>{{author.authorname}}</td>
+                          <td>{{author.authorbirth}}</td>
+                          <td><button class="btn btn-outline-secondary align-middle" ng-click="authorsfunction.edit(author)"><i class="bi bi-pencil"></i></button></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                      <li class="page-item">
+                      <button class="btn btn-primary page-link"  ng-click="authorsfunction.pager.first()">First</button>
+                      </li>
+                      <li class="page-item"><button class="page-link" ng-click="authorsfunction.pager.prev()">Previous</button></li>
+                      <li class="page-item"><a class="page-link" href="#">{{authorsfunction.pager.page + 1}} of {{authorsfunction.pager.count}}</a></li>
+                      <li class="page-item"><button class="page-link" ng-click="authorsfunction.pager.next()">Next</button></li>
+                      <li class="page-item">
+                      <button class="page-link" ng-click="authorsfunction.pager.last()">Last</button>
+                      </li>
+                    </ul>
+                    </nav>
+                </div>
+              </div>
+          </div>
+        <div class="text-center">
+          <div class="btn-container">
+              <button class="btn btn-warning" type="button" ng-click="authorsfunction.createAuthor()">Create</button>
+              <button class="btn btn-warning" type="button" ng-click="authorsfunction.update()">Update</button>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AuthorsModal -->
+
+<!-- PublishersModal -->
+
+<div class="modal fade" id="publishersAddModal" tabindex="-1" aria-labelledby="publishersAddModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="publishersAddModalLabel">Thêm nhà xuất bản</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="container mt-4 row">
+            <div class="col">
+              <div>
+                <div class="mb-3">
+                  <img ng-src="/assest/image/publishers/{{publishersform.publisherimage}}" alt="" style="max-width: 150px; max-height: 150px; border-radius: 50%;">
+                </div>
+                  <div class="mb-3">
+                      <label for="publishername" class="form-label">Tên nhà xuất bản</label>
+                      <input type="text" class="form-control" id="publishername" placeholder="Tên nhà xuất bản" ng-model="publishersform.publishername">
+                  </div>
+                  <div class="mb-3">
+                      <label for="publisheraddress" class="form-label">Địa chỉ</label>
+                      <input type="text" class="form-control" id="publisheraddress" placeholder="Địa chỉ nhà xuất bản" ng-model="publishersform.publisheraddress">
+                  </div>
+                  <div class="mb-3">
+                      <label for="publisherweb" class="form-label">Website</label>
+                      <input type="text" class="form-control" id="publisherweb" placeholder="Website nhà xuất bản" ng-model="publishersform.publisherweb">
+                  </div>
+                  <div class="mb-3">
+                    <label for="publisherimage" class="form-label">Logo nhà xuất bản</label>
+                    <input type="file" class="form-control" id="publisherimage" onchange="angular.element(this).scope().publisherfunction.imageChangePublisher(this.files)">
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="col-md-12">
+                <div class="table-wrap">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Hình ảnh</th>
+                        <th>Tên nhà xuất bản</th>
+                        <th>Địa chỉ</th>
+                        <th>Chỉnh sửa</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="publisher in publishersfunction.pager.items">
+                        <td><img src="/assest/image/publishers/{{publisher.publisherimage}}" alt="" style="width: 50px; height: 50px; border-radius: 50%;"></td>
+                        <td>{{publisher.publishername}}</td>
+                        <td>{{publisher.publisheraddress}}</td>
+                        <td><button class="btn btn-outline-secondary align-middle" ng-click="publishersfunction.edit(publisher)"><i class="bi bi-pencil"></i></button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                    <button class="btn btn-primary page-link"  ng-click="publishersfunction.pager.first()">First</button>
+                    </li>
+                    <li class="page-item"><button class="page-link" ng-click="publishersfunction.pager.prev()">Previous</button></li>
+                    <li class="page-item"><a class="page-link" href="#">{{publishersfunction.pager.page + 1}} of {{publishersfunction.pager.count}}</a></li>
+                    <li class="page-item"><button class="page-link" ng-click="publishersfunction.pager.next()">Next</button></li>
+                    <li class="page-item">
+                    <button class="page-link" ng-click="publishersfunction.pager.last()">Last</button>
+                    </li>
+                  </ul>
+                  </nav>
+              </div>
+            </div>
+          </div>
+          <div class="text-center">
+            <div class="btn-container">
+                <button class="btn btn-warning" type="button" ng-click="publishersfunction.createPublisher()">Create</button>
+                <button class="btn btn-warning" type="button" ng-click="publishersfunction.update()">Update</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PublishersModal -->
+
+<!-- IssuersModal -->
+
+<div class="modal fade" id="issuerAddModal" tabindex="-1" aria-labelledby="issuerAddModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="issuerAddModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="container mt-4 row">
+            <div class="col">
+              <div>
+                <div class="mb-3">
+                  <img ng-src="/assest/image/issuers/{{issuersform.issuerimage}}" alt="" style="max-width: 150px; max-height: 150px; border-radius: 50%;">
+                </div>
+                  <div class="mb-3">
+                      <label for="publishername" class="form-label">Tên nhà phát hành</label>
+                      <input type="text" class="form-control" id="publishername" placeholder="Tên nhà xuất bản" ng-model="issuersform.issuername">
+                  </div>
+                  <div class="mb-3">
+                      <label for="publisheraddress" class="form-label">Địa chỉ</label>
+                      <input type="text" class="form-control" id="publisheraddress" placeholder="Địa chỉ nhà xuất bản" ng-model="issuersform.issueraddress">
+                  </div>
+                  <div class="mb-3">
+                      <label for="publisherweb" class="form-label">Website</label>
+                      <input type="text" class="form-control" id="publisherweb" placeholder="Website nhà xuất bản" ng-model="issuersform.issuerweb">
+                  </div>
+                  <div class="mb-3">
+                    <label for="publisherimage" class="form-label">Logo nhà xuất bản</label>
+                    <input type="file" class="form-control" id="publisherimage" onchange="angular.element(this).scope().publisherfunction.imageChangePublisher(this.files)">
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="col-md-12">
+                <div class="table-wrap">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Hình ảnh</th>
+                        <th>Tên nhà phát hành</th>
+                        <th>Địa chỉ trang web</th>
+                        <th>Chỉnh sửa</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="issuer in issuersfunction.pager.items">
+                        <td><img src="/assest/image/issuers/{{issuer.issuerimage}}" alt="" style="width: 50px; height: 50px; border-radius: 50%;"></td>
+                        <td>{{issuer.issuername}}</td>
+                        <td>{{issuer.issuerweb}}</td>
+                        <td><button class="btn btn-outline-secondary align-middle" ng-click="issuersfunction.edit(issuer)"><i class="bi bi-pencil"></i></button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                    <button class="btn btn-primary page-link"  ng-click="issuersfunction.pager.first()">First</button>
+                    </li>
+                    <li class="page-item"><button class="page-link" ng-click="issuersfunction.pager.prev()">Previous</button></li>
+                    <li class="page-item"><a class="page-link" href="#">{{issuersfunction.pager.page + 1}} of {{issuersfunction.pager.count}}</a></li>
+                    <li class="page-item"><button class="page-link" ng-click="issuersfunction.pager.next()">Next</button></li>
+                    <li class="page-item">
+                    <button class="page-link" ng-click="issuersfunction.pager.last()">Last</button>
+                    </li>
+                  </ul>
+                  </nav>
+              </div>
+            </div>
+          </div>
+          <div class="text-center">
+            <div class="btn-container">
+                <button class="btn btn-warning" type="button" ng-click="issuersfunction.createIssuer()">Create</button>
+                <button class="btn btn-warning" type="button" ng-click="issuersfunction.update()">Update</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

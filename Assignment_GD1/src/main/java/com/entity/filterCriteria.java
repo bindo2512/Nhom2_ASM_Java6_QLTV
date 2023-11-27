@@ -8,10 +8,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class filterCriteria {
-    private Integer authorid;
-    private Integer publishersid;
-    private Integer categoriesid;
-    private String booknamekeyword;
+    private Integer authorid = null;
+    private Integer publishersid = null;
+    private Integer categoriesid = null;
+    private String booknamekeyword = "";
 
     public void clear() {
         this.authorid = null;

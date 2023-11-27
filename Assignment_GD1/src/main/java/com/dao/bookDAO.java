@@ -15,4 +15,5 @@ import com.entity.books;
 
 public interface bookDAO extends JpaRepository<books, Integer>, JpaSpecificationExecutor<books>{
     List<books> findByBname(String bname);
+
 }

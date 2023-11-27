@@ -19,4 +19,14 @@ public class authorsServiceImpl implements authorsService {
     public List<authors> findAll() {
        return dao.findAll();
     }
+
+    @Override
+    public authors createNewAuthors(authors author) {
+        return dao.save(author);
+    }
+
+    @Override
+    public authors updateAuthor(authors author) {
+        return dao.save(author);
+    }
 }

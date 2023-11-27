@@ -2,7 +2,7 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">Chi tiết mượn sách</h2>
+					<h2 class="heading-section">Danh sách các quyển sách tại thư viện</h2>
 				</div>
 			</div>
 			<div class="row">
@@ -17,6 +17,7 @@
 						      <th>Tên nhà xuất bản</th>
 						      <th>Năm phát hành</th>
                               <th>Thể loại</th>
+							  <th>Bìa cứng?</th>
 						      <th>Tình trạng</th>
                               <th>Chỉnh sửa</th>
 						    </tr>
@@ -27,9 +28,10 @@
 						      <td>{{b.bname.bookname}}</td>
 						      <td>{{b.authors.authorname}}</td>
 						      <td>{{b.publishers.publishername}}</td>
-						      <td>{{b.yearpub}}</td>
+						      <td>{{b.bname.bookreleaseyear}}</td>
                               <td>{{b.categories.categoryname}}</td>
-                              <td>{{b.available? 'Còn sách':'Hết sách'}}</td>
+							  <td>{{b.hardcover? 'Bìa cứng':'Bìa mềm'}}</td>
+							  <td>{{b.available? 'Còn sách':'Hết sách'}}</td>
                               <td><button class="btn btn-outline-secondary align-middle" ng-click="edit(b)"><i class="bi bi-pencil"></i></button></td>
 						    </tr>
 						  </tbody>

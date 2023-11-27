@@ -24,6 +24,8 @@ public class publishers {
     Integer publisherid;
     String publishername;
     String publisheraddress;
+    String publisherimage;
+    String publisherweb;
     @JsonIgnore
     @OneToMany(mappedBy = "publishers")
     List<books> books;

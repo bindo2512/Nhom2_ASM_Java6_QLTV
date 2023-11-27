@@ -16,8 +16,8 @@
 						    <tr ng-repeat="a in account">
 						      <td>{{a.username}}</td>
 						      <td>{{a.password}}</td>
-						      <td>{{a.admin}}</td>
-						      <td>{{a.active}}</td>
+						      <td>{{a.isadmin}}</td>
+						      <td>{{a.isactive}}</td>
                               <td><button class="btn btn-outline-secondary align-middle" ng-click="edit(a)"><i class="bi bi-pencil"></i></button></td>
 						    </tr>
 						  </tbody>
@@ -25,4 +25,4 @@
 					</div>
 				</div>
 			</div>
-		</div>
+

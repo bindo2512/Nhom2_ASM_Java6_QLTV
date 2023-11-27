@@ -18,6 +18,16 @@ public class issuerServiceImpl implements issuerService {
     public List<issuer> findAll() {
         return dao.findAll();
     }
+
+    @Override
+    public issuer createNewIssuer(issuer issuer) {
+        return dao.save(issuer);
+    }
+
+    @Override
+    public issuer updateIssuer(issuer issuer) {
+        return dao.save(issuer);
+    }
     
     
 }

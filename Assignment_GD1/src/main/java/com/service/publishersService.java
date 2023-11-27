@@ -6,4 +6,8 @@ import com.entity.publishers;
 
 public interface publishersService {
     List<publishers> findAll();
+
+    publishers createNewPublisher(publishers publishers);
+
+    publishers updatePublisher(publishers publishers);
 }

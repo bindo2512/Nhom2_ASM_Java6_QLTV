@@ -20,5 +20,15 @@ public class bnameSerivceImpl implements bnameService{
         // TODO Auto-generated method stub
         return dao.findAll();
     }
+
+    @Override
+    public bname createNewBname(bname bname) {
+        return dao.save(bname);
+    }
+
+    @Override
+    public bname updateBname(bname bname) {
+        return dao.save(bname);
+    }
     
 }

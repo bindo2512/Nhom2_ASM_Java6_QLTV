@@ -17,6 +17,9 @@ public interface bookService {
 
     List<books> findBooksByName(String bookName);
 
+    books update(books book);
 
     Page<books> findBookByCriteria(Integer authorid, Integer publishersid, Integer categoriesid, String booknamekeyword, int page, int page_size);
+
+    Page<books> findTop5Lastest();
 }

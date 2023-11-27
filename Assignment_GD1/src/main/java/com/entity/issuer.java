@@ -23,6 +23,9 @@ public class issuer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer issuerid;
     String issuername;
+    String issueraddress;
+    String issuerimage;
+    String issuerweb;
     @JsonIgnore
     @OneToMany(mappedBy = "issuer")
     List<books> books;

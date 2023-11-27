@@ -19,5 +19,15 @@ public class publishersServiceImpl implements publishersService {
         return dao.findAll();
     }
 
+    @Override
+    public publishers createNewPublisher(publishers publishers) {
+        return dao.save(publishers);
+    }
+
+    @Override
+    public publishers updatePublisher(publishers publishers) {
+        return dao.save(publishers);
+    }
+
     
 }

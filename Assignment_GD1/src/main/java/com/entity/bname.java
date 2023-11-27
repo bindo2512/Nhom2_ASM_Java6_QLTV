@@ -23,6 +23,8 @@ public class bname {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer booknameid;
     String bookname;
+    String bookdescription;
+	Integer bookreleaseyear;
     @JsonIgnore
     @OneToMany(mappedBy = "bname")
     List<books> books;

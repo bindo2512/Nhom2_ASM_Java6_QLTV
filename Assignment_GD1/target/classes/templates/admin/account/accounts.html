@@ -9,6 +9,8 @@
 <body>
 	<main ng-controller="account-admin-ctrl">
 		<h1 style="text-align:center;">Danh sách tài khoản</h1>
+		<br>
+		<div th:replace="/admin/account/_form.html"></div>
 		<hr>
 		<div th:replace="/admin/account/_table.html"></div>
 	</main>

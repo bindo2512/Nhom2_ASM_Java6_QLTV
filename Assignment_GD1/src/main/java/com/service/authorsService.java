@@ -6,4 +6,8 @@ import com.entity.authors;
 
 public interface authorsService {
     List<authors> findAll();
+
+    authors createNewAuthors(authors author);
+
+    authors updateAuthor(authors author);
 }

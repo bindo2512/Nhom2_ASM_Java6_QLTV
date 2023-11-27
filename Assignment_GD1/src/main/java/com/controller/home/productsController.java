@@ -14,12 +14,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.dao.bookDAO;
 import com.dao.categoriesDAO;
 import com.dao.publishersDAO;
 import com.entity.books;
 import com.entity.filterCriteria;
 import com.service.bookService;
 import com.service.rentalService;
+
+import javassist.compiler.ast.Keyword;
 
 @Controller
 public class productsController {
@@ -39,17 +42,24 @@ public class productsController {
 	@Autowired
 	publishersDAO pDao;
 
+	@Autowired
+	bookDAO bDAO;
+
 	static int page_size = 9;
 	static int page_count = 0;
+	static filterCriteria filterCriteria = new filterCriteria();
+	
 
 	@RequestMapping("/qltv/products")
 	public String productsCtrl(Model model) {
 		Page<books> list = service.findBookByCriteria(null, null, null, null, page_count, page_size);
 		model.addAttribute("criteria", new filterCriteria());
+		model.addAttribute("lastest5", service.findTop5Lastest());
 		model.addAttribute("items", list);
 		model.addAttribute("categories", cDAO.findAll());
 		model.addAttribute("authors", authorsDAO.findAll());
 		model.addAttribute("publishers", pDao.findAll());
+		filterCriteria.clear();
 		return "cart/main";
 	}
 
@@ -93,8 +103,23 @@ public class productsController {
 	}
 
 	@RequestMapping("/qltv/products/search")
-	public String searchCtrl(Model model, @ModelAttribute("criteria") filterCriteria criter, @RequestParam(defaultValue = "0") int page) {
-		Page<books> list = service.findBookByCriteria(criter.getAuthorid(), criter.getPublishersid(), criter.getCategoriesid(), criter.getBooknamekeyword(), page, page_size);
+	public String searchCtrl(Model model, @ModelAttribute("criteria") filterCriteria criter, @RequestParam(defaultValue = "0") int page, @RequestParam(name = "authorid", required = false) Integer authorid, @RequestParam(name = "publishersid", required = false) Integer publisherid, @RequestParam(name = "categoriesid", required = false) Integer categoryid, @Param("keyword") String keyword) {
+		if(criter.getAuthorid() != null) {
+			filterCriteria.setAuthorid(criter.getAuthorid());		
+		}
+		if (!criter.getBooknamekeyword().isEmpty()) {
+			filterCriteria.setBooknamekeyword(criter.getBooknamekeyword());
+		}
+		if (criter.getCategoriesid() != null) {			
+			filterCriteria.setCategoriesid(criter.getCategoriesid());
+		}
+		if (criter.getPublishersid() != null) {
+			filterCriteria.setPublishersid(criter.getPublishersid());
+		}
+		if (criter.getAuthorid() == null && criter.getBooknamekeyword().isEmpty() && criter.getCategoriesid() == null && criter.getPublishersid() == null) {
+			filterCriteria.clear();
+		}
+		Page<books> list = service.findBookByCriteria(filterCriteria.getAuthorid(), filterCriteria.getPublishersid(), filterCriteria.getCategoriesid(), filterCriteria.getBooknamekeyword(), page, page_size);
 		model.addAttribute("criteria", new filterCriteria());
 		model.addAttribute("categories", cDAO.findAll());
 		model.addAttribute("authors", authorsDAO.findAll());

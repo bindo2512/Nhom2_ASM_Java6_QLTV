@@ -66,4 +66,14 @@ public class bookServiceImpl implements bookService {
         return dao.findAll(spec, pageable);
     }
 
+    @Override
+    public books update(books book) {
+        return dao.save(book);
+    }
+
+    @Override
+    public Page<books> findTop5Lastest() {
+        return dao.findAll(PageRequest.of(0, 5, Sort.by(Sort.Direction.DESC, "createdate")));
+    }
+
 }

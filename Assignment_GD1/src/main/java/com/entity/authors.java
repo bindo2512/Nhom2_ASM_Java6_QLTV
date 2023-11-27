@@ -23,6 +23,9 @@ public class authors {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer authorid;
     String authorname;
+    String authorimage;
+    String authordescription;
+    Integer authorbirth;
     @JsonIgnore
     @OneToMany(mappedBy = "authors")
     List<books> books;

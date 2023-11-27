@@ -19,5 +19,15 @@ public class categoriesImpl implements categoriesService{
     public List<categories> findAll() {
         return dao.findAll();
     }
+
+    @Override
+    public categories createNewCategory(categories categories) {
+        return dao.save(categories);
+    }
+
+    @Override
+    public categories updateCategory(categories categories) {
+        return dao.save(categories);
+    }
     
 }

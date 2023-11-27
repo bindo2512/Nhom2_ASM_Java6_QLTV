@@ -1,0 +1,71 @@
+<div class="container mt-4">
+    <form>
+        <div class="row">
+            <div class="col">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" placeholder="Username" ng-model="form.username">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" ng-model="form.password">
+                </div>
+                <div class="mb-3 row">
+                    <div class="col">
+                        <label class="form-label">Role</label>
+                        <br>
+                        <label class="radio-label">
+                            <input type="radio" name="isadmin" value="yes" ng-model="form.isadmin" ng-value="ADMIN"> ADMIN
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="isadmin" value="no" ng-model="form.isadmin" ng-value="USER"> USER
+                        </label>
+                      </div>
+                      <div class="col">
+                        <label for="form-label">Active?</label>
+                        <input type="checkbox" ng-model="form.isactive">
+                      </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="mb-3">
+                    <img ng-src="/assest/image/users/{{form.accountdetail.image}}" alt="" style="max-width: 150px; max-height: 300px;">
+                </div>
+                <div class="mb-3">
+                    <label for="fullname" class="form-label">Họ tên đầy đủ</label>
+                    <input type="text" class="form-control" id="fullname" placeholder="Fullname" ng-model="form.accountdetail.fullname">
+                </div>
+                <div class="mb-3">
+                    <label for="phonenum" class="form-label">Số điện thoại</label>
+                    <input type="text" class="form-control" id="phonenum" placeholder="SDT" ng-model="form.accountdetail.phonenum">
+                </div>
+                <div class="mb-3">
+                    <label for="address" class="form-label">Địa chỉ</label>
+                    <input type="text" class="form-control" id="address" placeholder="Địa chỉ" ng-model="form.accountdetail.address">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Email" ng-model="form.accountdetail.email">
+                </div>
+                <div class="mb-3 row">
+                    <div class="col">
+                        <label class="form-label">Giới tính</label>
+                        <br>
+                        <label class="radio-label">
+                            <input type="radio" name="gender" value="yes" ng-model="form.accountdetail.gender" ng-value="true"> Nam
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="gender" value="no" ng-model="form.accountdetail.gender" ng-value="false"> Nữ
+                        </label>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="text-center">
+<div class="btn-container">
+    <button class="btn btn-warning" type="button" ng-click="update()">Update</button>
+</div>
+</div>

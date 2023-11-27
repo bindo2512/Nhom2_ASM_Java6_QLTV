@@ -17,18 +17,18 @@
     <main th:object="${item}">
         <div class="container py-5">
             <div class="row">
-                <div class="col-md-6">
-                    <img th:src="@{|/assest/image/products/${item.image}|}" alt="Book Cover" class="img-fluid">
+                <div class="col-md-3">
+                    <img th:src="@{|/assest/image/products/${item.image}|}" alt="Book Cover" class="img-fluid" style="max-width: 250px; margin-left: 15px;">
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-9">
                     <h1>[[${item.bname.bookname}]]</h1>
                     <hr>
                     <p> <h4>Nhà xuất bản</h4> [[${item.publishers.publishername}]]</p>
-                    <p> <h4>Tác giả</h4> [[${item.authors.authorname}]]</p>
-                    <p> <h4>Năm xuất bản</h4> [[${item.yearpub}]]</p>
-                    <p> <h4>Nội dung:</h4> <div ng-style="expandText">[[${item.description}]]</div> <button style="border:none;" ng-click="toggleText()" ng-bind="buttonText"></button> </p>
+                    <p> <h4>Tác giả</h4> <h6> <img th:src="@{|/assest/image/authors/${item.authors.authorimage}|}" style="width: 25px; height:25px; border-radius:50% ; margin-right:5px;"> [[${item.authors.authorname}]]</h6> </p>
+                    <p> <h4>Năm xuất bản</h4> [[${item.bname.bookreleaseyear}]]</p>
+                    <p> <h4>Nội dung:</h4> <div ng-style="expandText">[[${item.bname.bookdescription}]]</div> <button style="border:none;" ng-click="toggleText()" ng-bind="buttonText"></button> </p>
                     <hr>
-                    <a th:href="@{|/assest/pdf/${item.pdf}|}"  class="btn btn-primary">
+                    <a th:href="@{|/qltv/products/pdf/${item.bookid}|}"  class="btn btn-primary">
                         <i class="bi-book me-1"></i>
                         Đọc sách Online
                     </a>
@@ -44,7 +44,7 @@
                             </button>
                         </th>&nbsp
                         <th th:if="!${item.available}">
-                            <h1><span class="badge bg-danger">Sản phẩm đã hết hàng</span></h1>
+                            <h3><span class="badge bg-danger" style="margin-top: 10px;  width: 270px;">Sản phẩm đã hết hàng</span></h3>
                         </th>
                     </th:block>
                 </div>

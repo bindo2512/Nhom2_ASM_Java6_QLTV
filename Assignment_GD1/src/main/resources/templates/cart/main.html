@@ -23,7 +23,7 @@ th:replace="~{/layout/index :: dynamic(~{::main})}" style="width: 100px;">
             </div>
         </header>
         <h1 class="" th:text="*{message}"></h1>
-        <div style="margin-left:150px; transition: float 5s; transition-delay: 2.5s; width: 80%;">
+        <div style="margin-left:150px; margin-top: 50px; transition: float 5s; transition-delay: 2.5s; width: 80%;">
 					<button class="btn btn-outline-dark" type="button" data-bs-toggle="collapse" data-bs-target="#searchBox" aria-expanded="false" aria-controls="searchBox">
 						Tìm kiếm
 					</button>
@@ -63,11 +63,21 @@ th:replace="~{/layout/index :: dynamic(~{::main})}" style="width: 100px;">
 						</form>
 					</div>
 				  </div>
+          <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" style="margin-top: 50px; margin-bottom:100px ;">
+            <div class="carousel-inner" style="text-align: -webkit-center;">
+              <div class="carousel-item active" data-bs-interval="5000">
+                <img th:src="@{|/assest/image/main/new_book.png|}" class="d-block w-100" alt="..." style="max-width: 500px; ">
+              </div>
+              <div class="carousel-item" th:each="l5, l5stat: ${lastest5}" data-bs-interval="5000" style="background-image:url('https://media.istockphoto.com/id/1146986931/photo/wood-table-top-on-light-blur-background-empty-brown-wood-table.jpg?s=612x612&w=0&k=20&c=DSL7eBIJqHhzujlenRnX3P34qGWkPnDOflqM5v6nppA=') ; background-repeat: no-repeat; background-position: center;">
+                <img th:src="@{|/assest/image/products/${l5.image}|}" class="d-block" alt="..." style="height: 300px; width: auto;">
+              </div>
+            </div>
+          </div>
 		<div th:each="p:${items}" class="container px-4 px-lg-5 mt-5 col-sm-4">
 			<div class="col mb-5">
                 <div class="card h-100">
                     <!-- Product image-->
-                    <img class="card-img-top justify-content-center" th:src="@{|/assest/image/products/${p.image}|}" style="max-height: 300px; width: 175px; margin: auto; margin-top: 15px;"/>
+                    <img class="card-img-top justify-content-center" th:src="@{|/assest/image/products/${p.image}|}" style="height: 250px; width: auto; margin: auto; margin-top: 15px;"/>
                     <!-- Product details-->
                     <div class="card-body p-4">
                         <div class="text-center">
@@ -75,7 +85,7 @@ th:replace="~{/layout/index :: dynamic(~{::main})}" style="width: 100px;">
 							<h6 th:text="${p.publishers.publishername}"></h6>
 							<h5 th:text="${p.authors.authorname}"></h5>
                             <div style="display:flex; justify-content: center; padding: 5px;">
-                                <h3 th:text="${p.yearpub}"></h3>
+                                <h3 th:text="${p.bname.bookreleaseyear}"></h3>
                                 <h6 class="ribbon ribbon-top-left"><span th:text="${p.categories.categoryname}" class="badge bg-primary"></span></h6>
                             </div>
                         </div>
@@ -98,14 +108,14 @@ th:replace="~{/layout/index :: dynamic(~{::main})}" style="width: 100px;">
     <nav aria-label="Page navigation example" >
       <ul class="pagination" style="justify-content: center;">
         <li class="page-item" th:classappend="${items.first} ? 'disabled':''">
-          <a class="page-link" href="#" aria-label="Previous">
+          <a class="page-link" th:href="@{/qltv/products/search(page = ${items.number - 1})}" aria-label="Previous" >
             <span aria-hidden="true">&laquo;</span>
             <span class="sr-only">Previous</span>
           </a>
         </li>
         <li class="page-item" th:each="pageNum: ${#numbers.sequence(0, items.totalPages - 1)}" th:classappend="${pageNum == items.number} ? 'active':''"><a class="page-link" href="#" th:text="${pageNum + 1}" th:href="@{/qltv/products/search(page = ${pageNum})}"></a></li>
         <li class="page-item" th:classappend="${items.last} ? 'disabled':''">
-          <a class="page-link" href="#" aria-label="Next">
+          <a class="page-link" th:href="@{/qltv/products/search(page = ${items.number + 1})}" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
             <span class="sr-only">Next</span>
           </a>
@@ -155,8 +165,8 @@ th:replace="~{/layout/index :: dynamic(~{::main})}" style="width: 100px;">
 
 /* top left*/
 .ribbon-top-left {
-  top: -10px;
-  left: -10px;
+  top: -15px;
+  left: -15px;
 }
 .ribbon-top-left::before,
 .ribbon-top-left::after {
