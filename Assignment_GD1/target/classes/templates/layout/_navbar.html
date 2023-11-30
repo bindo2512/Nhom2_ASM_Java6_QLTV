@@ -6,7 +6,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>Library of Alexandria</title>
+<title>Book it NOW!</title>
 <link href="../assest/css/list.css" rel="stylesheet" />
 </head>
 <body>
@@ -14,7 +14,7 @@
 		<!-- Navigation-->
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container px-4 px-lg-5">
-				<a class="navbar-brand" th:href="@{/qltv/products}">Library of Alexandria</a>
+				<a class="navbar-brand" th:href="@{/qltv/products}">Book it NOW!</a>
 				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 					aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -66,7 +66,7 @@
 					   <th:block th:if="${#request.remoteUser}">
 							<th:block th:if="${#request.isUserInRole('USER')}">
 								<button class="btn btn-outline-dark margRg">
-									<a th:href="@{|/user/rental/history|}">Lịch sử mượn sách</a>
+									<a th:href="@{|/user/management|}">Quản lý tài khoản</a>
 								</button>
 							</th:block>
 							<button class="btn btn-outline-dark margRg" type="submit" >

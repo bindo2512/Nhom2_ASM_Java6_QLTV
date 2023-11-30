@@ -17,18 +17,20 @@
 	public class authConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	BCryptPasswordEncoder be;
+	
 	@Autowired
 	userService userService;
 
 
-	@Bean
-	public BCryptPasswordEncoder getPasswordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userService);
+	}
+
+	
+	@Bean
+	public BCryptPasswordEncoder getPasswordEncoder() {
+		return new BCryptPasswordEncoder();
 	}
 
 	@Override

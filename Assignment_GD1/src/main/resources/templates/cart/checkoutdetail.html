@@ -59,11 +59,11 @@ th:replace="~{/layout/index :: dynamic(~{::main})}"    >
                     </tr>
                   </thead>
                   <tbody>
-                    <tr th:each="detail: *{rdetail}" th:object="${detail}">
-                      <td><img th:src="@{|/assest/image/products/*{book.image}|}" alt="Book Cover" class="img-fluid" style="height: 100%; width: 50px;;"></td>
-                      <td>[[*{book.bname.bookname}]]</td>
-                      <td>[[*{book.authors.authorname}]]</td>
-                      <td>[[*{book.publishers.publishername}]]</td>
+                    <tr th:each="detail: *{details}" th:object="${detail}">
+                      <td><img th:src="@{|/assest/image/products/*{books.image}|}" alt="Book Cover" class="img-fluid" style="height: 100%; width: 50px;;"></td>
+                      <td>[[*{books.bname.bookname}]]</td>
+                      <td>[[*{books.authors.authorname}]]</td>
+                      <td>[[*{books.publishers.publishername}]]</td>
                   </tbody>
                 </table>
               </div>

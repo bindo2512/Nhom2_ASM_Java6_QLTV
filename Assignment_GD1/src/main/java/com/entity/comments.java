@@ -1,5 +1,7 @@
 package com.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,4 +28,5 @@ public class comments {
     @JoinColumn(name = "username")
     accounts accounts;
     String commentdes;
+    Date commentdate;
 }

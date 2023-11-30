@@ -32,7 +32,7 @@ public class categoriesRestController {
         return cservice.createNewCategory(categories);
     }
     
-    @PutMapping({"id"})
+    @PutMapping("{id}")
     public categories update(@PathVariable("id") Integer id, @RequestBody categories categories) {
         return cservice.updateCategory(categories);
     }

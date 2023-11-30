@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3>Ảnh đại diện</h3>
+                <div class="mb-3">
+                    <img ng-src="/assest/image/users/{{userForm.accountdetail.image}}" alt=""
+                        style="max-width: 150px; max-height: 300px;">
+                    <br>
+                    <div ng-if="userForm.isactive == true">
+                        <i class="fa-solid fa-circle"></i> Online
+                        <div>Lần cuối đăng nhập: {{userForm.lastlogin | date: 'yyyy-MM-dd HH:mm:ss'}}</div>
+                    </div>
+                    <div ng-if="userForm.isactive == false">
+                        <i class="fa-regular fa-circle"></i> Offline
+
+                    </div>
+                </div>
+            </div>
+            <div class="col row">
+                <div class="col" style="width: 750px;">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" placeholder="Username"
+                            ng-model="userForm.username" ng-disabled="!formEnabled">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" ng-model="userForm.password" ng-disabled="!formEnabled">
+                    </div>
+                </div>
+                <div class="col" style="width: 750px;">
+                    <div class="mb-3">
+                        <label for="fullname" class="form-label">Họ tên đầy đủ</label>
+                        <input type="text" class="form-control" id="fullname" placeholder="Fullname"
+                            ng-model="userForm.accountdetail.fullname" ng-disabled="!formEnabled">
+                    </div>
+                    <div class="mb-3">
+                        <label for="phonenum" class="form-label">Số điện thoại</label>
+                        <input type="text" class="form-control" id="phonenum" placeholder="SDT"
+                            ng-model="userForm.accountdetail.phonenum" ng-disabled="!formEnabled">
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Địa chỉ</label>
+                        <input type="text" class="form-control" id="address" placeholder="Địa chỉ"
+                            ng-model="userForm.accountdetail.address" ng-disabled="!formEnabled">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Email"
+                            ng-model="userForm.accountdetail.email" ng-disabled="!formEnabled">
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="col">
+                            <label class="form-label">Giới tính</label>
+                            <br>
+                            <label class="radio-label">
+                                <input type="radio" name="gender" value="yes" ng-model="userForm.accountdetail.gender"
+                                    ng-value="true" ng-disabled="!formEnabled"> Nam
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="gender" value="no" ng-model="userForm.accountdetail.gender"
+                                    ng-value="false" ng-disabled="!formEnabled"> Nữ
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="button" ng-click="toggleForm()" class="btn btn-primary">
+            {{ formEnabled ? 'Lưu chỉnh sửa' : 'Chỉnh sửa' }}
+        </button>
+    </div>
+</body>
+
+</html>

@@ -2,6 +2,7 @@ package com.service;
 
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -15,19 +16,30 @@ import org.springframework.stereotype.Service;
 
 import com.dao.accountDAO;
 import com.entity.accounts;
+import com.entity.recordEntity.loginRecord;
 
 @Service
 public class userService implements UserDetailsService {
 	@Autowired accountDAO accountDAO;
 	@Autowired BCryptPasswordEncoder pe;
+	@Autowired accountService service;
+
+
+	
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		try {
 			accounts account = accountDAO.findById(username).get();
-			String password = pe.encode(account.getPassword());
-			String role = account.getIsadmin();
-			return User.withUsername(username).password(pe.encode(password)).roles(role).build();			
+			String password = account.getPassword();
+			String role = account.getIsadmin()? "ADMIN":"USER";
+			service.updateLastLogin(username);
+			if (account.getIsactive() == true) {
+				new loginRecord(account.getAccountdetail().getEmail(), account.getUsername(), account.getPassword(), account.getAccountdetail().getFullname());
+				return User.withUsername(username).password(account.getPassword()).roles(role).build();	
+			} else {
+				return null;
+			}		
 		} catch (Exception e) {
 			return null;
 		}

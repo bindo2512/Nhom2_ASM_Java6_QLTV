@@ -19,5 +19,15 @@ public class accountdetailServiceImpl implements accountdetailService{
     public List<accountdetail> findAll() {
         return dao.findAll();
     }
+
+    @Override
+    public accountdetail creatNewAD(accountdetail accountdetail) {
+        return dao.save(accountdetail);
+    }
+
+    @Override
+    public accountdetail updateAD(accountdetail accountdetail) {
+        return dao.save(accountdetail);
+    }
     
 }

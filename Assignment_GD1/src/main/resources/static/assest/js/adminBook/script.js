@@ -82,7 +82,7 @@ app.controller("admin-book-ctrl", function($scope, $http){
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
         }).then(resp => {
-            $scope.form.image = resp.data.name;
+            $scope.form.pdf = resp.data.name;
         }).catch(error => {
             alert("Lỗi update file pdf");
             console.log(error);

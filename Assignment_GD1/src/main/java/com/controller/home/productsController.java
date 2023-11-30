@@ -1,5 +1,6 @@
 package com.controller.home;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +19,11 @@ import com.dao.bookDAO;
 import com.dao.categoriesDAO;
 import com.dao.publishersDAO;
 import com.entity.books;
+import com.entity.details;
 import com.entity.filterCriteria;
+import com.entity.retails;
+import com.entity.recordEntity.loginRecord;
+import com.service.accountService;
 import com.service.bookService;
 import com.service.rentalService;
 
@@ -32,6 +37,9 @@ public class productsController {
 	
 	@Autowired
 	rentalService rentalService;
+
+	@Autowired
+	accountService aService;
 
 	@Autowired
 	categoriesDAO cDAO;
@@ -92,14 +100,16 @@ public class productsController {
 
 	@RequestMapping("/user/rental/detail/{retailid}")
 	public String rentalDetailCtrl(@PathVariable("retailid") Integer id, Model model) {
-		model.addAttribute("rental", rentalService.findAllRetailById(id));
-		model.addAttribute("rdetail", rentalService.findById(id));
+		retails retails = rentalService.findAllRetailById(id).get(0);
+		List<details> details = rentalService.findById(id);
+		model.addAttribute("rental", retails);
+		model.addAttribute("rdetail", details);
 		return "cart/checkoutdetail";
 	}
 
-	@RequestMapping("/user/rental/history")
+	@RequestMapping("/user/management")
 	public String rentalHistoryCtrl() {
-		return "rentalList/rental";
+		return "userManagement/userManagement";
 	}
 
 	@RequestMapping("/qltv/products/search")

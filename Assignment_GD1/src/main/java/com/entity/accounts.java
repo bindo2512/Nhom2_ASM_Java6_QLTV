@@ -1,5 +1,6 @@
 package com.entity;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -23,7 +24,10 @@ public class accounts {
 	String username;
 	String password;
 	Boolean isactive;
-	String isadmin;
+	Boolean isadmin;
+	Date createdate;
+	java.util.Date lastlogin;
+	Boolean currentlylogin;
 	@ManyToOne
     @JoinColumn(name = "accountdetailid")
     accountdetail accountdetail;
@@ -33,4 +37,5 @@ public class accounts {
 	@JsonIgnore
 	@OneToMany(mappedBy = "accounts")
 	List<comments> comments;
+	String verification;
 }

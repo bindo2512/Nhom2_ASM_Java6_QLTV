@@ -12,6 +12,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -27,12 +31,20 @@ public class retails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer retailid;
+	@NotNull (message = "Bạn chưa chọn ngày mượn")
 	Date retaildate;
+	@NotNull
 	Date returndate;
+	@NotNull (message = "Bạn chưa nhập địa chỉ")
 	String address;
+	@NotNull (message = "Bạn chưa nhập họ tên")
 	String fullname;
+	@NotNull (message = "Bạn chưa nhập email")
+	@Email (message = "Định dạng nhập phải là email")
 	String email;
+	@NotNull
 	String phonenumber;
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "username")
 	accounts accounts;

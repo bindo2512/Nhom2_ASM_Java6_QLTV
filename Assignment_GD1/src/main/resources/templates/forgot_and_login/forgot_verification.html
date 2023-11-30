@@ -1,0 +1,46 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+th:replace="~{/layout/index :: dynamic(~{::main})}">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <main ng-controller="forgot-part-ctrl"> 
+        <section class="img d-flex justify-content-center align-items-center vh-100" style="background-image: url(../assets/images/Login/background.png);" >
+            <div class="container">
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="col col-md-8 col-lg-5 col-xl-4">
+                        <form class="card shadow-2-strong" style="border-radius: 1rem;" action="/qltv/forgot/changepass" method="post" th:object="${forgot}">
+                            <div class="card-body pb-0">
+                                <div class="text-center">
+                                    <!-- Your existing logo and title -->
+                                    <h4 class="mt-4 mb-4 text-bold" style="color: #433C3C">Nhập mã xác thực</h4>
+                                    <div class="w3-panel w3-red">
+                                        <p>
+                                            <i style="text-align: center;" ng-model="message"></i>
+                                        </p>
+                                    </div>
+                                    <h6 class="mt-4 mb-4 text-bold" style="color: #433C3C">Thời gian còn lại: {{countdown|secondsToTimeFormat }}</h6>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="addon-wrapping">Mã xác thực của bạn: </span>
+                                        <input type="text" id="verificationCode" name="verificationCode" class="form-control" placeholder="Nhập mã xác thực" aria-label="VerificationCode" th:field="*{enterForgotToken}">
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button class="btn btn-danger text-bold btn-lg btn-block" style="width: 50%; font-size: 1rem; font-weight:bold; border-radius:7px; border-color:black; margin-bottom: 50px;" type="submit">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Your existing scripts and footer -->
+    </main>
+</body>
+</html>

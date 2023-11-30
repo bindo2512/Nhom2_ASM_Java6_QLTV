@@ -12,14 +12,8 @@
                 </div>
                 <div class="mb-3 row">
                     <div class="col">
-                        <label class="form-label">Role</label>
-                        <br>
-                        <label class="radio-label">
-                            <input type="radio" name="isadmin" value="yes" ng-model="form.isadmin" ng-value="ADMIN"> ADMIN
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="isadmin" value="no" ng-model="form.isadmin" ng-value="USER"> USER
-                        </label>
+                        <label for="form-label">Admin?</label>
+                        <input type="checkbox" ng-model="form.isadmin">
                       </div>
                       <div class="col">
                         <label for="form-label">Active?</label>
@@ -59,13 +53,12 @@
                         </label>
                       </div>
                     </div>
-                </div>
             </div>
         </div>
     </form>
 </div>
 <div class="text-center">
 <div class="btn-container">
-    <button class="btn btn-warning" type="button" ng-click="update()">Update</button>
+    <button class="btn btn-warning" type="button" ng-click="update()">Update tài khoản</button>
 </div>
 </div>

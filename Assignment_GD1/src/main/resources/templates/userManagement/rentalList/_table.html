@@ -27,7 +27,7 @@
                       <td>{{r.email}}</td>
                       <td>{{r.address}}</td>
                       <td>{{r.phonenumber}}</td>
-                      <td>{{r.active? (r.returndate < currentDate? 'Sách mượn quá hạn':'Sách đang mượn'):'Chưa mượn sách'}}</td>
+                      <td>{{r.orderstate.orderstatename}}</td>
                       <td><button class="btn btn-outline-secondary align-middle" ng-click="watch(r)"><i class="bi bi-search"></i></button></td>
                     </tr>
                   </tbody>

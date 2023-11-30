@@ -29,7 +29,7 @@ public class publishersRestController {
         return service.createNewPublisher(publishers);
     }
 
-    @PutMapping({"id"})
+    @PutMapping("{id}")
     public publishers update(@RequestBody publishers publishers) {
         return service.updatePublisher(publishers);
     }
