@@ -22,7 +22,7 @@ th:replace="~{/layout/index :: dynamic(~{::main})}" style="width: 100px;">
                 </div>
             </div>
         </header>
-        <h1 class="" th:text="*{message}"></h1>
+
         <div style="margin-left:150px; margin-top: 50px; transition: float 5s; transition-delay: 2.5s; width: 80%;">
 					<button class="btn btn-outline-dark" type="button" data-bs-toggle="collapse" data-bs-target="#searchBox" aria-expanded="false" aria-controls="searchBox">
 						Tìm kiếm
@@ -47,7 +47,7 @@ th:replace="~{/layout/index :: dynamic(~{::main})}" style="width: 100px;">
 												</select>
 												<select name="" id="authors" class="form-control margTop" th:field="*{authorid}">
 													<option value="">Tất cả</option>
-													<option th:each="author: ${authors}" th:value="${author.authorid}" th:text="${author.authorname}" th:selected="${author.authorid == authorid}"></option>
+													<option th:each="author: ${authors}" th:value="${author.authorid}" th:text="${author.authorname}" th:selected="${author.authorid == authorid}" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();'></option>
 												</select>
 												<select name="" id="publishers" class="form-control margTop" th:field="*{publishersid}">
 													<option value="">Tất cả</option>
@@ -74,6 +74,7 @@ th:replace="~{/layout/index :: dynamic(~{::main})}" style="width: 100px;">
               </div>
             </div>
           </div>
+          <h1 class="" th:text="*{message}" style="text-align-last: center;"></h1>
 		<div th:each="p:${items}" class="container px-4 px-lg-5 mt-5 col-sm-4">
 			<div class="col mb-5">
                 <div class="card h-100" style="border: none;">

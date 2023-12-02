@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;	
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.dao.bookDAO;
 import com.dao.categoriesDAO;
 import com.dao.publishersDAO;
+import com.dao.retailDAO;
 import com.entity.books;
 import com.entity.details;
 import com.entity.filterCriteria;
@@ -25,6 +27,7 @@ import com.entity.retails;
 import com.entity.recordEntity.loginRecord;
 import com.service.accountService;
 import com.service.bookService;
+import com.service.emailService;
 import com.service.rentalService;
 
 import javassist.compiler.ast.Keyword;
@@ -42,6 +45,9 @@ public class productsController {
 	accountService aService;
 
 	@Autowired
+	emailService eService;
+
+	@Autowired
 	categoriesDAO cDAO;
 
 	@Autowired
@@ -52,6 +58,9 @@ public class productsController {
 
 	@Autowired
 	bookDAO bDAO;
+
+	@Autowired
+	retailDAO rDAO;
 
 	static int page_size = 9;
 	static int page_count = 0;
@@ -87,8 +96,8 @@ public class productsController {
 	}
 
 	@RequestMapping("/user/cart")
-	public String cartCtrl(Model model) {
-		model.addAttribute("criteria", new filterCriteria());
+	public String cartCtrl(Model model, @CurrentSecurityContext(expression = "authentication?.name") String username) {
+		model.addAttribute("user", aService.findAccountById(username).get());
 		return "cart/cart";
 	}
 
@@ -99,9 +108,10 @@ public class productsController {
 	}
 
 	@RequestMapping("/user/rental/detail/{retailid}")
-	public String rentalDetailCtrl(@PathVariable("retailid") Integer id, Model model) {
+	public String rentalDetailCtrl(@PathVariable("retailid") Integer id, Model model) throws Exception {
 		retails retails = rentalService.findAllRetailById(id).get(0);
 		List<details> details = rentalService.findById(id);
+		eService.sendRentailVerification(retails, details);
 		model.addAttribute("rental", retails);
 		model.addAttribute("rdetail", details);
 		return "cart/checkoutdetail";
@@ -111,6 +121,8 @@ public class productsController {
 	public String rentalHistoryCtrl() {
 		return "userManagement/userManagement";
 	}
+
+	
 
 	@RequestMapping("/qltv/products/search")
 	public String searchCtrl(Model model, @ModelAttribute("criteria") filterCriteria criter, @RequestParam(defaultValue = "0") int page, @RequestParam(name = "authorid", required = false) Integer authorid, @RequestParam(name = "publishersid", required = false) Integer publisherid, @RequestParam(name = "categoriesid", required = false) Integer categoryid, @Param("keyword") String keyword) {

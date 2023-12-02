@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="table-wrap">
+						<table class="table table-striped">
+						  <thead>
+						    <tr>
+						      <th>Tên sách</th>
+						      <th>Tên tác giả</th>
+						      <th>Tên nhà xuất bản</th>
+						      <th>Năm phát hành</th>
+                  <th>Thể loại</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr th:each="rd:${rentailDetail}">
+						      <td th:text="${rd.books.bname.bookname}"></td>
+						      <td th:text="${rd.books.authors.authorname}"></td>
+						      <td th:text="${rd.books.publishers.publishername}"></td>
+						      <td th:text="${rd.books.hardcover? 'Bìa cứng':'Bìa mềm'}"></td>
+                  <td th:text="${rd.books.categories.categoryname}"></td>
+						    </tr>
+						  </tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-wrap">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>Tên tài khoản mượn</th>
+                          <th>Ngày mượn</th>
+                          <th>Ngày trả</th>
+                          <th>Họ tên người mượn</th>
+                          <th>Email</th>
+                          <th>Địa chỉ</th>
+                          <th>Số điện thoại</th>
+                          <th>Tình trạng</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr th:object="${rentail}">
+                          <td th:text="*{accounts.username}"></td>
+                          <td th:text="*{retaildate}"></td>
+                          <td th:text="*{returndate}"></td>
+                          <td th:text="*{fullname}"></td>
+                          <td th:text="*{email}"></td>
+                          <td th:text="*{address}"></td>
+                          <td th:text="*{phonenumber}"></td>
+                          <td th:text="*{orderstate.orderstatename}"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

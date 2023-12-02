@@ -47,23 +47,7 @@
                             <option ng-repeat="c in categories" ng-value="c.categoryid">{{c.categoryname}}</option>
                         </select>
                        <span class="input-group-btn"> <button data-bs-toggle="modal" data-bs-target="#categoryAddModal" class="btn btn-primary">Thêm phân loại mới</button></span>
-                        <div class="modal fade" id="categoryAddModal" tabindex="-1" aria-labelledby="categoryAddModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="categoryAddModalLabel">Modal title</h5>
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                  ...
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                  <button type="button" class="btn btn-primary">Save changes</button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+
                     </div>
                     <div class="mb-3">
                         <label for="pdf" class="form-label">PDF</label>
@@ -315,7 +299,7 @@
               </div>
             </div>
             <div class="col">
-              <div class="col-md-12">
+              <div >
                 <div class="table-wrap">
                   <table class="table table-striped">
                     <thead>
@@ -372,7 +356,7 @@
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="issuerAddModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="issuerAddModalLabel">Quản lý nhà phát hành</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -443,6 +427,77 @@
             <div class="btn-container">
                 <button class="btn btn-warning" type="button" ng-click="issuersfunction.createIssuer()">Create</button>
                 <button class="btn btn-warning" type="button" ng-click="issuersfunction.update()">Update</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- IssuersModal -->
+
+<!-- CategoryModal -->
+
+<div class="modal fade" id="categoryAddModal" tabindex="-1" aria-labelledby="categoryAddModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="categoryAddModalLabel">Quản lý thể loại</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="">
+           <div class="container mb-4 row">
+            <div class="col">
+              <div>
+                <div class="mb-3">
+                  <label for="categoryname" class="form-label">Tên thể loại</label>
+                  <input type="text" class="form-control" id="categoryname" placeholder="Tên thể loại" ng-model="categoriesform.categoryname">
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div >
+                <div class="table-wrap">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>ID Thể loại</th>
+                        <th>Tên thể loại</th>
+                        <th>Chỉnh sửa</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="category in categoriesfunction.pager.items">
+                        <td>{{category.categoryid}}</td>
+                        <td>{{category.categoryname}}</td>
+                        <td><button class="btn btn-outline-secondary align-middle" ng-click="categoriesfunction.edit(category)"><i class="bi bi-pencil"></i></button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                    <button class="btn btn-primary page-link"  ng-click="categoriesfunction.pager.first()">First</button>
+                    </li>
+                    <li class="page-item"><button class="page-link" ng-click="categoriesfunction.pager.prev()">Previous</button></li>
+                    <li class="page-item"><a class="page-link" href="#">{{categoriesfunction.pager.page + 1}} of {{categoriesfunction.pager.count}}</a></li>
+                    <li class="page-item"><button class="page-link" ng-click="categoriesfunction.pager.next()">Next</button></li>
+                    <li class="page-item">
+                    <button class="page-link" ng-click="categoriesfunction.pager.last()">Last</button>
+                    </li>
+                  </ul>
+                  </nav>
+              </div>
+            </div>
+           </div>
+           <div class="text-center">
+            <div class="btn-container">
+                <button class="btn btn-warning" type="button" ng-click="categoriesfunction.createCategory()">Create</button>
+                <button class="btn btn-warning" type="button" ng-click="categoriesfunction.update()">Update</button>
+                <button class="btn btn-warning" type="button" ng-click="categoriesfunction.reset()">Reset form</button>
             </div>
           </div>
         </form>

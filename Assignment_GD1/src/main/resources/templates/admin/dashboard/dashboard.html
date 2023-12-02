@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <main>
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist" style="margin: 25px 0 25px 100px !important;">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="book-dashboard-tab" data-bs-toggle="pill" data-bs-target="#book-dashboard" type="button" role="tab" aria-controls="book-dashboard" aria-selected="true">Thống kê sách</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="account-dashboard-tab" data-bs-toggle="pill" data-bs-target="#account-dashboard" type="button" role="tab" aria-controls="account-dashboard" aria-selected="false">Thống kê tài khoản</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="retail-dashboard-tab" data-bs-toggle="pill" data-bs-target="#retail-dashboard" type="button" role="tab" aria-controls="retail-dashboard" aria-selected="false">Thông kê mượn sách</button>
+      </li>
+    </ul>
+    <div class="tab-content" id="pills-tabContent">
+      <div class="tab-pane fade show active" id="book-dashboard" role="tabpanel" aria-labelledby="book-dashboard-tab">
+        <div th:replace="/admin/dashboard/bookDashboard.html"></div>
+      </div>
+      <div class="tab-pane fade" id="account-dashboard" role="tabpanel" aria-labelledby="account-dashboard-tab">
+        <div th:replace="/admin/dashboard/accountDashboard.html"></div>
+      </div>
+      <div class="tab-pane fade" id="retail-dashboard" role="tabpanel" aria-labelledby="retail-dashboard-tab">
+        <div th:replace="/admin/dashboard/retailDashboard.html"></div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

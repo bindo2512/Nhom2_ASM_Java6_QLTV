@@ -7,6 +7,7 @@
 </head>
 <body>
     <main>
+        <div hidden id="username">[[${#request.remoteUser}]]</div>
         <div class="container py-5">
             <h2 class="mb-4">Giỏ hàng</h2>
             <h6 ng-if="cart.items.length == 0">Bạn chưa có sản phẩm nào trong giỏ hàng</h6>
@@ -88,14 +89,14 @@
                 </div>
             </div>
             <hr>
-                <div>
+                <div th:object="${user}">
                     <div class="form-group">
                         <label for="username">Tài khoản mượn:</label>
                         <div class="form-control" id="username" >[[${#request.remoteUser}]]</div>
                     </div>
                     <div class="form-group">
                         <label for="fullname">Họ tên người mượn:</label>
-                        <input type="fullname" class="form-control" id="fullname" placeholder="Nhập họ tên người mượn" required ng-model="retail.fullname">
+                        <input type="fullname" class="form-control" id="fullname" placeholder="Nhập họ tên người mượn" required  ng-model="retail.fullname" >
                     </div>
                     <div class="form-group">
                         <label for="diaChi">Địa chỉ:</label>
@@ -107,7 +108,7 @@
                     </div>
                     <div class="form-group">
                         <label for="sdt">Số điện thoại:</label>
-                        <input type="text" class="form-control" id="sdt" placeholder="Nhập số điện thoại" required ng-model="retail.phonenumber"d>
+                        <input type="text" class="form-control" id="sdt" placeholder="Nhập số điện thoại" required ng-model="retail.phonenumber">
                     </div>
                     <div class="form-group">
                         <label for="ngayMuon">Ngày mượn:</label>

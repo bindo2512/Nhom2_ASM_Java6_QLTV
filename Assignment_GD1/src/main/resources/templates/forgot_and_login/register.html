@@ -34,7 +34,7 @@ th:replace="~{/layout/index :: dynamic(~{::main})}">
 <html xmlns:th="http://www.thymeleaf.org">
 </head>
 <body>
-	<main>
+	<main ng-controller="register-ctrl">
 		<section class="img d-flex justify-content-center align-items-center vh-100"
 			style="background-image: url(../assets/images/Login/background.png);">
 			<div class="container">
@@ -45,7 +45,7 @@ th:replace="~{/layout/index :: dynamic(~{::main})}">
 					<div class="col col-md-8 col-lg-5 col-xl-4">
 						<form class="register-form card shadow-2-strong" style="border-radius: 1rem;" th:action="@{|/qltv/register/save|}"
 							th:object="${user}" method="post">
-							<div class="card-body pb-0">
+							<div class="card-body pb-0 row">
 								<div class="text-center">
 									<h4 class="mt-4 mb-4 text-bold" style="color: #433C3C">ĐĂNG
 										KÝ</h4>
@@ -55,71 +55,90 @@ th:replace="~{/layout/index :: dynamic(~{::main})}">
 										<i th:text="${message}" style="text-align: center;"></i>
 									</p>
 								</div>
-								<div class="form-group mb-3">
-									<label class="mb-1 text-left text-bold"><h6
-											class="text-sm mb-0" style="font-size: 0.8rem;">TÊN TÀI
-											KHOẢN:</h6></label>
-									<div class="input-group flex-nowrap">
-										<span class="input-group-text" id="addon-wrapping"><i
-											class="fas fa-user"></i></span> <input type="text" id="username"
-											name="username" class="form-control"
-											placeholder="Nhập tên tài khoản" aria-label="Username"
-											aria-describedby="addon-wrapping" th:field="*{username}">
+								<div class="col">
+									<div class="form-group mb-3">
+										<label class="mb-1 text-left text-bold"><h6
+												class="text-sm mb-0" style="font-size: 0.8rem;">TÊN TÀI
+												KHOẢN:</h6></label>
+										<div class="input-group flex-nowrap">
+											<span class="input-group-text" id="addon-wrapping"><i
+												class="fas fa-user"></i></span> <input type="text" id="username"
+												name="username" class="form-control"
+												placeholder="Nhập tên tài khoản" aria-label="Username"
+												aria-describedby="addon-wrapping" th:field="*{username}">
+										</div>
+									</div>
+									<div class="form-group mb-3">
+										<label class="mb-1 text-left text-bold"><h6
+												class="text-sm mb-0" style="font-size: 0.8rem;">HỌ TÊN CỦA BẠN:</h6></label>
+										<div class="input-group flex-nowrap">
+											<span class="input-group-text" id="addon-wrapping"><i
+												class="fas fa-id-card"></i></span> <input type="text" id="username"
+												name="username" class="form-control"
+												placeholder="Nhập họ và tên" aria-label="Username"
+												aria-describedby="addon-wrapping" th:field="*{accountdetail.fullname}"> 
+										</div>
+									</div>
+									<div class="form-group mb-3">
+										<label class="mb-1 text-left text-bold"><h6
+												class="text-sm mb-0" style="font-size: 0.8rem;">EMAIL CỦA BẠN:</h6></label>
+										<div class="input-group flex-nowrap">
+											<span class="input-group-text" id="addon-wrapping"><i
+												class="fas fa-envelope"></i></span> <input type="text" id="username"
+												name="username" class="form-control"
+												placeholder="Nhập email của bạn" aria-label="email"
+												aria-describedby="addon-wrapping" th:field="*{accountdetail.email}">
+										</div>
+									</div>
+									<div class="form-group mb-3">
+									<label class="mb-1 text-left text-bold"><h6 class="text-sm mb-0" style="font-size: 0.8rem;">NHẬP MẬT KHẨU:</h6></label>
+										<div class="input-group flex-nowrap">
+											<span class="input-group-text" id="addon-wrapping"><i
+												class="fas fa-key"></i></span> <input type="password" id="pw"
+												name="password" class="form-control"
+												placeholder="Nhập mật khẩu của bạn" aria-label="pass"
+												aria-describedby="addon-wrapping" th:field="*{password}">
+										</div>
+									</div>
+									<div class="form-group mb-3">
+									<label class="mb-1 text-left text-bold"><h6 class="text-sm mb-0" style="font-size: 0.8rem;">NHẬP LẠI MẬT KHẨU:</h6></label>
+										<div class="input-group flex-nowrap">
+											<span class="input-group-text" id="addon-wrapping"><i
+												class="fas fa-key"></i></span> <input type="password" id="repw"
+												name="repassword" class="form-control"
+												placeholder="Nhập lại mật khẩu của bạn" aria-label="repass"
+												aria-describedby="addon-wrapping">
+										</div>
 									</div>
 								</div>
-								<div class="form-group mb-3">
-									<label class="mb-1 text-left text-bold"><h6
-											class="text-sm mb-0" style="font-size: 0.8rem;">HỌ TÊN CỦA BẠN:</h6></label>
-									<div class="input-group flex-nowrap">
-										<span class="input-group-text" id="addon-wrapping"><i
-											class="fas fa-id-card"></i></span> <input type="text" id="username"
-											name="username" class="form-control"
-											placeholder="Nhập họ và tên" aria-label="Username"
-											aria-describedby="addon-wrapping" th:field="*{accountdetail.fullname}"> 
+								<div class="col">
+									<div class="form-group mb-3">
+										<label class="mb-1 text-left text-bold"><h6
+												class="text-sm mb-0" style="font-size: 0.8rem;">NHẬP ĐỊA CHỈ CỦA BẠN:</h6></label>
+										<div class="input-group flex-nowrap">
+											<span class="input-group-text" id="addon-wrapping"><i
+												class="fas fa-envelope"></i></span> <input type="text" id="address"
+												name="address" class="form-control"
+												placeholder="Nhập địa chỉ" aria-label="email"
+												aria-describedby="addon-wrapping" th:field="*{accountdetail.address}">
+										</div>
 									</div>
-								</div>
-								<div class="form-group mb-3">
-									<label class="mb-1 text-left text-bold"><h6
-											class="text-sm mb-0" style="font-size: 0.8rem;">EMAIL CỦA BẠN:</h6></label>
-									<div class="input-group flex-nowrap">
-										<span class="input-group-text" id="addon-wrapping"><i
-											class="fas fa-envelope"></i></span> <input type="text" id="username"
-											name="username" class="form-control"
-											placeholder="Nhập email của bạn" aria-label="email"
-											aria-describedby="addon-wrapping" th:field="*{accountdetail.email}">
+									<div class="mb-3">
+										<label for="image" class="form-label">Hình Ảnh</label>
+										<input type="file" class="form-control" id="image" onchange="angular.element(this).scope().imageChange(this.files)" th:field="*{accountdetail.image}">
 									</div>
-								</div>
-								<div class="form-group mb-3">
-								<label class="mb-1 text-left text-bold"><h6 class="text-sm mb-0" style="font-size: 0.8rem;">NHẬP MẬT KHẨU:</h6></label>
-									<div class="input-group flex-nowrap">
-										<span class="input-group-text" id="addon-wrapping"><i
-											class="fas fa-key"></i></span> <input type="password" id="pw"
-											name="password" class="form-control"
-											placeholder="Nhập mật khẩu của bạn" aria-label="pass"
-											aria-describedby="addon-wrapping" th:field="*{password}">
+									<div class="form-group mb-3">
+										<h6 class="mb-1 text-left text-bold" style="font-size: 0.8rem;">GIỚI TÍNH CỦA BẠN:</h6>
+										<div class="form-check">
+											<input class="form-check-input" type="radio" id="male" name="gender" value="true" checked th:field="*{accountdetail.gender}">
+											<label class="form-check-label" for="male" > Nam</label>                     
+										</div>
+										<div class="form-check">
+											<input class="form-check-input" type="radio" id="female" name="gender" value="false" th:field="*{accountdetail.gender}">
+											<label class="form-check-label" for="female"> Nữ</label>
+										</div>
+		
 									</div>
-								</div>
-								<div class="form-group mb-3">
-								<label class="mb-1 text-left text-bold"><h6 class="text-sm mb-0" style="font-size: 0.8rem;">NHẬP LẠI MẬT KHẨU:</h6></label>
-									<div class="input-group flex-nowrap">
-										<span class="input-group-text" id="addon-wrapping"><i
-											class="fas fa-key"></i></span> <input type="password" id="repw"
-											name="repassword" class="form-control"
-											placeholder="Nhập lại mật khẩu của bạn" aria-label="repass"
-											aria-describedby="addon-wrapping">
-									</div>
-								</div>
-								<div class="form-group mb-3">
-									<h6 class="mb-1 text-left text-bold" style="font-size: 0.8rem;">GIỚI TÍNH CỦA BẠN:</h6>
-									<div class="form-check">
-										<input class="form-check-input" type="radio" id="male" name="gender" value="true" checked th:field="*{accountdetail.gender}">
-										<label class="form-check-label" for="male" > Nam</label>                     
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="radio" id="female" name="gender" value="false" th:field="*{accountdetail.gender}">
-										<label class="form-check-label" for="female"> Nữ</label>
-									</div>
-	
 								</div>
 								<hr class="my-4">
 								<div class="text-center">

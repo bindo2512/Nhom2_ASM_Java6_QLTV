@@ -18,6 +18,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.service.rentalService;
 
+import net.bytebuddy.utility.RandomString;
+
 
 @Service
 public class rentalServiceImpl implements rentalService {
@@ -34,6 +36,7 @@ public class rentalServiceImpl implements rentalService {
     public retails create(JsonNode orderData) {
         ObjectMapper mapper = new ObjectMapper();
         retails retail = mapper.convertValue(orderData, retails.class);
+        retail.setVerification(RandomString.make(64));
         dao.save(retail);
 
         TypeReference<List<details>> type = new TypeReference<List<details>>() {};

@@ -20,7 +20,7 @@ public class adminController {
 	public String index(Model model) {
 		List<books> list = service.findAll();
 		model.addAttribute("items", list);
-		return "admin/dashboard";
+		return "admin/dashboard/dashboard";
 	}
 
 	@RequestMapping("rental")

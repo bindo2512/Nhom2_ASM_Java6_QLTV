@@ -51,6 +51,7 @@ src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"
 	<nav>
 		<div th:replace="/layout/_navbar.html"></div>
 	</nav>
+	<div hidden id="username">[[${#request.remoteUser}]]</div>
 		<main th:replace="${main}" ></main>
 	</div>
 	<footer>
@@ -60,7 +61,6 @@ src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"
 		const app = angular.module("library-app", []);
 
 app.controller("library-ctrl", function($scope, $http, $document){
-
 
     $scope.cart = {
         items: [],
@@ -106,6 +106,7 @@ app.controller("library-ctrl", function($scope, $http, $document){
 		},
     }
 	$scope.retail = {
+		accounts: {username: $("#username").text()},
 		retaildate: "",
 		returndate: new Date(),
 		fullname:"",
@@ -120,7 +121,19 @@ app.controller("library-ctrl", function($scope, $http, $document){
     	}
 		return $scope.retail.returndate
 	},
-		accounts: {username: $("#username").text()},
+
+		
+		findUserDetail() {
+			console.log($scope.retail.accounts)
+			$http.get("/rest/account/" + $scope.retail.accounts.username).then(resp => {
+				console.log(resp.data)
+				$scope.retail.fullname = resp.data.accountdetail.fullname
+				$scope.retail.email = resp.data.accountdetail.email	
+				$scope.retail.phonenumber = resp.data.accountdetail.phonenum
+				$scope.retail.address = resp.data.accountdetail.address
+			})
+		},
+
 		get details(){
 			return $scope.cart.items.map(item => {
 				return {
@@ -154,10 +167,10 @@ app.controller("library-ctrl", function($scope, $http, $document){
 	}
 	};
 
-
 	console.log($scope.isLogin)
 	$scope.cart.init();
 	$scope.cart.loadStorage();
+	$scope.retail.findUserDetail();
 })
 	</script>
 	<script th:src="@{|/assest/js/adminBook/script.js|}"></script>
@@ -167,5 +180,9 @@ app.controller("library-ctrl", function($scope, $http, $document){
 	<script th:src="@{|/assest/js/pdfRead/script.js|}"></script>
 	<script th:src="@{|/assest/js/bookDetail/script.js|}"></script>
 	<script th:src="@{|/assest/js/forgotPass/forgotPass.js|}"></script>
+	<script th:src="@{|/assest/js/registration/script.js|}"></script>
+	<script th:src="@{|/assest/js/dashboard/retail/script.js|}"></script>
+	<script th:src="@{|/assest/js/dashboard/account/script.js|}"></script>
+	<script th:src="@{|/assest/js/dashboard/book/script.js|}"></script>
 </body>
 </html>

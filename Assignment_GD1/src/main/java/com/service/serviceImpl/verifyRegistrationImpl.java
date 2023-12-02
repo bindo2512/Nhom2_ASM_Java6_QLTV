@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dao.accountDAO;
+import com.dao.retailDAO;
 import com.entity.accounts;
+import com.entity.retails;
 import com.service.accountService;
 import com.service.verifyService;
 
@@ -15,6 +17,9 @@ public class verifyRegistrationImpl implements verifyService{
 
     @Autowired
     accountDAO dao;
+
+    @Autowired 
+    retailDAO rDAO;
 
     @Autowired
     accountService aService;
@@ -49,6 +54,17 @@ public class verifyRegistrationImpl implements verifyService{
         } else {
             return true;
         }
+    }
+
+    @Override
+    public boolean verifyCheckout(String code) {
+       retails retails = rDAO.findByVerification(code);
+       if (retails == null) {
+        return false;
+       } else {
+        rDAO.enable(retails.getRetailid());
+        return true;
+       }
     }
     
 }

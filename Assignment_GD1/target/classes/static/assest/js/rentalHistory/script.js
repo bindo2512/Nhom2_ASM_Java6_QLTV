@@ -23,7 +23,32 @@ app.controller("user-management-ctrl", function($scope, $http){
 
     $scope.toggleForm = function() {
         $scope.formEnabled = !$scope.formEnabled;
+
     };
+    $scope.$watch('formEnabled', function(afterValue, beforeValue) {
+        if (beforeValue === true && afterValue === false) {
+            var item = angular.copy($scope.userForm);
+            $http.put("/rest/account/${item.username}", item).then(resp => {
+                alert("Update thành công")
+            }).catch(error => {
+                alert("Lỗi cập nhật");
+                console.log(error);
+            })
+        }
+    });
+    $scope.imageChange = function(files) {
+        var data = new FormData();
+        data.append('file', files[0]);
+        $http.post('/rest/upload/image/users', data, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        }).then(resp => {
+            $scope.userForm.accountdetail.image = resp.data.name;
+        }).catch(error => {
+            alert("Lỗi update file hình ảnh");
+            console.log(error);
+        })
+    }
 
     $scope.watch = function(item) {
         $http.get("/rest/rental/id/" + item.retailid).then(resp => {

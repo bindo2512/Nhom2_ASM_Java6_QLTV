@@ -11,6 +11,7 @@ app.controller("admin-book-ctrl", function($scope, $http){
 
     };
     $scope.bnameform = {};
+    $scope.categoriesform = {};
     $scope.authorsform = {
         authorimage: 'not_available.png',
     };
@@ -345,7 +346,7 @@ app.controller("admin-book-ctrl", function($scope, $http){
         },
 
         reset() {
-            $scope.form = {
+            $scope.issuersform = {
                 issuerimage: 'not_available.png'
             }
         },
@@ -386,6 +387,64 @@ app.controller("admin-book-ctrl", function($scope, $http){
             },
             get count() {
                 return Math.ceil(1.0 * $scope.issuer.length / this.size); 
+            },
+            first () {
+                this.page = 0;
+            },
+            prev() {
+                this.page--;
+            },
+            next() {
+                this.page++;
+            },
+            last() {
+                this.page = this.count - 1;
+            }
+        }
+    }
+    $scope.categoriesfunction =  {
+        createCategory() {
+            var item = angular.copy($scope.categoriesform);
+            $http.post('/rest/categories', item).then(resp =>{
+                $scope.categories.push(resp.data);
+                $scope.reset();
+                alert("Thêm thành công");
+            }).catch(error => {
+                alert("Lỗi");
+                console.log(error);
+            })
+        },
+
+        update() {
+            var item = angular.copy($scope.categoriesform);
+            $http.put(`/rest/categories/${item.categoryid}`, item).then(resp => {
+                var index = $scope.categories.findIndex(c => c.categoryid == item.categoryid);
+                $scope.issuer[index] = item;
+                alert("Update thành công")
+            }).catch(error => {
+                alert("Lỗi cập nhật");
+                console.log(error);
+            })
+        },
+
+        reset() {
+            $scope.categoriesform = {
+                
+            }
+        },
+        edit(item) {
+            $scope.categoriesform = angular.copy(item);
+        },
+
+        pager: {
+            page: 0,
+            size: 5,
+            get items() {
+                var start = this.page * this.size;
+                return $scope.categories.slice(start, start + this.size);
+            },
+            get count() {
+                return Math.ceil(1.0 * $scope.categories.length / this.size); 
             },
             first () {
                 this.page = 0;

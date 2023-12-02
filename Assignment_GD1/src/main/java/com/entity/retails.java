@@ -54,4 +54,6 @@ public class retails {
 	@ManyToOne
 	@JoinColumn(name = "orderstateid")
 	orderstate orderstate;
+	String verification;
+	Boolean isverify;
 }

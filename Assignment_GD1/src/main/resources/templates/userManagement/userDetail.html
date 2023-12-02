@@ -15,16 +15,20 @@
                 <h3>Ảnh đại diện</h3>
                 <div class="mb-3">
                     <img ng-src="/assest/image/users/{{userForm.accountdetail.image}}" alt=""
-                        style="max-width: 150px; max-height: 300px;">
+                        style="max-width: 150px; max-height: 150px; border-radius: 50%;">
                     <br>
                     <div ng-if="userForm.isactive == true">
                         <i class="fa-solid fa-circle"></i> Online
-                        <div>Lần cuối đăng nhập: {{userForm.lastlogin | date: 'yyyy-MM-dd HH:mm:ss'}}</div>
                     </div>
                     <div ng-if="userForm.isactive == false">
                         <i class="fa-regular fa-circle"></i> Offline
-
+                        <div>Lần cuối đăng nhập: {{userForm.lastlogin | date: 'yyyy-MM-dd HH:mm:ss'}}</div>
                     </div>
+                    <br>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Thay ảnh đại diện</label>
+                        <input type="file" class="form-control" id="image" onchange="angular.element(this).scope().imageChange(this.files)" ng-model="form.accountdetail.image" ng-disabled="!formEnabled">
+                       </div>
                 </div>
             </div>
             <div class="col row">
@@ -32,11 +36,7 @@
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
                         <input type="text" class="form-control" id="username" placeholder="Username"
-                            ng-model="userForm.username" ng-disabled="!formEnabled">
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" ng-model="userForm.password" ng-disabled="!formEnabled">
+                            ng-model="userForm.username" disabled>
                     </div>
                 </div>
                 <div class="col" style="width: 750px;">
@@ -60,6 +60,7 @@
                         <input type="email" class="form-control" id="email" placeholder="Email"
                             ng-model="userForm.accountdetail.email" ng-disabled="!formEnabled">
                     </div>
+
                     <div class="mb-3 row">
                         <div class="col">
                             <label class="form-label">Giới tính</label>

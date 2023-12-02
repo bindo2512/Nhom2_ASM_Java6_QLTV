@@ -8,4 +8,6 @@ public interface verifyService {
     boolean verifyForgotPassword(accounts accounts);
 
     boolean verifyNotSamePassword(String username, accounts accounts);
+
+    boolean verifyCheckout(String code);
 }

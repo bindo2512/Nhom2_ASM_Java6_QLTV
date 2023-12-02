@@ -32,6 +32,7 @@ import net.bytebuddy.utility.RandomString;
 public class loginController {
 
 	static String code;
+	static Boolean isNormal = false;
 	static forgotPassword fp = new forgotPassword();
 
 	@Autowired
@@ -67,6 +68,7 @@ public class loginController {
 	
 	@RequestMapping("/qltv/login/success")
 	public String loginCtrlSuccess(Model model) {
+		isNormal = true;
 		return "redirect:/qltv/products";
 	}
 
@@ -90,7 +92,10 @@ public class loginController {
 
 	@RequestMapping("/qltv/logout/successful")
 	public String logoutSucess(Model model) {
-		aService.updateLogout();
+		if (isNormal) {
+			aService.updateLogout();
+			isNormal = false;
+		}
 		model.addAttribute("message", "Đăng xuất thành công");
 		return "forgot_and_login/login";
 	}
@@ -166,5 +171,12 @@ public class loginController {
 		System.out.println(code);
 		model.addAttribute("message", verify? "Xác thực thành công" : "Xác thực thất bại");
 		return "forgot_and_login/login";
+	}
+
+	@GetMapping("/qltv/rental/verify")
+	public String verifyRental(@Param("code") String code, Model model) {
+		boolean verify = vservice.verifyCheckout(code);
+		model.addAttribute("message", verify? "Xác thực thành công": "Xác thực thất bại");
+		return "cart/main";
 	}
 }
