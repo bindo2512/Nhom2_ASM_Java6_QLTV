@@ -47,6 +47,9 @@ public class books {
 	List<details> retaildetail;
 	@JsonIgnore
 	@OneToMany(mappedBy = "books")
+	List<history> history;
+	@JsonIgnore
+	@OneToMany(mappedBy = "books")
 	List<comments> comments;
 	@ManyToOne
 	@JoinColumn(name = "categoryid")

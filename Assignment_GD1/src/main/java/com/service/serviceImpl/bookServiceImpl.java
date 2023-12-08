@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.dao.bookDAO;
 import com.dao.categoriesDAO;
 import com.entity.books;
+import com.entity.comments;
 import com.service.bookService;
 
 @Service
@@ -74,6 +75,11 @@ public class bookServiceImpl implements bookService {
     @Override
     public Page<books> findTop5Lastest() {
         return dao.findAll(PageRequest.of(0, 5, Sort.by(Sort.Direction.DESC, "createdate")));
+    }
+
+    @Override
+    public List<comments> getAllCommentByBookid(Integer id) {
+        return dao.findById(id).get().getComments();
     }
 
 }

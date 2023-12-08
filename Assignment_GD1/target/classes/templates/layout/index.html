@@ -45,8 +45,13 @@ src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gulp/3.8.5/gulp.min.js" integrity="sha512-/t2QTDqdi+qF/biht8vq9VhWvE2bmMHasiO1PWPGql4BIZwa/XrhbzO098+R9GGK4yBIFKBFvLZ7SIhsZrIUgw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Sofia+Sans&display=swap" rel="stylesheet">
 
 </head>
+
 <body ng-app="library-app" ng-controller="library-ctrl">
 	<nav>
 		<div th:replace="/layout/_navbar.html"></div>
@@ -57,11 +62,22 @@ src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"
 	<footer>
 		<div th:replace="/layout/_footer.html"></div>
 	</footer>
+	<div class="wrapper loading-screen">
+		<div class="book-loader-container">
+		  <div class="spine"></div>
+		  <div class="page" style="--page-num: 1"></div>
+		  <div class="page" style="--page-num: 2"></div>
+		  <div class="page" style="--page-num: 3"></div>
+		  <div class="page" style="--page-num: 4"></div>
+		  <div class="page static right"></div>
+		  <div class="page static left"></div>
+		</div>
+	  </div>
 	<script type="text/javascript">
 		const app = angular.module("library-app", []);
 
 app.controller("library-ctrl", function($scope, $http, $document){
-
+	$scope.returndate;
     $scope.cart = {
         items: [],
 		number: 0,
@@ -107,7 +123,7 @@ app.controller("library-ctrl", function($scope, $http, $document){
     }
 	$scope.retail = {
 		accounts: {username: $("#username").text()},
-		retaildate: "",
+		retaildate:	new Date(),
 		returndate: new Date(),
 		fullname:"",
 		address:"",
@@ -115,12 +131,40 @@ app.controller("library-ctrl", function($scope, $http, $document){
 		email: "",
 		orderstate: {orderstateid: '1'},
 		updateReturnDate: function() {
-    	if ($scope.retail.returndate) {
+    	if ($scope.returndate) {
 			$scope.retail.returndate = new Date($scope.retail.retaildate);
 			$scope.retail.returndate.setMonth($scope.retail.retaildate.getMonth() + 1);
     	}
 		return $scope.retail.returndate
 	},
+
+
+
+	updateReturnLenght() {
+        // Logic to calculate returndate based on returnType
+        // You can customize this logic based on your requirements
+        switch ($scope.returndate) {
+            case '1':
+				$scope.retail.returndate = new Date($scope.retail.retaildate);
+				$scope.retail.returndate.setDate($scope.retail.retaildate.getDay() + 7);
+                break;
+            case '2':
+				$scope.retail.returndate = new Date($scope.retail.retaildate);
+				$scope.retail.returndate.setDate($scope.retail.retaildate.getDay() + 14);
+                break;
+            case '3':
+				$scope.retail.returndate = new Date($scope.retail.retaildate);
+				$scope.retail.returndate.setDate($scope.retail.retaildate.getDay() + 21);
+                break;
+            case '4':
+				$scope.retail.returndate = new Date($scope.retail.retaildate);
+				$scope.retail.returndate.setMonth($scope.retail.retaildate.getMonth() + 1);
+                break;
+            default:
+                // Default case or additional logic
+                break;
+        }
+    },
 
 		
 		findUserDetail() {
@@ -184,5 +228,15 @@ app.controller("library-ctrl", function($scope, $http, $document){
 	<script th:src="@{|/assest/js/dashboard/retail/script.js|}"></script>
 	<script th:src="@{|/assest/js/dashboard/account/script.js|}"></script>
 	<script th:src="@{|/assest/js/dashboard/book/script.js|}"></script>
+	<link rel="stylesheet" th:href="@{|/assest/css/loadingScreen/style.css|}">
+	<script>
+		window.addEventListener("load" , () =>	{
+			const loader = document.querySelector(".loading-screen");
+			loader.classList.add("loader-hidden");
+			loader.addEventListener("transitioned", () => {
+				document.body.removeChild("loading-screen")
+			})
+		})
+	</script>
 </body>
 </html>

@@ -6,4 +6,6 @@ import com.entity.comments;
 
 public interface commentService {
     List<comments> getAll();
+
+    comments saveComment(comments comments);
 }

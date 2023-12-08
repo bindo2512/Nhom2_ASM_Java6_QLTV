@@ -73,6 +73,25 @@
                         </th>
                     </th:block>
                 </div>
+                <div th:attr="ng-init=@{|bookid = ${item.bookid}|}" id="bookid" hidden>[[${item.bookid}]]</div>
+                <div class="container mt-4">
+                    <h4>User Comments</h4>
+                    <ul class="list-unstyled" ng-repeat="cm in comment.pager.items">
+                        <li class="mb-2">
+                            <img class="card-img-top justify-content-center" src="/assest/image/users/{{cm.accounts.accountdetail.image}}" style="height: 25px; width: 25px; margin: auto; margin-top: 15px;"/>
+                            <h5>{{cm.commentdes}}</h5>
+                        </li>
+                    </ul>
+                    <th:block th:if="${#request.remoteUser}">
+                        <form method="post" >
+                            <div class="mb-3">
+                                <label for="commentInput" class="form-label">Bình luận của bạn</label>
+                                <textarea class="form-control" id="commentInput" rows="3" ng-model="commentform.commentdes"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" th:attr="ng-click=@{|comment.addComment(${item.bookid})|}">Submit</button>
+                        </form>
+                    </th:block>
+                </div>
             </div>
         </div>
     </main>

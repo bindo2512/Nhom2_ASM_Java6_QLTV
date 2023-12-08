@@ -1,6 +1,7 @@
 app.controller("user-management-ctrl", function($scope, $http){
     $scope.rentals = [];
     $scope.retaildetail = [];
+    $scope.readHistory = [];
     $scope.userForm = {};
     $scope.username = $("#username").text()
     $scope.formEnabled = false;
@@ -18,6 +19,10 @@ app.controller("user-management-ctrl", function($scope, $http){
             $scope.userForm = resp.data;
         }).catch(error =>  {
             console.log(error)
+        })
+        $http.get("/rest/history/" + $scope.username).then(resp => {
+            console.log(resp.data)
+            $scope.readHistory = resp.data;
         })
     },
 
@@ -54,7 +59,31 @@ app.controller("user-management-ctrl", function($scope, $http){
         $http.get("/rest/rental/id/" + item.retailid).then(resp => {
             $scope.retaildetail = resp.data;
         })
-    },
+    }
     
+    $scope.historyPager = {
+        page: 0,
+        size: 50,
+        get items(){
+            var start = this.page * this.size;
+            return $scope.readHistory.slice(start, start + this.size);
+        },
+        get count() {
+            return Math.ceil(1.0 * $scope.readHistory.length / this.size); 
+        },
+        first () {
+            this.page = 0;
+        },
+        prev() {
+            this.page--;
+        },
+        next() {
+            this.page++;
+        },
+        last() {
+            this.page = this.count - 1;
+        }
+    }
+
     $scope.init();
 })

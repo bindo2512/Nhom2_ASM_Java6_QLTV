@@ -37,6 +37,7 @@ public class rentalServiceImpl implements rentalService {
         ObjectMapper mapper = new ObjectMapper();
         retails retail = mapper.convertValue(orderData, retails.class);
         retail.setVerification(RandomString.make(64));
+        retail.setIsverify(false);
         dao.save(retail);
 
         TypeReference<List<details>> type = new TypeReference<List<details>>() {};
@@ -78,5 +79,10 @@ public class rentalServiceImpl implements rentalService {
     @Override
     public List<retails> findAllRetailById(Integer id) {
         return dao.findAll();
+    }
+
+    @Override
+    public retails findRetailsById(Integer id) {
+        return dao.findById(id).get();
     }
 }

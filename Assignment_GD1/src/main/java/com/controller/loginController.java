@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.dao.accountDAO;
 import com.entity.accounts;
+import com.entity.commentData;
 import com.entity.filterCriteria;
 import com.entity.forgotPassword;
 import com.entity.recordEntity.loginRecord;
@@ -69,6 +70,7 @@ public class loginController {
 	@RequestMapping("/qltv/login/success")
 	public String loginCtrlSuccess(Model model) {
 		isNormal = true;
+
 		return "redirect:/qltv/products";
 	}
 
@@ -166,7 +168,6 @@ public class loginController {
 
 	@GetMapping("/qltv/verify")
 	public String verifyAccount(@Param("code") String code, Model model) {
-
 		boolean verify = vservice.verifyRegistration(code);
 		System.out.println(code);
 		model.addAttribute("message", verify? "Xác thực thành công" : "Xác thực thất bại");
@@ -177,6 +178,7 @@ public class loginController {
 	public String verifyRental(@Param("code") String code, Model model) {
 		boolean verify = vservice.verifyCheckout(code);
 		model.addAttribute("message", verify? "Xác thực thành công": "Xác thực thất bại");
+		model.addAttribute("criteria", new filterCriteria());
 		return "cart/main";
 	}
 }

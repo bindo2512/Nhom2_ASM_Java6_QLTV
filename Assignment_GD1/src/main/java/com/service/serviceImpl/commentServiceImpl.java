@@ -19,5 +19,10 @@ public class commentServiceImpl implements commentService {
     public List<comments> getAll() {
         return dao.findAll();
     }
+
+    @Override
+    public comments saveComment(comments comments) {
+        return dao.save(comments);
+    }
     
 }

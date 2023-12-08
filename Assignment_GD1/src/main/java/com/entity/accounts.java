@@ -37,5 +37,8 @@ public class accounts {
 	@JsonIgnore
 	@OneToMany(mappedBy = "accounts")
 	List<comments> comments;
+	@JsonIgnore
+	@OneToMany(mappedBy = "accounts")
+	List<history> history;
 	String verification;
 }

@@ -21,4 +21,6 @@ public interface rentalService {
     List<details> findAllRDetails();
 
     List<retails> findAllRetailById(Integer id);
+
+    retails findRetailsById(Integer id);
 }

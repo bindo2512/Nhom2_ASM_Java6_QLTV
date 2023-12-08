@@ -88,7 +88,7 @@ public class emailServiceImpl implements emailService {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
         helper.setFrom("eazy97889@gmail.com", sender);
-        helper.setTo(aDao.findById(retails.getAccounts().getUsername()).get().getAccountdetail().getEmail());
+        helper.setTo(retails.getEmail());
         helper.setSubject(subject);
         helper.setText(mailContent, true);
         mailSender.send(message);

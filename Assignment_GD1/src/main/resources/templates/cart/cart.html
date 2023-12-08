@@ -117,6 +117,13 @@
                     <div class="form-group">
                         <label for="ngayTra">Ngày trả:</label>
                         <input type="date" class="form-control" id="ngayTra" ng-model="retail.returndate" disabled></input>
+                        <br>
+                        <select name="" id="" class="form-control" ng-model="returndate" ng-change="retail.updateReturnLenght()">
+                            <option value="1" selected>Mượn 1 tuàn</option>
+                            <option value="2">Mượn 2 tuàn</option>
+                            <option value="3">Mượn 3 tuàn</option>
+                            <option value="4">Mượn 1 tháng</option>
+                        </select>
                     </div>
                     <div class="text-center" ng-show="{{cart.count()}}" ng-model-options="{debounce: 500}">
                         <button type="submit" class="btn btn-primary" ng-click="retail.rental()">Đặt mượn</button>
