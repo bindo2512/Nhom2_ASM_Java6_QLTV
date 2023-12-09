@@ -123,7 +123,8 @@ app.controller("retail-dashboard-ctrl", function($http, $scope) {
                         'rgb(86, 168, 179)',
                         'rgb(84, 130, 130)',
                         'rgb(135,206,250)',
-                        'rgb(65,105,225)'
+                        'rgb(65,105,225)',
+                        'rgb(0,0,139)'
                       ],
                     hoverOffset: 1
                 }]

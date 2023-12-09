@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dao.bookDAO;
+import com.dao.historyDAO;
 
 @CrossOrigin("*")
 @RestController
@@ -21,6 +22,9 @@ import com.dao.bookDAO;
 public class booksDashboardRestController {
     @Autowired
     bookDAO dao;
+
+    @Autowired
+    historyDAO hDAO;
 
     @GetMapping("/countbookbymonth")
     public List<Map<String, Object>> registrationPerMonth() {
@@ -41,6 +45,21 @@ public class booksDashboardRestController {
             rowMap.put("month", month);
             resultList.add(rowMap);
         });
+        return resultList;
+    }
+
+    @GetMapping("/countreadbyname")
+    public List<Map<String, Object>> countBookReadByName() {
+        List<Object[]> result = hDAO.countNumberOfReadByBook();
+        List<Map<String, Object>> resultList = new ArrayList<>();
+        for (Object[] row: result) {
+            Map<String, Object> rowMap = new HashMap<>();
+            Long numberOfRead = (Long) row[0];
+            String bookname = (String) row[1]; 
+            rowMap.put("numberOfRead", numberOfRead);
+            rowMap.put("bookname", bookname);
+            resultList.add(rowMap);
+        }
         return resultList;
     }
 }

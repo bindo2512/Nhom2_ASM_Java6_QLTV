@@ -112,7 +112,7 @@
                     </div>
                     <div class="form-group">
                         <label for="ngayMuon">Ngày mượn:</label>
-                        <input type="date" class="form-control" id="ngayMuon" required ng-model="retail.retaildate"  ng-change="retail.updateReturnDate()">
+                        <input type="date" class="form-control" id="ngayMuon" required ng-model="retail.retaildate"  ng-change="retail.updateReturnDate()" ng-min="currentDate">
                     </div>
                     <div class="form-group">
                         <label for="ngayTra">Ngày trả:</label>

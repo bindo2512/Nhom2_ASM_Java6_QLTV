@@ -39,7 +39,10 @@ import com.service.emailService;
 import com.service.historyService;
 import com.service.rentalService;
 
+import io.getstream.chat.java.models.Message;
 import javassist.compiler.ast.Keyword;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 
 @Controller
 public class productsController {
@@ -157,6 +160,12 @@ public class productsController {
 	public String rentalHistoryCtrl() {
 		return "userManagement/userManagement";
 	}
+
+	@RequestMapping("/user/chat")
+	public String chatCtrl() {
+		return "messaging/messaging";
+	}
+	
 
 
 	@RequestMapping("/qltv/products/search")

@@ -50,6 +50,8 @@ src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Sofia+Sans&display=swap" rel="stylesheet">
 
+<!-- Stream Chat CDN -->
+<script src="https://cdn.jsdelivr.net/npm/stream-chat"></script>
 </head>
 
 <body ng-app="library-app" ng-controller="library-ctrl">
@@ -77,6 +79,7 @@ src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"
 		const app = angular.module("library-app", []);
 
 app.controller("library-ctrl", function($scope, $http, $document){
+	$scope.currentDate = new Date()
 	$scope.returndate;
     $scope.cart = {
         items: [],
@@ -225,6 +228,7 @@ app.controller("library-ctrl", function($scope, $http, $document){
 	<script th:src="@{|/assest/js/bookDetail/script.js|}"></script>
 	<script th:src="@{|/assest/js/forgotPass/forgotPass.js|}"></script>
 	<script th:src="@{|/assest/js/registration/script.js|}"></script>
+	<script th:src="@{|/assest/js/message/script.js|}"></script>
 	<script th:src="@{|/assest/js/dashboard/retail/script.js|}"></script>
 	<script th:src="@{|/assest/js/dashboard/account/script.js|}"></script>
 	<script th:src="@{|/assest/js/dashboard/book/script.js|}"></script>
