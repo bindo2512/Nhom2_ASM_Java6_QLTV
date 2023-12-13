@@ -11,6 +11,7 @@ public class filterCriteria {
     private Integer authorid = null;
     private Integer publishersid = null;
     private Integer categoriesid = null;
+    private String sortby = "";
     private String booknamekeyword = "";
 
     public void clear() {
@@ -18,5 +19,6 @@ public class filterCriteria {
         this.publishersid = null;
         this.categoriesid = null;
         this.booknamekeyword = null;
+        this.sortby = "";
     }
 }

@@ -46,6 +46,10 @@
                             <option ng-repeat="o in orderstate" ng-value="o.orderstateid">{{o.orderstatename}}</option>
                         </select>
                     </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="adminValidation" ng-model="form.adminverify">
+                        <label class="form-check-label" for="adminValidation">Xác thực từ admin</label>
+                      </div>
                 </div>
             </div>
         </form>

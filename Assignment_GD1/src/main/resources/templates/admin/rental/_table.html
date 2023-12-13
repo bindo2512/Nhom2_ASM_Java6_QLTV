@@ -1,39 +1,36 @@
 
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="table-wrap">
-						<table class="table table-striped">
-						  <thead>
-						    <tr>
-						      <th>Id mượn sách</th>
-						      <th>Tên tài khoản mượn</th>
-						      <th>Ngày mượn</th>
-						      <th>Ngày trả</th>
-						      <th>Họ tên người mượn</th>
-							  <th>Email</th>
-                              <th>Địa chỉ</th>
-							  <th>Số điện thoại</th>
-						      <th>Tình trạng</th>
-                              <th>Chỉnh sửa</th>
-						    </tr>
-						  </thead>
-						  <tbody>
-						    <tr ng-repeat="r in rentals">
-						      <th>{{r.retailid}}</th>
-						      <td>{{r.accounts.username}}</td>
-						      <td>{{r.retaildate}}</td>
-						      <td>{{r.returndate}}</td>
-						      <td>{{r.fullname}}</td>
-							  <td>{{r.email}}</td>
-                              <td>{{r.address}}</td>
-							  <td>{{r.phonenumber}}</td>
-                              <td>{{r.orderstate.orderstatename}}</td>
-                              <td><button class="btn btn-outline-secondary align-middle" ng-click="edit(r)"><i class="bi bi-pencil"></i></button></td>
-						    </tr>
-						  </tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="allRetailsTab" data-bs-toggle="pill" data-bs-target="#allRetail" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Tất cả các đơn mượn sách</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="userVerifyRetailTab" data-bs-toggle="pill" data-bs-target="#userVerifyRetail" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Đơn mượn đã xác thực từ user</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="needUserVerifyRetailTab" data-bs-toggle="pill" data-bs-target="#needUserVerifyRetail" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Đơn mượn đã xác thực từ user</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="adminVerifyTab" data-bs-toggle="pill" data-bs-target="#adminVerify" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Đơn mượn đã xác thực từ admin</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="needAdminVerifyTab" data-bs-toggle="pill" data-bs-target="#needAdminVerify" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Đơn mượn chưa xác thực từ admin</button>
+        </li>
+        
+      </ul>
+      <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="allRetail" role="tabpanel" aria-labelledby="allRetailsTab">
+            <div th:replace="/admin/rental/allRetailsTable.html"></div>
+        </div>
+        <div class="tab-pane fade" id="userVerifyRetail" role="tabpanel" aria-labelledby="userVerifyRetailTab">
+          <div th:replace="/admin/rental/userVerify.html"></div>
+        </div>
+        <div class="tab-pane fade" id="needUserVerifyRetail" role="tabpanel" aria-labelledby="needUserVerifyRetailTab">
+          <div th:replace="/admin/rental/needUserVerify.html"></div>
+        </div>
+        <div class="tab-pane fade" id="adminVerify" role="tabpanel" aria-labelledby="adminVerifyTab">
+          <div th:replace="/admin/rental/adminVerify.html"></div>
+        </div>
+        <div class="tab-pane fade" id="needAdminVerify" role="tabpanel" aria-labelledby="needAdminVerifyTab">
+          <div th:replace="/admin/rental/needAdminVerify.html"></div>
+        </div>
+      </div>

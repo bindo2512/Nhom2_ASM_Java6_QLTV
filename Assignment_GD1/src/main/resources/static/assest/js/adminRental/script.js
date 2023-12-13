@@ -7,11 +7,22 @@ app.controller("admin-rental-ctrl", function($scope,$http) {
     $scope.init = function() {
         $http.get("/rest/rental").then(resp => {
             $scope.rentals = resp.data;
-        }).catch(error => {
-            console.log(error)
-        });
+        })
+        $http.get("/rest/rental/isverify/true").then(resp => {
+            $scope.rentalsWithUserVerify.rentals = resp.data;
+        })
+        $http.get("/rest/rental/isverify/false").then(resp => {
+            $scope.rentalsWithoutUserVerify.rentals = resp.data;
+        })
         $http.get("/rest/orderstate").then(resp => {
             $scope.orderstate = resp.data;
+        })
+        $http.get("/rest/rental/adminverify/true").then(resp => {
+            $scope.rentalsWithAdminVerfiy = resp.data;
+            console.log(resp.data)
+        })
+        $http.get("/rest/rental/adminverify/false").then(resp => {
+            $scope.rentalsWithoutAdminVerify = resp.data;
         })
     }
 
@@ -28,6 +39,22 @@ app.controller("admin-rental-ctrl", function($scope,$http) {
         }).catch(error => {
             console.log(error);
         })
+    }
+
+    $scope.rentalsWithUserVerify = {
+        rentals: [],
+    }
+
+    $scope.rentalsWithoutUserVerify = {
+        rentals: [],
+    }
+
+    $scope.rentalsWithAdminVerfiy = {
+        rentals: []
+    }
+
+    $scope.rentalsWithoutAdminVerify = {
+        rentals: [],
     }
 
     $scope.init();

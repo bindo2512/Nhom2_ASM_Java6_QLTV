@@ -77,9 +77,18 @@
                 <div class="container mt-4">
                     <h4>User Comments</h4>
                     <ul class="list-unstyled" ng-repeat="cm in comment.pager.items">
-                        <li class="mb-2">
-                            <img class="card-img-top justify-content-center" src="/assest/image/users/{{cm.accounts.accountdetail.image}}" style="height: 25px; width: 25px; margin: auto; margin-top: 15px;"/>
+                        <li class="mb-2" style="border: 1px black thin; padding: 25px;">
+                            <div style="display:inline-flex;">
+                                <img class="card-img-top justify-content-center" src="/assest/image/users/{{cm.accounts.accountdetail.image}}" style="height: 25px; width: 25px; margin: auto; margin-top: 15px; margin-right: 15px;"/>
+                                <h5 style="margin:auto;">{{cm.accounts.username}}</h5>
+                            </div>
+                            <br>
                             <h5>{{cm.commentdes}}</h5>
+                            <div style="font-size: smaller;" class="row">
+                                <div ng-if="cm.accounts.username == username">
+                                    <button style="border: none; background-color:none;" ng-click="comment.delete(cm.commentid)"><i class="fa-solid fa-trash"></i></button>
+                                </div>
+                            </div>  
                         </li>
                     </ul>
                     <th:block th:if="${#request.remoteUser}">

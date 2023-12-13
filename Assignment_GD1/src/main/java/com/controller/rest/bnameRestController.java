@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.entity.bname;
+import com.entity.books;
 import com.service.bnameService;
 
 @RestController
@@ -34,4 +35,9 @@ public class bnameRestController {
     public bname update(@PathVariable("id") Integer id, @RequestBody bname bname) {
         return service.updateBname(bname);
     }
+
+    @GetMapping("{bookname}")
+    public List<books> findBookByBookname(@PathVariable("bookname") String bookname) {
+        return service.findBooksByBookname(bookname);
+    } 
 }

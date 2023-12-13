@@ -47,11 +47,40 @@ public class bookServiceImpl implements bookService {
     }
 
     @Override
-    public Page<books> findBookByCriteria(Integer authorid, Integer publishersid , Integer categoriesid,
+    public Page<books> findBookByCriteria(Integer authorid, Integer publishersid , Integer categoriesid, String sortBy,
             String booknamekeyword, int page, int page_size) {
         Pageable pageable;
         pageable = PageRequest.of(page, page_size, Sort.unsorted());
         Specification<books> spec = Specification.where(null);
+        switch (sortBy) {
+            case "bnameASC":
+                pageable = PageRequest.of(page, page_size, Sort.by("bname.bookname"));
+                break;
+            case "bnameDESC":
+                pageable = PageRequest.of(page, page_size, Sort.by("bname.bookname").descending());
+                break;
+            case "yearReleaseASC":
+                pageable = PageRequest.of(page, page_size, Sort.by("bname.bookreleaseyear"));
+                break;
+            case "yearReleaseDESC":
+                pageable = PageRequest.of(page, page_size, Sort.by("bname.bookreleaseyear").descending());
+                break;
+            case "publishersASC":
+                pageable = PageRequest.of(page, page_size, Sort.by("publishers.publishername"));
+                break;
+            case "publishersDESC":
+                pageable = PageRequest.of(page, page_size, Sort.by("publishers.publishername").descending());
+                break;
+            case "issuerASC": 
+                pageable = PageRequest.of(page, page_size, Sort.by("issuer.issuername"));
+                break;
+            case "issuerDESC":
+                pageable = PageRequest.of(page, page_size, Sort.by("issuer.issuername").descending());
+            default:
+                pageable = PageRequest.of(page, page_size, Sort.unsorted());
+                break;
+        }
+
         if (authorid != null) {
             spec = spec.and(((root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("authors").get("authorid"), authorid)));
         }

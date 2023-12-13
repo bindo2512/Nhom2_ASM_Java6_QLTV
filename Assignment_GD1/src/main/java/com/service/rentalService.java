@@ -23,4 +23,8 @@ public interface rentalService {
     List<retails> findAllRetailById(Integer id);
 
     retails findRetailsById(Integer id);
+
+    List<retails> findRetailsByVerifyState(boolean verifystate);
+
+    List<retails> findRetailsByAdminVerify(boolean verifystate);
 }

@@ -24,5 +24,10 @@ public class commentServiceImpl implements commentService {
     public comments saveComment(comments comments) {
         return dao.save(comments);
     }
+
+    @Override
+    public void delete(Integer id) {
+        dao.deleteById(id);;
+    }
     
 }

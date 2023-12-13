@@ -13,6 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;	
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,6 +46,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller
+@CrossOrigin("*")
 public class productsController {
 	
 	@Autowired
@@ -84,8 +86,8 @@ public class productsController {
 
 	@RequestMapping("/qltv/products")
 	public String productsCtrl(Model model , @CurrentSecurityContext(expression = "authentication?.name") String username) {
-		Page<books> list = service.findBookByCriteria(null, null, null, null, page_count, page_size);
-		model.addAttribute("criteria", new filterCriteria());
+		Page<books> list = service.findBookByCriteria(null, null, null, "bnameASC", null, page_count, page_size);
+		model.addAttribute("criteria", filterCriteria);
 		model.addAttribute("lastest5", service.findTop5Lastest());
 		model.addAttribute("items", list);
 		model.addAttribute("categories", cDAO.findAll());
@@ -169,7 +171,7 @@ public class productsController {
 
 
 	@RequestMapping("/qltv/products/search")
-	public String searchCtrl(Model model, @ModelAttribute("criteria") filterCriteria criter, @RequestParam(defaultValue = "0") int page, @RequestParam(name = "authorid", required = false) Integer authorid, @RequestParam(name = "publishersid", required = false) Integer publisherid, @RequestParam(name = "categoriesid", required = false) Integer categoryid, @Param("keyword") String keyword) {
+	public String searchCtrl(Model model, @ModelAttribute("criteria") filterCriteria criter, @RequestParam(defaultValue = "0") int page, @RequestParam(name = "authorid", required = false) Integer authorid, @RequestParam(name = "publishersid", required = false) Integer publisherid, @RequestParam(name = "categoriesid", required = false) Integer categoryid, @RequestParam(name = "sortby", required = false) String sortby, @Param("keyword") String keyword) {
 		if(criter.getAuthorid() != null) {
 			filterCriteria.setAuthorid(criter.getAuthorid());		
 		}
@@ -182,11 +184,14 @@ public class productsController {
 		if (criter.getPublishersid() != null) {
 			filterCriteria.setPublishersid(criter.getPublishersid());
 		}
-		if (criter.getAuthorid() == null && criter.getBooknamekeyword().isEmpty() && criter.getCategoriesid() == null && criter.getPublishersid() == null) {
+		if(criter.getSortby() != null) {
+			filterCriteria.setSortby(criter.getSortby());
+		}
+		if (criter.getAuthorid() == null && criter.getBooknamekeyword().isEmpty() && criter.getCategoriesid() == null && criter.getPublishersid() == null && criter.getSortby().equals("")) {
 			filterCriteria.clear();
 		}
-		Page<books> list = service.findBookByCriteria(filterCriteria.getAuthorid(), filterCriteria.getPublishersid(), filterCriteria.getCategoriesid(), filterCriteria.getBooknamekeyword(), page, page_size);
-		model.addAttribute("criteria", new filterCriteria());
+		Page<books> list = service.findBookByCriteria(filterCriteria.getAuthorid(), filterCriteria.getPublishersid(), filterCriteria.getCategoriesid(), filterCriteria.getSortby(), filterCriteria.getBooknamekeyword(), page, page_size);
+		model.addAttribute("criteria", filterCriteria);
 		model.addAttribute("categories", cDAO.findAll());
 		model.addAttribute("authors", authorsDAO.findAll());
 		model.addAttribute("publishers", pDao.findAll());

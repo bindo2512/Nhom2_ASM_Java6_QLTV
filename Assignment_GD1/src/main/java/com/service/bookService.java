@@ -22,7 +22,7 @@ public interface bookService {
 
     List<comments> getAllCommentByBookid(Integer id);
 
-    Page<books> findBookByCriteria(Integer authorid, Integer publishersid, Integer categoriesid, String booknamekeyword, int page, int page_size);
+    Page<books> findBookByCriteria(Integer authorid, Integer publishersid, Integer categoriesid, String sortBy,String booknamekeyword, int page, int page_size);
 
     Page<books> findTop5Lastest();
 }

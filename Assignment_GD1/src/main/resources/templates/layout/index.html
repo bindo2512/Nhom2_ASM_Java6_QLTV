@@ -52,6 +52,14 @@ src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"
 
 <!-- Stream Chat CDN -->
 <script src="https://cdn.jsdelivr.net/npm/stream-chat"></script>
+
+<!-- DarkReader CDN -->
+<script src="
+https://cdn.jsdelivr.net/npm/darkreader@4.9.73/darkreader.min.js
+"></script>
+
+<!-- scrollreveal CDN -->
+<script src="https://unpkg.com/scrollreveal"></script>
 </head>
 
 <body ng-app="library-app" ng-controller="library-ctrl">
@@ -76,14 +84,45 @@ src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"
 		</div>
 	  </div>
 	<script type="text/javascript">
+		
 		const app = angular.module("library-app", []);
 
 app.controller("library-ctrl", function($scope, $http, $document){
 	$scope.currentDate = new Date()
 	$scope.returndate;
+	$scope.darkMode = false;
+
+
+
+DarkReader.enable({
+    brightness: 100,
+    contrast: 90,
+    sepia: 10
+});
+
+DarkReader.disable();
+
+DarkReader.auto({
+    brightness: 100,
+    contrast: 90,
+    sepia: 10
+});
+
+DarkReader.auto($scope.darkMode);
+
+
+
+const isEnabled = DarkReader.isEnabled();
+
+$scope.darkModeToggle = function() {
+	DarkReader.auto($scope.darkMode);
+}
+
+
     $scope.cart = {
         items: [],
 		number: 0,
+		
 		init() {
 			$http.get("/rest/categories").then(resp => {
             $scope.categories = resp.data;
@@ -214,6 +253,19 @@ app.controller("library-ctrl", function($scope, $http, $document){
 	}
 	};
 
+	$scope.find = {
+		findText: "",
+		recommendation: [],
+		addRecommendation() {
+			$http.get("/rest/bname/" + $scope.find.findText).then(resp => {
+				$scope.find.recommendation = resp.data;
+				console.log($scope.find.recommendation)
+			})
+		},
+		checkBookDetail(bookid) {
+			location.href = `/qltv/products/detail/${bookid}`;
+		}
+	}
 	console.log($scope.isLogin)
 	$scope.cart.init();
 	$scope.cart.loadStorage();
@@ -242,5 +294,7 @@ app.controller("library-ctrl", function($scope, $http, $document){
 			})
 		})
 	</script>
+	<link rel="stylesheet" th:href="@{|/assest/css/resultBox/script.css|}"/>
+
 </body>
 </html>

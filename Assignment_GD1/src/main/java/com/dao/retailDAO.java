@@ -51,4 +51,8 @@ public interface retailDAO extends JpaRepository<retails, Integer> {
     @Modifying
     @Query("update retails r set r.isverify = true, r.verification = null where r.retailid = ?1")
     public void enable(Integer id);
+
+    List<retails> findByIsverify(Boolean isverify);
+
+    List<retails> findByAdminverify(Boolean adminverify);
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.dao.bnameDAO;
 import com.entity.bname;
+import com.entity.books;
 import com.service.bnameService;
 
 @Service
@@ -29,6 +30,11 @@ public class bnameSerivceImpl implements bnameService{
     @Override
     public bname updateBname(bname bname) {
         return dao.save(bname);
+    }
+
+    @Override
+    public List<books> findBooksByBookname(String bookname) {
+        return dao.findByBookname(bookname);
     }
     
 }

@@ -56,4 +56,5 @@ public class retails {
 	orderstate orderstate;
 	String verification;
 	Boolean isverify;
+	Boolean adminverify;
 }

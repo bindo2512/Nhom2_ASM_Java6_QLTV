@@ -2,6 +2,8 @@ app.controller("book-detail-controller", function($scope, $http) {
     $scope.commentform = {},
     $scope.commentlist = [],
     $scope.bookid = $("#bookid").text(),
+    $scope.username = $("#username").text(),
+
     
 
     $scope.comment = {
@@ -20,6 +22,15 @@ app.controller("book-detail-controller", function($scope, $http) {
             var item = angular.copy($scope.commentform)
             $http.post(`/rest/comments/${bookid}`, item).then(resp => {
                 $scope.commentlist.push(resp.data)
+            })
+        },
+
+        delete(commentid) {
+            var id = angular.copy(commentid)
+            $http.delete(`/rest/comments/${id}`).then(resp => {
+                var index = $scope.commentlist.findIndex(c => c.commentid == id)
+                $scope.commentlist.splice(index,1);
+                alert("Xóa comment thành công")
             })
         },
 
@@ -48,5 +59,7 @@ app.controller("book-detail-controller", function($scope, $http) {
         }
 	}
     $scope.comment.init();
+    console.log($scope.username);
     console.log($scope.bookid);
+
 })

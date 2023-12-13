@@ -22,6 +22,10 @@
 					aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
+				<div class="form-check form-switch"	>
+					<input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" ng-model="darkMode" ng-change="darkModeToggle()">
+					<label class="form-check-label" for="flexSwitchCheckDefault" >Dark mode</label>
+				  </div>
 
                     <form class="d-flex">
                        <th:block th:unless="${#request.remoteUser}">
@@ -69,15 +73,14 @@
 								<button class="btn btn-outline-dark margRg">
 									<a th:href="@{|/user/management|}">Quản lý tài khoản</a>
 								</button>
+								<button type="button" class="btn btn-outline-dark margRg" data-bs-toggle="modal" data-bs-target="#qrScanModal">
+									Quét mã QR
+								  </button>
 							</th:block>
 							<button class="btn btn-outline-dark margRg" type="submit" >
 								<i class="bi-cart-fill me-1"></i>
 								<a th:href="@{/user/cart}">Giỏ hàng</a>
 								<span class="badge bg-dark text-white ms-1 rounded-pill">{{cart.count()}}</span>
-							</button>
-							<button class="btn btn-outline-dark margRg" type="submit" >
-								<i class="bi bi-chat"></i>
-								<a th:href="@{/user/chat}">Trò chuyện</a>
 							</button>
 							<button class="btn btn-outline-dark margRg">
 								<a th:href="@{|/qltv/logout|}" ng-click="cart.clear()">Đăng xuất</a>
@@ -101,6 +104,39 @@
                     </form>
 				</div>
 		</nav>
+
+		<div class="modal fade" id="qrScanModal" tabindex="-1" aria-labelledby="qrScanModalLabel" aria-hidden="true" >
+			<div class="modal-dialog modal-lg">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h5 class="modal-title" id="qrScanModalLabel">Scan mã vạch sách</h5>
+				  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body" style="margin: auto; ">
+					<div id="qr-reader" style="width:500px;border: none;" ></div>
+					<div id="qr-reader-results"></div>
+				</div>
+			  </div>
+			</div>
+		  </div>
+
+		  <script>
+			var resultContainer = document.getElementById('qr-reader-results');
+var lastResult, countResults = 0;
+
+function onScanSuccess(decodedText, decodedResult) {
+    if (decodedText !== lastResult) {
+        ++countResults;
+        lastResult = decodedText;
+        // Handle on success condition with the decoded message.
+        console.log(`Scan result ${decodedText}`, decodedResult);
+    }
+}
+
+var html5QrcodeScanner = new Html5QrcodeScanner(
+    "qr-reader", { fps: 10, qrbox: 250 });
+html5QrcodeScanner.render(onScanSuccess);
+		  </script>
 	</main>
 
 </body>

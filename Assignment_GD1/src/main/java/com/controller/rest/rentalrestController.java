@@ -54,4 +54,14 @@ public class rentalrestController {
     public List<details> getAllRDetails() {
         return service.findAllRDetails();
     }
+
+    @GetMapping("/isverify/{verifystate}")
+    public List<retails> getRetailByVerify(@PathVariable("verifystate") Boolean verifystate) {
+        return service.findRetailsByVerifyState(verifystate);
+    }
+
+    @GetMapping("/adminverify/{verifystate}")
+    public List<retails> getRetailByAdminVerify(@PathVariable("verifystate") Boolean verifystate) {
+        return service.findRetailsByAdminVerify(verifystate);
+    }
 }

@@ -1,0 +1,14 @@
+.resultBox {
+    padding: 15px 10px;
+}
+
+.resultBox ul li {
+    list-style: none;
+    border-radius: 3px;
+    padding: 15px 10px;
+    cursor: pointer;
+}
+
+.resultBox ul li:hover {
+    background-color: darkgray;
+}

@@ -38,6 +38,7 @@ public class rentalServiceImpl implements rentalService {
         retails retail = mapper.convertValue(orderData, retails.class);
         retail.setVerification(RandomString.make(64));
         retail.setIsverify(false);
+        retail.setAdminverify(false);
         dao.save(retail);
 
         TypeReference<List<details>> type = new TypeReference<List<details>>() {};
@@ -84,5 +85,15 @@ public class rentalServiceImpl implements rentalService {
     @Override
     public retails findRetailsById(Integer id) {
         return dao.findById(id).get();
+    }
+
+    @Override
+    public List<retails> findRetailsByVerifyState(boolean verifystate) {
+        return dao.findByIsverify(verifystate);
+    }
+
+    @Override
+    public List<retails> findRetailsByAdminVerify(boolean verifystate) {
+        return dao.findByAdminverify(verifystate);
     }
 }

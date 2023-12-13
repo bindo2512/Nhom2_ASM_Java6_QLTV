@@ -3,7 +3,6 @@
 th:replace="~{/layout/index :: dynamic(~{::main})}" style="width: 100px;">
 
 
-
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
@@ -33,14 +32,21 @@ th:replace="~{/layout/index :: dynamic(~{::main})}" style="width: 100px;">
 						<form th:action="@{/qltv/products/search}" th:object="${criteria}" method="post">
 							<div class="input-group search-box" style="justify-content:center;">
 								<div class="form-outline margRg">
-								  <input id="search-input" type="search" class="form-control" th:field="*{booknamekeyword}" />
+								  <input id="search-input searchBox" type="search" class="form-control" th:field="*{booknamekeyword}" ng-change="find.addRecommendation()" ng-model="find.findText" style="width:500px;"/>
+                  <br>
+                  <div class="resultBox" style="max-height: 400px;overflow-y: scroll; width: 500px;">
+                    <ul ng-repeat="r in find.recommendation">
+                      <li style="font-weight: bold; font-size:large;" ng-click="find.checkBookDetail(r.bookid)"><a href=""><img src="/assest/image/products/{{r.image}}" alt="" style="height: 40px; width: auto;padding-right:40px;">{{r.bname.bookname}}</a></li>
+                    </ul>
+                  </div>
 								</div>
 								<div class="margRg">
 									<button class="btn btn-outline-dark" type="button" data-bs-toggle="collapse" data-bs-target="#advanceSearchBox" aria-expanded="false" aria-controls="advanceSearchBox" style="width: 225.6px;">
 										Tìm kiếm nâng cao
 									  </button>
 									<div class="collapse" id="advanceSearchBox" style="margin-top: 15px;">
-											<div class="form-outline margRg">
+                    <div class="row">
+                      <div class="form-outline margRg col">
 												<select name="" id="category" class="form-control margTop" th:field="*{categoriesid}">
 													<option value="">Tất cả</option>
 													<option th:each="category: ${categories}" th:value="${category.categoryid}" th:text="${category.categoryname}" th:selected="${category.categoryid == categoriesid}"></option>
@@ -53,10 +59,26 @@ th:replace="~{/layout/index :: dynamic(~{::main})}" style="width: 100px;">
 													<option value="">Tất cả</option>
 													<option th:each="publisher: ${publishers}" th:value="${publisher.publisherid}" th:text="${publisher.publishername}" th:selected="${publisher.publisherid == publishersid}"></option>
 												</select>
-											</div>										
+											</div>	
+                      <div class="col">
+                        <select name="sortBy" id="sortBy" class="form-control margTop" th:field="*{sortby}">
+                          <option value="">Không sắp xếp</option>
+                          <option th:value="bnameASC">Sắp xếp theo tên sách (Tăng dần)</option>
+                          <option th:value="bnameDESC">Sắp xếp theo tên sách (Giảm dần)</option>
+                          <option th:value="yearReleaseASC">Sắp xếp theo năm xuất bản (Tăng dần)</option>
+                          <option th:value="yearReleaseDESC">Sắp xếp theo năm xuất bản (Giảm dần)</option>
+                          <option th:value="publishersASC">Sắp xếp theo nhà xuất bản (Tăng dần)</option>
+                          <option th:value="publishersDESC">Sắp xếp theo nhà xuất bản (Giảm dần)</option>
+                          <option th:value="issuerASC">Sắp xếp theo nhà phát hành (Tăng dần)</option>
+                          <option th:value="issuerDESC">Sắp xếp theo nhà phát hành (Giảm dần)</option>
+                          <option th:value="authorsASC">Sắp xếp theo tên tác giả (Tăng dần)</option>
+                          <option th:value="authorDESC">Sắp xếp theo tên tác giả (Giảm dần)</option>
+                        </select>
+                      </div>
+                    </div>
 									</div>
 								</div>
-								<button id="search-button margRg" type="submit" class="btn btn-primary">
+								<button id="search-button margRg" type="submit" class="btn btn-primary" style="max-width: 37.6px; max-height: 37.6px;">
 								  <i class="fas fa-search"></i>
 								</button>
 							</div>	

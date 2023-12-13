@@ -8,4 +8,6 @@ public interface commentService {
     List<comments> getAll();
 
     comments saveComment(comments comments);
+
+    void delete(Integer id);
 }

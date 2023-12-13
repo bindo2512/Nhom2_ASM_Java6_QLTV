@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,6 +51,11 @@ public class commentRestController {
         comments.setBooks(bService.findById(id));
         comments.setCommentdate(new Date());
         return service.saveComment(comments);
+    }
+
+    @DeleteMapping("/{commentid}")
+    public void deleteCommentById(@PathVariable("commentid") Integer id) {
+        service.delete(id);
     }
     
     
