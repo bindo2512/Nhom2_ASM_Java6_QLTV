@@ -14,6 +14,10 @@ app.controller("user-management-ctrl", function($scope, $http){
         }).catch(error => {
             console.log(error)
         })
+        $http.get("/rest/rental/nearexpired/" + $scope.username).then(resp => {
+            console.log(resp.data)
+            $scope.expiredRentals.rentals = resp.data;
+        })
         $http.get("/rest/account/" + $scope.username).then(resp => {
             console.log(resp.data)
             $scope.userForm = resp.data;
@@ -59,6 +63,7 @@ app.controller("user-management-ctrl", function($scope, $http){
         $http.get("/rest/rental/id/" + item.retailid).then(resp => {
             $scope.retaildetail = resp.data;
         })
+        
     }
     
     $scope.historyPager = {
@@ -83,6 +88,10 @@ app.controller("user-management-ctrl", function($scope, $http){
         last() {
             this.page = this.count - 1;
         }
+    }
+
+    $scope.expiredRentals = {
+        rentals: [],
     }
 
     $scope.init();

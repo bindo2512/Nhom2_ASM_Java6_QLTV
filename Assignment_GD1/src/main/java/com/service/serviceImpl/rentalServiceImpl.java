@@ -1,6 +1,8 @@
 package com.service.serviceImpl;
 
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,6 +41,7 @@ public class rentalServiceImpl implements rentalService {
         retail.setVerification(RandomString.make(64));
         retail.setIsverify(false);
         retail.setAdminverify(false);
+        retail.setInvalidate(false);
         dao.save(retail);
 
         TypeReference<List<details>> type = new TypeReference<List<details>>() {};
@@ -95,5 +98,28 @@ public class rentalServiceImpl implements rentalService {
     @Override
     public List<retails> findRetailsByAdminVerify(boolean verifystate) {
         return dao.findByAdminverify(verifystate);
+    }
+
+    @Override
+    public List<retails> findRetailNearExpireDay(String username) {
+        Date date = Date.valueOf(LocalDate.now());
+        return dao.findNearExpireRetails(date,username);
+    }
+
+    @Override
+    public List<retails> findRetailNeedUserverify(String username) {
+        return dao.findRentalsNeedVerify(username);
+    }
+
+    @Override
+    public void updateCancleRentals() {
+        Date date = Date.valueOf(LocalDate.now());
+        dao.disableExpiredRentals(date);
+    }
+
+    @Override
+    public void updateInvalidateRentals() {
+        Date date = Date.valueOf(LocalDate.now());
+        dao.remindIllegalRentals(date);
     }
 }

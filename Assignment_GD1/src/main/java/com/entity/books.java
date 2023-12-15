@@ -54,5 +54,6 @@ public class books {
 	@ManyToOne
 	@JoinColumn(name = "categoryid")
 	categories categories;
+	String isbn;
 	
 }

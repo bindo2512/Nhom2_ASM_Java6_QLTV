@@ -1,5 +1,6 @@
 package com.dao;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -55,4 +56,26 @@ public interface retailDAO extends JpaRepository<retails, Integer> {
     List<retails> findByIsverify(Boolean isverify);
 
     List<retails> findByAdminverify(Boolean adminverify);
+
+    @Modifying
+    @Query("select r from retails r join r.accounts a join r.orderstate o where DATEDIFF(day, r.returndate, ?1) >= 5 and a.username = ?2 and o.orderstateid = 2")
+    public List<retails> findNearExpireRetails(Date date, String username);
+
+    @Modifying
+    @Query("select r from retails r join r.accounts a where r.isverify = false and a.username = ?1")
+    public List<retails> findRentalsNeedVerify(String username);
+
+    @Modifying
+    @Query("select a.username from retails r join r.accounts a join r.orderstate o where o.orderstateid = 5")
+    public List<Object[]> findAllUsernameHaveExpireRentals();
+
+    @Transactional
+    @Modifying
+    @Query("update retails r set r.orderstate.orderstateid = 5 where DATEDIFF(day,r.retaildate, ?1) <= 1 and r.orderstate.orderstateid = 1")
+    public void disableExpiredRentals(Date date);
+
+    @Transactional
+    @Modifying
+    @Query("update retails r set r.orderstate.orderstateid = 4, r.invalidate = true where DATEDIFF(day, ?1,r.returndate) <= 1 and r.orderstate.orderstateid = 2")
+    public void remindIllegalRentals(Date date);
 }

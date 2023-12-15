@@ -61,7 +61,6 @@ https://cdn.jsdelivr.net/npm/darkreader@4.9.73/darkreader.min.js
 <!-- scrollreveal CDN -->
 <script src="https://unpkg.com/scrollreveal"></script>
 
-<!-- Scan barcode and qr code -->
 <script src="https://unpkg.com/html5-qrcode"></script>
 </head>
 
@@ -94,7 +93,6 @@ app.controller("library-ctrl", function($scope, $http, $document){
 	$scope.currentDate = new Date()
 	$scope.returndate;
 	$scope.darkMode = false;
-
 
 
 DarkReader.enable({
@@ -269,7 +267,6 @@ $scope.darkModeToggle = function() {
 			location.href = `/qltv/products/detail/${bookid}`;
 		}
 	}
-	console.log($scope.isLogin)
 	$scope.cart.init();
 	$scope.cart.loadStorage();
 	$scope.retail.findUserDetail();

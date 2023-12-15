@@ -1,5 +1,6 @@
 package com.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.entity.details;
@@ -27,4 +28,12 @@ public interface rentalService {
     List<retails> findRetailsByVerifyState(boolean verifystate);
 
     List<retails> findRetailsByAdminVerify(boolean verifystate);
+
+    List<retails> findRetailNearExpireDay(String username);
+
+    List<retails> findRetailNeedUserverify(String username);
+    
+    void updateCancleRentals();
+
+    void updateInvalidateRentals();
 }

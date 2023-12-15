@@ -57,4 +57,5 @@ public class retails {
 	String verification;
 	Boolean isverify;
 	Boolean adminverify;
+	Boolean invalidate;
 }

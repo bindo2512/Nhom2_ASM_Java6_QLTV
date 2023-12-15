@@ -1,5 +1,6 @@
 package com.controller.rest;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,5 +64,10 @@ public class rentalrestController {
     @GetMapping("/adminverify/{verifystate}")
     public List<retails> getRetailByAdminVerify(@PathVariable("verifystate") Boolean verifystate) {
         return service.findRetailsByAdminVerify(verifystate);
+    }
+
+    @GetMapping("/nearexpired/{username}")
+    public List<retails> getRetailsNearExpireDate(@PathVariable("username") String username) {
+        return service.findRetailNearExpireDay(username);
     }
 }
