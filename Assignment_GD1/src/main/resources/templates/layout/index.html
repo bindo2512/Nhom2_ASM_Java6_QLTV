@@ -60,6 +60,14 @@ https://cdn.jsdelivr.net/npm/darkreader@4.9.73/darkreader.min.js
 
 <!-- scrollreveal CDN -->
 <script src="https://unpkg.com/scrollreveal"></script>
+
+<!-- QR Code HTML5 -->
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+<!-- XLSX CDN -->
+<script src="
+https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.min.js
+"></script>
 </head>
 
 <body ng-app="library-app" ng-controller="library-ctrl">
@@ -91,6 +99,7 @@ app.controller("library-ctrl", function($scope, $http, $document){
 	$scope.currentDate = new Date()
 	$scope.returndate;
 	$scope.darkMode = false;
+	$scope.validDate = false
 
 
 
@@ -173,11 +182,8 @@ $scope.darkModeToggle = function() {
 		email: "",
 		orderstate: {orderstateid: '1'},
 		updateReturnDate: function() {
-    	if ($scope.returndate) {
 			$scope.retail.returndate = new Date($scope.retail.retaildate);
 			$scope.retail.returndate.setMonth($scope.retail.retaildate.getMonth() + 1);
-    	}
-		return $scope.retail.returndate
 	},
 
 
@@ -188,15 +194,15 @@ $scope.darkModeToggle = function() {
         switch ($scope.returndate) {
             case '1':
 				$scope.retail.returndate = new Date($scope.retail.retaildate);
-				$scope.retail.returndate.setDate($scope.retail.retaildate.getDay() + 7);
+				$scope.retail.returndate.setDate($scope.retail.retaildate.getDate() + 7);
                 break;
             case '2':
 				$scope.retail.returndate = new Date($scope.retail.retaildate);
-				$scope.retail.returndate.setDate($scope.retail.retaildate.getDay() + 14);
+				$scope.retail.returndate.setDate($scope.retail.retaildate.getDate() + 14);
                 break;
             case '3':
 				$scope.retail.returndate = new Date($scope.retail.retaildate);
-				$scope.retail.returndate.setDate($scope.retail.retaildate.getDay() + 21);
+				$scope.retail.returndate.setDate($scope.retail.retaildate.getDate() + 21);
                 break;
             case '4':
 				$scope.retail.returndate = new Date($scope.retail.retaildate);
@@ -207,6 +213,14 @@ $scope.darkModeToggle = function() {
                 break;
         }
     },
+
+	checkValidDate() {
+		if ($scope.retail.returndate > $scope.retail.retaildate) {
+			$scope.validDate = true;
+		} else {
+			$scope.validDate = false;
+		}
+	},
 
 		
 		findUserDetail() {

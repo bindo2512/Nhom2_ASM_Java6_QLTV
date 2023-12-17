@@ -69,13 +69,17 @@ public interface retailDAO extends JpaRepository<retails, Integer> {
     @Query("select a.username from retails r join r.accounts a join r.orderstate o where o.orderstateid = 5")
     public List<Object[]> findAllUsernameHaveExpireRentals();
 
+    @Modifying
+    @Query("select r from retails r join r.accounts a join r.orderstate o where o.orderstateid = 4 and a.username = ?1")
+    public List<retails> findIllegalRentalsByUsername(String username);
+
     @Transactional
     @Modifying
-    @Query("update retails r set r.orderstate.orderstateid = 5 where DATEDIFF(day,r.retaildate, ?1) <= 1 and r.orderstate.orderstateid = 1")
+    @Query("update retails r set r.orderstate.orderstateid = 5 where DATEDIFF(day, ?1,r.retaildate) < 0 and r.orderstate.orderstateid = 1")
     public void disableExpiredRentals(Date date);
 
     @Transactional
     @Modifying
-    @Query("update retails r set r.orderstate.orderstateid = 4, r.invalidate = true where DATEDIFF(day, ?1,r.returndate) <= 1 and r.orderstate.orderstateid = 2")
+    @Query("update retails r set r.orderstate.orderstateid = 4, r.invalidate = true where DATEDIFF(day, ?1,r.returndate) < 0 and r.orderstate.orderstateid = 2")
     public void remindIllegalRentals(Date date);
 }

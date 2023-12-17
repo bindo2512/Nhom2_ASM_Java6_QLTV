@@ -5,6 +5,16 @@ app.controller("account-admin-ctrl", function($scope, $http) {
         image: "not_available.png",
         isadmin: true,
     };
+
+    $scope.exportFile = {
+        exportData() {
+            const fileName = 'exported-sheet.xlsx';
+            const table = document.getElementById("table");
+            const wb = XLSX.utils.table_to_book(table);
+            XLSX.writeFile(wb, fileName);
+        }
+    }
+
     $scope.edit = function(item) {
         $scope.form = angular.copy(item);
         console.log($scope.form.accountdetail)

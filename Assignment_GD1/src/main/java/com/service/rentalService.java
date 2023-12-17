@@ -1,6 +1,5 @@
 package com.service;
 
-import java.util.Date;
 import java.util.List;
 
 import com.entity.details;
@@ -32,6 +31,8 @@ public interface rentalService {
     List<retails> findRetailNearExpireDay(String username);
 
     List<retails> findRetailNeedUserverify(String username);
+
+    List<retails> findIllegalRentalsByUsername(String username);
     
     void updateCancleRentals();
 

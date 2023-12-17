@@ -74,6 +74,9 @@
 									<a th:href="@{|/user/management|}">Quản lý tài khoản</a>
 								</button>
 							</th:block>
+							<button type="button" class="btn btn-outline-dark margRg" data-bs-toggle="modal" data-bs-target="#qrCodeModal">
+								Quét mã QR/Barcode
+							  </button>
 							<button class="btn btn-outline-dark margRg" type="submit" >
 								<i class="bi-cart-fill me-1"></i>
 								<a th:href="@{/user/cart}">Giỏ hàng</a>
@@ -83,6 +86,20 @@
 								<a th:href="@{|/qltv/logout|}" ng-click="cart.clear()">Đăng xuất</a>
 							</button>
 					   </th:block>
+					   <div class="modal fade" id="qrCodeModal" tabindex="-1" aria-labelledby="qrCodeModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-lg">
+						  <div class="modal-content">
+							<div class="modal-header">
+							  <h5 class="modal-title" id="qrCodeModalLabel">Quét mã QR/Barcode</h5>
+							  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body" style="margin: auto;">
+								<div id="qr-reader" style="width:500px"></div>
+								<div id="qr-reader-results"></div>
+							</div>
+						  </div>
+						</div>
+					  </div>
                         <style>
 							.margRg{
 								margin-right:20px;
@@ -99,6 +116,23 @@
 							}
 						</style>	
                     </form>
+					<script>
+						var resultContainer = document.getElementById('qr-reader-results');
+var lastResult, countResults = 0;
+
+function onScanSuccess(decodedText, decodedResult) {
+    if (decodedText !== lastResult) {
+        ++countResults;
+        lastResult = decodedText;
+        // Handle on success condition with the decoded message.
+        console.log(`Scan result ${decodedText}`, decodedResult);
+    }
+}
+
+var html5QrcodeScanner = new Html5QrcodeScanner(
+    "qr-reader", { fps: 10, qrbox: 250 });
+html5QrcodeScanner.render(onScanSuccess);
+					</script>
 				</div>
 		</nav>
 	</main>

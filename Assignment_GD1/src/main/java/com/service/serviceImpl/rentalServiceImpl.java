@@ -122,4 +122,9 @@ public class rentalServiceImpl implements rentalService {
         Date date = Date.valueOf(LocalDate.now());
         dao.remindIllegalRentals(date);
     }
+
+    @Override
+    public List<retails> findIllegalRentalsByUsername(String username) {
+        return dao.findIllegalRentalsByUsername(username);
+    }
 }

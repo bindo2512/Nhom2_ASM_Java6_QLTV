@@ -16,4 +16,6 @@ public interface emailService {
     void sendForgotPasswordVerificationEmail(accounts accounts, forgotPassword fp) throws Exception;
 
     void sendRentailVerification(retails retails, List<details> details) throws Exception;
+
+    void sendNotificationAboutIllegalRental(accounts accounts, List<retails> retails) throws Exception;
 }

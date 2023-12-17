@@ -1,5 +1,18 @@
 app.controller("register-ctrl", function($scope, $http) {
-    $scope.image;
+    $scope.image = "not_available.png";
+    $scope.password;
+    $scope.repassword;
+    $scope.isPasswordMatch = false;
+    $scope.form = {
+        username: "",
+    };
+    $scope.username;
+
+    $scope.checkPasswordMatch = function () {
+        $scope.isPasswordMatch = ($scope.password === $scope.repassword);
+    };
+
+
     $scope.imageChange = function(files) {
         var data = new FormData();
         data.append('file', files[0]);

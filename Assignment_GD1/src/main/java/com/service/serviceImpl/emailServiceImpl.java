@@ -75,7 +75,7 @@ public class emailServiceImpl implements emailService {
         Context context = new Context();
         String subject = "Mail xác thực việc mượn sách";
         String sender = "Book it NOW! Developers Team";
-        String mailContent = "Thân gửi" + retails.getFullname() + " !";
+        String mailContent = "Thân gửi " + retails.getFullname() + " !";
         context.setVariable("rentailDetail", details);
         context.setVariable("rentail", retails);
         String text = templateEngine.process("emailTemplate/rentalMailTemplate", context);
@@ -89,6 +89,28 @@ public class emailServiceImpl implements emailService {
         MimeMessageHelper helper = new MimeMessageHelper(message);
         helper.setFrom("eazy97889@gmail.com", sender);
         helper.setTo(retails.getEmail());
+        helper.setSubject(subject);
+        helper.setText(mailContent, true);
+        mailSender.send(message);
+    }
+
+    @Override
+    public void sendNotificationAboutIllegalRental(accounts accounts, List<retails> retails) throws Exception {
+        Context context = new Context();
+        String subject = "Mail thông báo đơn mượn sách quá hạn";
+        String sender ="Book it NOW! Developers Team";
+        context.setVariable("account", accounts);
+        context.setVariable("retails", retails);
+        String mailContent = "Thân gửi " + accounts.getAccountdetail().getFullname() + "!";
+        String text = templateEngine.process("emailTemplate/illegalRentalMailTemplate", context);
+        mailContent += "<h3>Đây là danh sách các hóa đơn mượn sách mà bạn chưa trả</h3>";
+        mailContent += text;
+        mailContent += "<p>Vui lòng trả sách trong tuần khi nhận được mail này</p>";
+        mailContent += "<p>Cảm ơn vì đã sử dụng dịch vụ của chúng tôi</p>";
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+        helper.setFrom("eazy97889@gmail.com", sender);
+        helper.setTo(accounts.getAccountdetail().getEmail());
         helper.setSubject(subject);
         helper.setText(mailContent, true);
         mailSender.send(message);
